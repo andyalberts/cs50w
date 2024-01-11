@@ -1,8 +1,10 @@
 body {
-    background-color: gray;
+    
 }
 
 button {
-    background-color: red;
-    border-radius: 14px;
+    background-color: blue;
+    border-radius: 4px;
+    border: none;
+    padding: 3px;
 }
