@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Search</title>
+        <title>Advanced Search</title>
     </head>
     <body>
         <a href="/search/index.html">Index</a>
@@ -10,5 +10,25 @@
             <input type="text" name="q">
             <input type="submit" value="Google Search">
         </form>
+        
+        <br>
+
+        <label for="allWords">all these words:</label>
+        <input type="text" name="as_q" id="allWords">
+
+        <br>
+
+        <label for="exactWord">this exact word or phrase:</label>
+        <input type="text" name="as_epq" id="exactWord">
+
+        <br>
+
+        <label for="anyWords">any of these words:</label>
+        <input type="text" name="as_oq" id="anyWords">
+        
+        <br>
+
+        <label for="noneWords">none of these words::</label>
+        <input type="text" name="as_eq" id="noneWords">
     </body>
 </html>
