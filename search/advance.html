@@ -9,34 +9,21 @@
         
         <br>
 
-        <label for="allWords">all these words:</label>
         <form target="_blank" action="https://www.google.com/search">
-            <input type="text" name="as_q" id="allWords"  placeholder="Search">
-            <input type="submit" value="Google Search">
-        </form>
-
-        <br>
-
-        <label for="exactWord">this exact word or phrase:</label>
-        <form target="_blank" action="https://www.google.com/search">
-            <input type="text" name="as_epq" id="exactWord" placeholder="Search">
-            <input type="submit" value="Google Search">
-        </form>
-
-        <br>
-
-        <label for="anyWords">any of these words:</label>
-        <form target="_blank" action="https://www.google.com/search">
-            <input type="text" name="as_oq" id="anyWords" placeholder="Search">
-            <input type="submit" value="Google Search">
-        </form>
-        
-        <br>
-
-        <label for="noneWords">none of these words:</label>
-        <form target="_blank" action="https://www.google.com/search">
-            <input type="text" name="as_eq" id="noneWords" placeholder="Search">
-            <input type="submit" value="Google Search">
+            <label for="allWords">all these words:</label>
+            <input type="text" name="as_q" id="allWords" placeholder="Search">
+    
+            <label for="exactPhrase">this exact word or phrase:</label>
+            <input type="text" name="as_epq" id="exactPhrase">
+    
+            <label for="anyWords">any of these words:</label>
+            <input type="text" name="as_oq" id="anyWords">
+    
+            <label for="noneWords">none of these words:</label>
+            <input type="text" name="as_eq" id="noneWords">
+    
+            <button type="submit">Google Search</button>
+            <button type="submit" formaction="https://www.google.com/search">Google Search (Default)</button>
         </form>
 
     </body>
