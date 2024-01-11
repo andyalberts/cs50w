@@ -6,29 +6,38 @@
     <body>
         <a href="/search/index.html">Index</a>
         <a href="/search/image.html">Image Search</a>
-        <form target="_blank" action="https://www.google.com/advanced_search">
-            <input type="text" name="q">
+        
+        <br>
+
+        <label for="allWords">all these words:</label>
+        <form target="_blank" action="https://www.google.com/search">
+            <input type="text" name="as_q" id="allWords"  placeholder="Search">
+            <input type="submit" value="Google Search">
+        </form>
+
+        <br>
+
+        <label for="exactWord">this exact word or phrase:</label>
+        <form target="_blank" action="https://www.google.com/search">
+            <input type="text" name="as_eq" id="exactWord" placeholder="Search">
+            <input type="submit" value="Google Search">
+        </form>
+
+        <br>
+
+        <label for="anyWords">any of these words:</label>
+        <form target="_blank" action="https://www.google.com/search">
+            <input type="text" name="as_oq" id="anyWords" placeholder="Search">
             <input type="submit" value="Google Search">
         </form>
         
         <br>
 
-        <label for="allWords">all these words:</label>
-        <input type="text" name="as_q" id="allWords">
+        <label for="noneWords">none of these words:</label>
+        <form target="_blank" action="https://www.google.com/search">
+            <input type="text" name="as_eq" id="noneWords" placeholder="Search">
+            <input type="submit" value="Google Search">
+        </form>
 
-        <br>
-
-        <label for="exactWord">this exact word or phrase:</label>
-        <input type="text" name="as_epq" id="exactWord">
-
-        <br>
-
-        <label for="anyWords">any of these words:</label>
-        <input type="text" name="as_oq" id="anyWords">
-        
-        <br>
-
-        <label for="noneWords">none of these words::</label>
-        <input type="text" name="as_eq" id="noneWords">
     </body>
 </html>
