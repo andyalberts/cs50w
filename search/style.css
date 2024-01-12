@@ -1,5 +1,12 @@
 body {
-    
+    display: inline;
+}
+
+.header_buttons {
+    color: blue;
+    float: right;
+    padding: 8px;
+    margin-right: 10px;
 }
 
 button {
@@ -7,4 +14,9 @@ button {
     border-radius: 4px;
     border: none;
     padding: 3px;
+}
+
+
+.centered {
+    text-align: center;
 }
