@@ -22,15 +22,15 @@ h1 {
 }
 
 .advform {
-    width: 30%;
+    width: 25%;
     flex-direction: column;
     float:right;
-    margin-right: 35%;
+    margin-right: 32%;
 }
 
 label{
     color: gray;
-    
+    margin-left: 27%;
 }
 
 .homebutt {
