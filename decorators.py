@@ -6,9 +6,10 @@ def announce(f):
         print("Done with the function.")
     return wrapper
 
-#add announce decorator to function hello
+#add announce decorator to function hello, becomes f
+#f() represents hello function
 @announce
 def hello():
     print("Hello, World!")
 
-hello()
+hello() 
