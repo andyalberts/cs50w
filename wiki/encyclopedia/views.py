@@ -11,4 +11,4 @@ def index(request):
 
 def entry_page(request, title):
     entry_content = get_entry(title)
-    render(request, 'encyclopedia/wiki.html', {'title': title, 'entry_content': entry_content})
+    render(request, "encyclopedia/wiki.html", {"title": title, "entry_content": entry_content})
