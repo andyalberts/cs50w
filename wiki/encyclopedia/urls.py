@@ -1,5 +1,4 @@
 from django.urls import path
-from .views import entry_page
 from . import views
 
 urlpatterns = [
