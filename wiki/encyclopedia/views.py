@@ -26,4 +26,4 @@ def search(request):
     if page_content:
         return redirect("entry_page", title=search_query)
     else:
-        return render(request,)
+        return render(request, 'encyclopedia/search.html', {'search_query': search_query})
