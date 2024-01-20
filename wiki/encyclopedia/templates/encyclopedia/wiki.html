@@ -5,11 +5,9 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ title }}</h1>
 
-
-        {% if entry_content %}
-            {{ entry_content }}
+{% if entry_content %}
+            {{ entry_content|safe }}
         {% else %}
         <p> no entry found</p>
         {% endif %}
