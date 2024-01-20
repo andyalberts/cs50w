@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from . import util
-from .util import get_entry
+from .util import get_entry, list_entries
 import markdown2
 
 def index(request):
+    #util.list_entries could also be assigned as a variable outside of context (entry = list_entries())
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
     })
