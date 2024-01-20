@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . import util
 from .util import get_entry, list_entries
@@ -18,3 +18,12 @@ def entry_page(request, title):
         return render(request, "encyclopedia/wiki.html", {"title": title, "entry_content": html_content})
     else:
         return HttpResponse("Entry Not Found", status=404)
+    
+def search(request):
+    search_query = request.GET.get('q', '')
+    page_content = get_entry(search_query)
+
+    if page_content:
+        return redirect("entry_page", title=search_query)
+    else:
+        return render(request,)
