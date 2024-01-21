@@ -7,9 +7,9 @@
 {% block body%}
 
 <ul>
-    {% for word in page_content if search_query in page_content %}
-        <li>{{ word }}</li>
+    {% for entry in partial_match %}
+        <a href="{% url 'entry_page' entry%}">{{ entry }}</a>
     {% endfor %}
 </ul>
-
+ 
 {% endblock %}

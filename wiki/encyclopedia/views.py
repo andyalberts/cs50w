@@ -23,7 +23,7 @@ def search(request):
     search_query = request.GET.get('q', '')
     page_content = get_entry(search_query)
     entries = list_entries()
-    partial_match = [entry for entry in entries if search_query.lower() in entries.lower()]
+    partial_match = [entry for entry in entries if search_query.lower() in entry.lower()]
     if page_content:
         return redirect("entry_page", title=search_query)
     else:
