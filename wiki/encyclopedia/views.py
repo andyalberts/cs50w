@@ -9,6 +9,7 @@ def index(request):
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
     })
+#this a change in the file to commit
 
 def entry_page(request, title):
     entry_content = get_entry(title)
