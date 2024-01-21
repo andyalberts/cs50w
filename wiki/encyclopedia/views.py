@@ -22,8 +22,9 @@ def entry_page(request, title):
 def search(request):
     search_query = request.GET.get('q', '')
     page_content = get_entry(search_query)
-
+    entries = list_entries()
+    partial_match = [entry for entry in entries if search_query.lower() in entries.lower()]
     if page_content:
         return redirect("entry_page", title=search_query)
     else:
-        return render(request, 'encyclopedia/search.html', {'search_query': search_query})
+        return render(request, 'encyclopedia/search.html', {"partial_match": partial_match, "search_query": search_query})

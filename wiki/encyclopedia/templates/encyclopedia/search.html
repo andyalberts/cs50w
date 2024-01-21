@@ -5,5 +5,11 @@
 {% endblock %}
 
 {% block body%}
-    {{ search_query}}
+
+<ul>
+    {% for word in page_content if search_query in page_content %}
+        <li>{{ word }}</li>
+    {% endfor %}
+</ul>
+
 {% endblock %}
