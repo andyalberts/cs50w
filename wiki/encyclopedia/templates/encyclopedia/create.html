@@ -6,11 +6,12 @@ Create New Page
 
 {% block body %}
 <form method="post" action="{% url 'create' %}">
+    {% csrf_token %}
 <div class="input-group mb-3">
-    <input type="text" class="form-control col-md-6" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
+    <input type="text" class="form-control col-md-6" name="Title"  placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
   </div>
 <div class="input-group">
-    <textarea class="form-control col-md-6" placeholder="Entry"   aria-label="With textarea" rows="8"></textarea>
+    <textarea class="form-control col-md-6" name="markdown_content" placeholder="Entry"   aria-label="With textarea" rows="8"></textarea>
   </div>
   <br>
   <input class="btn btn-primary" type="submit" value="Submit">

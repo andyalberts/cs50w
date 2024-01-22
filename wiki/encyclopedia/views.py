@@ -6,7 +6,7 @@ from .util import get_entry, list_entries
 import markdown2
 
 class CreatePageForm(forms.Form):
-    title = forms.CharField(label="page_title")
+    title = forms.CharField(label="Title")
     markdown_content = forms.CharField(widget=forms.Textarea, label="Markdown Content")
 
 
@@ -37,4 +37,6 @@ def search(request):
         return render(request, 'encyclopedia/search.html', {"partial_match": partial_match, "search_query": search_query})
     
 def create(request):
+    if request.method == "POST":
+
     return render(request, 'encyclopedia/create.html')
