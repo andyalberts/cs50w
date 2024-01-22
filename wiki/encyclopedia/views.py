@@ -38,5 +38,9 @@ def search(request):
     
 def create(request):
     if request.method == "POST":
+    form = CreatePageForm(request.POST)
+    if form.is_valid():
+        title = form.cleaned_data['title']
+        user_entry = form.cleaned_data['markdown_content']
 
     return render(request, 'encyclopedia/create.html')
