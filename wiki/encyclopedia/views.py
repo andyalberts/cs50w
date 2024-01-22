@@ -2,7 +2,7 @@ from django import forms
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
 from . import util
-from .util import get_entry, list_entries
+from .util import get_entry, list_entries, save_entry
 import markdown2
 
 class CreatePageForm(forms.Form):
@@ -37,15 +37,16 @@ def search(request):
         return render(request, 'encyclopedia/search.html', {"partial_match": partial_match, "search_query": search_query})
     
 def create(request):
-    entries = list_entries()
     if request.method == "POST":
         form = CreatePageForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data['title']
             user_entry = form.cleaned_data['markdown_content']
-            if title in entries:
-                return HttpResponseNotFound("Entry with this title already exists.")
+            if title not in list_entries():
+                save_entry(title, user_entry)
+                return redirect('entry_page', title=title)
+               
             else:
-                return render(request, 'encyclopedia/create.html')
+                 return HttpResponseNotFound("Entry with this title already exists.")
     else:
-        return render(request, 'encyclopedia/create.html')
+        return render(request, 'encyclopedia/create.html', {'form': CreatePageForm()})
