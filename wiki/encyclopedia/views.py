@@ -29,3 +29,6 @@ def search(request):
         return redirect("entry_page", title=search_query)
     else:
         return render(request, 'encyclopedia/search.html', {"partial_match": partial_match, "search_query": search_query})
+    
+def create(request):
+    return render(request, 'encyclopedia/create.html')
