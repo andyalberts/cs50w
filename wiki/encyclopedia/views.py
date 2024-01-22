@@ -1,8 +1,14 @@
+from django import forms
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . import util
 from .util import get_entry, list_entries
 import markdown2
+
+class CreatePageForm(forms.Form):
+    title = forms.CharField(label="page_title")
+    markdown_content = forms.CharField(widget=forms.Textarea, label="Markdown Content")
+
 
 def index(request):
     #util.list_entries could also be assigned as a variable outside of context (entry = list_entries())
