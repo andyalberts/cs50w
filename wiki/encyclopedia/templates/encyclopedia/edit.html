@@ -5,6 +5,11 @@ Edit Page
 {% endblock %}
 
 {% block body %}
-  <p>Does this exist?</p>
-  <p>Does I exist????</p>
+
+<form action="{% url 'edit' %}" method="post" id="myForm">
+    {% csrf_token %}
+    <input type="text" name="toEdit" value="{{ title }}">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
 {% endblock %}

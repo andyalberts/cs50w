@@ -13,6 +13,12 @@
 {% else %}
     <p>no entry found</p>
 {% endif %}
-  
+
+<!-- edit button-->
+
+<form action="{% url 'edit' %}" method="post" id="myForm">
+    {% csrf_token %}
+    <button type="hidden" class="btn btn-primary" name="toEdit" value="{{ title }}">Submit</button>
+</form>
 
 {% endblock %}
