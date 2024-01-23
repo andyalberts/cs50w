@@ -6,10 +6,10 @@ Edit Page
 
 {% block body %}
 
-<form action="{% url 'edit' %}" method="post" id="myForm">
+<form method="post" action="{% url 'save_edit' %}">
     {% csrf_token %}
-    <input type="text" name="toEdit" value="{{ title }}">
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    {{ form.as_p }}
+    <input class="btn btn-primary" type="submit" value="Save Changes">
+  </form>
 
 {% endblock %}

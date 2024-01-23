@@ -16,9 +16,6 @@
 
 <!-- edit button-->
 
-<form action="{% url 'edit' %}" method="post" id="myForm">
-    {% csrf_token %}
-    <button type="hidden" class="btn btn-primary" name="toEdit" value="{{ title }}">Submit</button>
-</form>
 
+<a href="{% url 'edit' title=title %}"><input class="btn btn-primary" type="submit" value="Edit"></a>
 {% endblock %}
