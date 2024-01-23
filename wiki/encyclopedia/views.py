@@ -50,3 +50,6 @@ def create(request):
                  return HttpResponseNotFound("Entry with this title already exists.")
     else:
         return render(request, 'encyclopedia/create.html', {'form': CreatePageForm()})
+    
+def edit(request):
+    return render(request, 'encyclopedia/edit.html')
