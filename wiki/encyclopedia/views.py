@@ -65,3 +65,6 @@ def save_edit(request):
             save_entry(title, markdown_content)
             return redirect('entry_page', title=title)
     return redirect('index')
+
+def random(request):
+    return render(request, 'encyclopedia/index.html')
