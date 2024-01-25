@@ -5,7 +5,7 @@ from django.urls import reverse
 from . import util
 from .util import get_entry, list_entries, save_entry
 import markdown2, random
-from random import choice
+
 
 class CreatePageForm(forms.Form):
     title = forms.CharField(label="title")
@@ -68,7 +68,7 @@ def save_edit(request):
             return redirect('entry_page', title=title)
     return redirect('index')
 
-def random(request):
+def random_entry(request):
     entries = list_entries()
     if entries:
         random_entry = random.choice(entries)
