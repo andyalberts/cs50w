@@ -1,9 +1,11 @@
 from django import forms
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
 from . import util
 from .util import get_entry, list_entries, save_entry
-import markdown2
+import markdown2, random
+from random import choice
 
 class CreatePageForm(forms.Form):
     title = forms.CharField(label="title")
@@ -67,4 +69,10 @@ def save_edit(request):
     return redirect('index')
 
 def random(request):
-    return render(request, 'encyclopedia/index.html')
+    entries = list_entries()
+    if entries:
+        random_entry = random.choice(entries)
+        return HttpResponseRedirect(reverse('entry_page',args=[random_entry]))
+    else:
+        HttpResponse("No Entries Available")
+    
