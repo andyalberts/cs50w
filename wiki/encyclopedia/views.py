@@ -54,7 +54,7 @@ def create(request):
 def edit(request, title):
     entry_content = get_entry(title)
     form = CreatePageForm(initial={'title': title, 'markdown_content': entry_content})
-    return render(request, 'encyclopedia/edit.html', {'form': form, 'title': title})
+    return render(request, 'encyclopedia/edit.html', {'form': form,  'markdown_content': entry_content, 'title': title})
 
 def save_edit(request):
     if request.method == "POST":
