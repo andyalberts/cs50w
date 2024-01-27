@@ -9,6 +9,8 @@ class Airport(models.Model):
         return f"{self.city} ({self.code})"
     
 class Flight(models.Model):
+    #on_delete=CASCADE will delete all related references when selected field is deleted
+    #related_name is how the variable can be referenced by other tables/models
     origin = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="departures")
     destination = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="arrivals")
     duration = models.IntegerField()
@@ -16,3 +18,11 @@ class Flight(models.Model):
     # returns information if entered as string
     def __str__(self):
         return f"{self.id}: {self.origin} to {self.destination}"
+    
+class Passenger(models.Model):
+    first = models.CharField(max_length=64)
+    last = models.CharField(max_length=64)
+    flights = models.ManyToManyField(Flight, blank=True, related_name="passengers") #blank=True allows possibility that passenger has no flights
+
+    def __str__(self):
+        return f"{self.first} {self.last}"
