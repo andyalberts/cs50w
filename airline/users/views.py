@@ -12,5 +12,5 @@ def index(request):
 def login_view(request):
     return render(request, "users/login.html")
 
-def logout_view:
+def logout_view(request):
     pass
