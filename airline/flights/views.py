@@ -13,7 +13,9 @@ def flight(request, flight_id):
     flight = Flight.objects.get(id=flight_id)
     return render(request, "flights/flight.html", {
         "flight": flight,
-        "passengers": flight.passengers.all()
+        "passengers": flight.passengers.all(),
+        #non_passengers Get all passengers except the ones on the flight
+        "non_passengers": Passenger.objects.exclude(flights=flight).all()
     })
     
 def book(request, flight_id):
