@@ -13,6 +13,7 @@ def flight(request, flight_id):
     flight = Flight.objects.get(id=flight_id)
     return render(request, "flights/flight.html", {
         "flight": flight,
+        #accesses Passengers through related name passengers which is accessible through Flight model
         "passengers": flight.passengers.all(),
         #non_passengers Get all passengers except the ones on the flight
         "non_passengers": Passenger.objects.exclude(flights=flight).all()
@@ -20,8 +21,8 @@ def flight(request, flight_id):
     
 def book(request, flight_id):
     if request.method == "POST":
-        flight = Flight.objects.get(pk=flight_id) #when form submitted, provide id of passenger
-        passenger = Passenger.objects.get(pk=int(request.POST["passenger"])) #accesses through form w/ input field "passenger" 
-        passenger.flights.add(flight) #access passengers flight and add
-        return HttpResponseRedirect(reverse("flight", args=(flight_id)))
+        flight = Flight.objects.get(pk=flight_id) #contains info on flight.id
+        passenger = Passenger.objects.get(pk=int(request.POST["passenger"])) #contains info on Passenger.id
+        passenger.flights.add(flight) # add flight to Passenger
+        return HttpResponseRedirect(reverse("flight", args=(flight.id,)))
 

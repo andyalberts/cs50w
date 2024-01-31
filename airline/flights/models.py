@@ -9,8 +9,9 @@ class Airport(models.Model):
         return f"{self.city} ({self.code})"
     
 class Flight(models.Model):
-    #origin and destination can access Airport with input being "code"
+    #origin and destination can accept 'code' as input to retrieve Airport info
     origin = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="departures")
+    #jfk.arrivals.all() would display all flights with destination of 'jfk'
     destination = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="arrivals")
     duration = models.IntegerField()
 
@@ -23,7 +24,6 @@ class Passenger(models.Model):
     first = models.CharField(max_length=64)
     last = models.CharField(max_length=64)
     #every passenger could be associated with many 'Flights'
-    #blank=True allows possibility that passenger has no flights
     flights = models.ManyToManyField(Flight, blank=True, related_name="passengers") 
 
     def __str__(self):
