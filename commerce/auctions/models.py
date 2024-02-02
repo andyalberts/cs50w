@@ -4,7 +4,7 @@ from django.db import models
 class Listing(models.Model):
     title = models.CharField(max_length=125)
     start_bid = models.DecimalField(max_digits=7, decimal_places=2)
-    listing_image = models.ImageField(upload_to='auctions/listing_images', null=True, blank=True)
+    image = models.ImageField(upload_to='auctions/listing_images', null=True, blank=True)
 
 class User(AbstractUser):
     wishlist = models.ForeignKey(Listing, null=True, blank=True, on_delete=models.SET_NULL, related_name="wish_list")
