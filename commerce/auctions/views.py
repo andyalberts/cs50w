@@ -62,4 +62,4 @@ def register(request):
         return render(request, "auctions/register.html")
 
 def create_listing(request):
-    return HttpResponseRedirect(reverse("index"))
+    return render(request, "auctions/create.html")
