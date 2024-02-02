@@ -3,8 +3,7 @@
 {% block body %}
     <h2>Active Listings</h2>
 
-    TODO
-
-    {{ title }}
-    {{ description }}
+    {% for listing in listings %}
+        <li>{{ listing.title }}</li>
+    {% endfor %}
 {% endblock %}
