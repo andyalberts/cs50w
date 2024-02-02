@@ -8,7 +8,7 @@ class Listing(models.Model):
     image = models.ImageField(upload_to='auctions/listing_images', null=True, blank=True)
 
 class User(AbstractUser):
-    watchlist = models.ManyToManyField(Listing, null=True, blank=True, related_name="watchlist")
+    watch_list = models.ManyToManyField(Listing, null=True, blank=True, related_name="watch_list")
 
 class Bid(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name='bids')
