@@ -11,6 +11,7 @@ def index(request):
         "listings": Listing.objects.all()
     })
 
+# ----------------- User Handling ------------------------
 
 def login_view(request):
     if request.method == "POST":
@@ -62,6 +63,8 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
 
+# -------------Listing Views--------------------------------
+
 def create_listing(request):
     if request.method == "POST":
         title = request.POST["title"]
@@ -74,3 +77,6 @@ def create_listing(request):
         return redirect('index')
    
     return render(request, 'auctions/create.html')
+
+def listing(request):
+    return render(request, 'auctions/listing.html')
