@@ -79,6 +79,6 @@ def create_listing(request):
     return render(request, 'auctions/create.html')
 
 # ONLY PARTIALLY COMPLETE
-def listing(request):
-    listing = Listing.objects.get()
-    return render(request, 'auctions/listing.html')
+def listing(request, id):
+    listing = Listing.objects.get(pk=id)
+    return render(request, 'auctions/listing.html',{"title": listing.title, "image": listing.image, "description": listing.description, "start_bid": listing.start_bid})
