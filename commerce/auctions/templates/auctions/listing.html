@@ -1,8 +1,9 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-{{ listing.title }} 
-{{ image }}
+{{ title }} 
+
+<img src="{{ image.url }}">
 {{ description }}
 {{ start_bid }}
 {{ place_bid }}

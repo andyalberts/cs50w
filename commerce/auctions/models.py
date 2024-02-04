@@ -5,7 +5,7 @@ class Listing(models.Model):
     title = models.CharField(max_length=125)
     description = models.CharField(max_length=250, blank=True)
     start_bid = models.DecimalField(max_digits=7, decimal_places=2)
-    image = models.ImageField(upload_to='auctions/listing_images', null=True, blank=True)
+    image = models.ImageField(upload_to='media', null=True, blank=True)
 
 class User(AbstractUser):
     watch_list = models.ManyToManyField(Listing, blank=True, related_name="watchers")
