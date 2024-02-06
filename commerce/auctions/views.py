@@ -83,3 +83,8 @@ def listing(request, id):
     listing = Listing.objects.get(pk=id)
     return render(request, 'auctions/listing.html',
     {"title": listing.title, "image": listing.image.url, "description": listing.description, "start_bid": listing.start_bid})
+
+def comment(request):
+    if request.method == 'POST':
+        pass
+    return redirect('index')
