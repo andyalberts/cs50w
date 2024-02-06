@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
@@ -5,6 +6,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import User, Listing
 
+class CommentForm(forms.Form):
+    comment = forms.Textarea(label="comment")
 
 def index(request):
     return render(request, "auctions/index.html", {
@@ -86,5 +89,9 @@ def listing(request, id):
 
 def comment(request):
     if request.method == 'POST':
+        listing = Listing.objects.all()
+        comment = CommentForm(request.POST)
+        if comment.is_valid():
+            comment = comment.cleaned_data["comment"]
         return redirect('index')
     return redirect('index')
