@@ -7,6 +7,9 @@ class Listing(models.Model):
     start_bid = models.DecimalField(max_digits=7, decimal_places=2)
     image = models.ImageField(upload_to='media', null=True, blank=True)
 
+    def __str__(self):
+        return f"{self.title}, {self.start_bid}"
+
 class User(AbstractUser):
     listings = models.ManyToManyField(Listing, blank=True, related_name="owner")
     watch_list = models.ManyToManyField(Listing, blank=True, related_name="watchers")
