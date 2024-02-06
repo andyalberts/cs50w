@@ -87,6 +87,7 @@ def listing(request, id):
     return render(request, 'auctions/listing.html',
     {"title": listing.title, "image": listing.image.url, "description": listing.description, "start_bid": listing.start_bid})
 
+# does this even collect comment??
 def comment(request):
     if request.method == 'POST':
         listing = Listing.objects.all()
