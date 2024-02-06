@@ -6,7 +6,7 @@ class UserAdmin(admin.ModelAdmin):
     user_display= ["id","listings"]
 
 class ListingAdmin(admin.ModelAdmin):
-    list_display= ["title", "description", "start_bid", "image"]
+    list_display= ["title", "description", "start_bid", "image", "is_active"]
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Listing, ListingAdmin)
