@@ -6,7 +6,7 @@ class Listing(models.Model):
     description = models.CharField(max_length=250, blank=True)
     start_bid = models.DecimalField(max_digits=7, decimal_places=2)
     image = models.ImageField(upload_to='media', null=True, blank=True)
-
+    is_active = models.BooleanField(default=True)
     def __str__(self):
         return f"{self.title}, {self.start_bid}"
 
