@@ -8,8 +8,9 @@
 {{ start_bid }}
 {{ place_bid }}
 {{ details }} <!--seller, category -->
-<form method="get">
-    <input class="search" type="text" name="q" placeholder="Search Encyclopedia">
+<form action="{% url 'comment' %}">
+    <textarea class="form-control" type="text" placeholder="Comment"></textarea>   
+    <button type="submit">Post Comment</button>
 </form>
 {{ comments }}
 {% endblock %}

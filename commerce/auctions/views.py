@@ -86,5 +86,5 @@ def listing(request, id):
 
 def comment(request):
     if request.method == 'POST':
-        pass
+        return redirect('index')
     return redirect('index')
