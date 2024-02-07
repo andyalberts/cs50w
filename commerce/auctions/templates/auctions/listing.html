@@ -8,10 +8,15 @@
 {{ start_bid }}
 {{ place_bid }}
 {{ details }} <!--seller, category -->
-<form action="{% url 'comment' %}">
+<form action="{% url 'listing' id=id %}" method="post">
     {% csrf_token %}
-    <textarea class="form-control" type="text" placeholder="Comment">Type Comment...</textarea>   
+    <div class="input-group">
+        <textarea class="form-control col-md-6" name="comment" placeholder="comment"  aria-label="entry textarea" rows="4"></textarea>
+    </div>
     <button type="submit">Post Comment</button>
 </form>
-{{ comments }}
+{% for comment in comments %}
+    <li> {{ comment.text }}</li>
+    <br>
+    {% endfor %}
 {% endblock %}

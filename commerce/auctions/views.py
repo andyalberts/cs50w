@@ -4,7 +4,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from .models import User, Listing
+from .models import User, Listing, Comments
 
 class CommentForm(forms.Form):
     comment = forms.CharField(widget=forms.Textarea,label="comment")
@@ -84,16 +84,34 @@ def create_listing(request):
 # ONLY PARTIALLY COMPLETE
 def listing(request, id):
     listing = Listing.objects.get(pk=id)
-    return render(request, 'auctions/listing.html',
-    {"title": listing.title, "image": listing.image.url, "description": listing.description, "start_bid": listing.start_bid})
+    comments = Comments.objects.filter(listing=listing)
 
-# does this even collect comment??
-def comment(request):
     if request.method == 'POST':
         user_input = CommentForm(request.POST)
+        
         if user_input.is_valid():
-            listing = Listing.objects.all()
-            comment = comment.cleaned_data["comment"]
+            new_comment = Comments(
+                listing=listing,
+                user=request.user, 
+                text=user_input.cleaned_data["comment"]
+            )
+            new_comment.save()
+            # refreshes comment section after adding one
+            comments = Comments.objects.filter(listing=listing)
 
-        return redirect('index')
-    return redirect('index')
+    return render(request, 'auctions/listing.html',
+    {"id": listing.id, "title": listing.title, "image": listing.image.url, "description": listing.description, "start_bid": listing.start_bid, "comments": comments})
+
+# does this even collect comment??
+# def comment(request, id):
+#     if request.method == 'POST':
+#         user_input = CommentForm(request.POST)
+
+#         if user_input.is_valid():
+#             new_comment = Comments(
+#                 listing=listing,
+#                 text=user_input.cleaned_data["comment"]
+#             )
+#             new_comment.save()
+#         return redirect("listing", id=id)
+#     return redirect ("listing", id = id)
