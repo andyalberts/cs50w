@@ -9,6 +9,7 @@
 {{ place_bid }}
 {{ details }} <!--seller, category -->
 <form action="{% url 'comment' %}">
+    {% csrf_token %}
     <textarea class="form-control" type="text" placeholder="Comment">Type Comment...</textarea>   
     <button type="submit">Post Comment</button>
 </form>

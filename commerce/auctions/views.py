@@ -7,7 +7,7 @@ from django.urls import reverse
 from .models import User, Listing
 
 class CommentForm(forms.Form):
-    comment = forms.Textarea(label="comment")
+    comment = forms.CharField(widget=forms.Textarea,label="comment")
 
 def index(request):
     return render(request, "auctions/index.html", {
