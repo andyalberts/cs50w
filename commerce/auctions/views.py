@@ -90,6 +90,7 @@ def listing(request, id):
     if request.method == 'POST':
         user_input = CommentForm(request.POST)
         
+        # comments
         if user_input.is_valid():
             new_comment = Comments(
                 listing=listing,
@@ -106,17 +107,3 @@ def listing(request, id):
         return render(request, 'auctions/listing.html',
         {"id": listing.id, "title": listing.title, "image": listing.image.url, "description": listing.description, "start_bid": listing.start_bid, "comments": comments})
 
-
-# does this even collect comment??
-# def comment(request, id):
-#     if request.method == 'POST':
-#         user_input = CommentForm(request.POST)
-
-#         if user_input.is_valid():
-#             new_comment = Comments(
-#                 listing=listing,
-#                 text=user_input.cleaned_data["comment"]
-#             )
-#             new_comment.save()
-#         return redirect("listing", id=id)
-#     return redirect ("listing", id = id)
