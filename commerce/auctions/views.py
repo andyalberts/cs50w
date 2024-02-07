@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required 
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -81,7 +82,7 @@ def create_listing(request):
    
     return render(request, 'auctions/create.html')
 
-# ONLY PARTIALLY COMPLETE
+
 def listing(request, id):
     listing = Listing.objects.get(pk=id)
     comments = Comments.objects.filter(listing=listing)
@@ -99,8 +100,12 @@ def listing(request, id):
             # refreshes comment section after adding one
             comments = Comments.objects.filter(listing=listing)
 
-    return render(request, 'auctions/listing.html',
-    {"id": listing.id, "title": listing.title, "image": listing.image.url, "description": listing.description, "start_bid": listing.start_bid, "comments": comments})
+        return render(request, 'auctions/listing.html',
+        {"id": listing.id, "title": listing.title, "image": listing.image.url, "description": listing.description, "start_bid": listing.start_bid, "comments": comments})
+    else:
+        return render(request, 'auctions/listing.html',
+        {"id": listing.id, "title": listing.title, "image": listing.image.url, "description": listing.description, "start_bid": listing.start_bid, "comments": comments})
+
 
 # does this even collect comment??
 # def comment(request, id):

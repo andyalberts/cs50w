@@ -8,6 +8,8 @@
 {{ start_bid }}
 {{ place_bid }}
 {{ details }} <!--seller, category -->
+
+{% if user.is_authenticated %}
 <form action="{% url 'listing' id=id %}" method="post">
     {% csrf_token %}
     <div class="input-group">
@@ -15,8 +17,10 @@
     </div>
     <button type="submit">Post Comment</button>
 </form>
+{% endif %}
+
 {% for comment in comments %}
     <li> {{ comment.text }}</li>
     <br>
-    {% endfor %}
+{% endfor %}
 {% endblock %}
