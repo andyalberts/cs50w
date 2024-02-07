@@ -90,9 +90,10 @@ def listing(request, id):
 # does this even collect comment??
 def comment(request):
     if request.method == 'POST':
-        listing = Listing.objects.all()
-        comment = CommentForm(request.POST)
-        if comment.is_valid():
+        user_input = CommentForm(request.POST)
+        if user_input.is_valid():
+            listing = Listing.objects.all()
             comment = comment.cleaned_data["comment"]
+
         return redirect('index')
     return redirect('index')
