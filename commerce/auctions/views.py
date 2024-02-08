@@ -67,7 +67,7 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
 
-# -------------Listing Views--------------------------------
+# -------------Main Views--------------------------------
 
 def create_listing(request):
     if request.method == "POST":
@@ -102,8 +102,21 @@ def listing(request, id):
             comments = Comments.objects.filter(listing=listing)
 
         return render(request, 'auctions/listing.html',
-        {"id": listing.id, "title": listing.title, "image": listing.image.url, "description": listing.description, "start_bid": listing.start_bid, "comments": comments})
+        {"id": listing.id, 
+         "title": listing.title, 
+         "image": listing.image.url, 
+         "description": listing.description, 
+         "start_bid": listing.start_bid, 
+         "comments": comments})
     else:
         return render(request, 'auctions/listing.html',
-        {"id": listing.id, "title": listing.title, "image": listing.image.url, "description": listing.description, "start_bid": listing.start_bid, "comments": comments})
+        {"id": listing.id, 
+         "title": listing.title, 
+         "image": listing.image.url, 
+         "description": listing.description, 
+         "start_bid": listing.start_bid, 
+         "comments": comments})
+    
+def watchlist(request):
+    pass
 

@@ -12,7 +12,7 @@ class Listing(models.Model):
 
 class User(AbstractUser):
     listings = models.ManyToManyField(Listing, blank=True, related_name="owner")
-    watch_list = models.ManyToManyField(Listing, blank=True, related_name="watchers")
+    watchlist = models.ManyToManyField(Listing, blank=True, related_name="watchers")
 
 class Bid(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name='bids')
