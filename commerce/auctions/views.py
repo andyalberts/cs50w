@@ -118,5 +118,5 @@ def listing(request, id):
          "comments": comments})
     
 def watchlist(request):
-    pass
+    return render(request, 'auctions/watchlist.html')
 
