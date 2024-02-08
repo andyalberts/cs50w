@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required 
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from .models import User, Listing, Comments
 
@@ -75,9 +75,11 @@ def create_listing(request):
         description = request.POST["description"]
         start_bid = request.POST["start_bid"]
         image = request.FILES.get("image")
-
+        owner = request.user
         new_entry = Listing(title=title, description=description, start_bid=start_bid, image=image)
         new_entry.save()
+        owner.listings.add(new_entry)
+
         return redirect('index')
    
     return render(request, 'auctions/create.html')
@@ -86,6 +88,7 @@ def create_listing(request):
 def listing(request, id):
     listing = Listing.objects.get(pk=id)
     comments = Comments.objects.filter(listing=listing)
+    owner = get_object_or_404(User, id=listing.owner.first().id)
 
     if request.method == 'POST':
         user_input = CommentForm(request.POST)
@@ -107,7 +110,8 @@ def listing(request, id):
          "image": listing.image.url, 
          "description": listing.description, 
          "start_bid": listing.start_bid, 
-         "comments": comments})
+         "comments": comments,
+         "owner": owner})
     else:
         return render(request, 'auctions/listing.html',
         {"id": listing.id, 
@@ -115,8 +119,16 @@ def listing(request, id):
          "image": listing.image.url, 
          "description": listing.description, 
          "start_bid": listing.start_bid, 
-         "comments": comments})
+         "comments": comments,
+         "owner": owner})
     
-def watchlist(request):
-    return render(request, 'auctions/watchlist.html')
+def watchlist(request,id):
+    listing = Listing.objects.get(pk=id)
+    user = User.objects.filter(listing=listing)
+
+    if request.method == "POST":
+        return render(request, 'auctions/watchlist.html')
+
+    else:
+        return render(request, 'auctions/watchlist.html')
 
