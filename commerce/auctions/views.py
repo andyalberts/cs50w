@@ -125,10 +125,10 @@ def listing(request, id):
 def watchlist(request,id):
     listing = Listing.objects.get(pk=id)
     user = request.user
-    watch = user.watchlist
+    watchlist = user.watchlist
 
     if request.method == "POST":
-        
+
         return render(request, 'auctions/watchlist.html')
 
     else:
@@ -138,7 +138,7 @@ def watchlist(request,id):
         return render(request, 'auctions/watchlist.html',{
             "listing": listing,
             "user": user,
-            "id": watch
+            "watchlist": watchlist
             
             
         })

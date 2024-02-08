@@ -5,7 +5,9 @@
 
 {{ user }}
 <br>
-{{ id }}
+{% for item in watchlist %}
+    <li>{{ item }}</li>
+{% endfor %}
 <br>
 {{ listing }}
 {% endblock %}
