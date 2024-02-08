@@ -124,11 +124,22 @@ def listing(request, id):
     
 def watchlist(request,id):
     listing = Listing.objects.get(pk=id)
-    user = User.objects.filter(listing=listing)
+    user = request.user
+    watch = user.watchlist
 
     if request.method == "POST":
+        
         return render(request, 'auctions/watchlist.html')
 
     else:
-        return render(request, 'auctions/watchlist.html')
+        print(user)
+        print(listing)
+        print(watch)
+        return render(request, 'auctions/watchlist.html',{
+            "listing": listing,
+            "user": user,
+            "id": watch
+            
+            
+        })
 

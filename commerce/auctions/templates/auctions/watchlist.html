@@ -1,1 +1,11 @@
 {% extends "auctions/layout.html" %}
+
+{% block body %}
+{% csrf_token %}
+
+{{ user }}
+<br>
+{{ id }}
+<br>
+{{ listing }}
+{% endblock %}
