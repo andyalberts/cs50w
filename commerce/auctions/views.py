@@ -123,22 +123,22 @@ def listing(request, id):
          "owner": owner})
     
 def watchlist(request,id):
-    listing = Listing.objects.get(pk=id)
     user = request.user
-    watchlist = user.watchlist
+    listing = Listing.objects.get(pk=id)
 
     if request.method == "POST":
+        user.watchlist.add(listing)
 
-        return render(request, 'auctions/watchlist.html')
+        return redirect('watchlist')
 
     else:
         print(user)
         print(listing)
-        print(watch)
+        print(watchlist)
         return render(request, 'auctions/watchlist.html',{
-            "listing": listing,
+            
             "user": user,
-            "watchlist": watchlist
+            "watchlist": user.watchlist.all()
             
             
         })
