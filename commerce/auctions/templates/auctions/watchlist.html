@@ -3,10 +3,13 @@
 {% block body %}
 {% csrf_token %}
 
-{{ user }}
 <br>
 {% for item in watchlist %}
+<img src="{{ item.image.url }}">
     {{ item.title }}
+    {{ item.start_bid }}
+    {{ item.description }}
+   
     <br>
 {% endfor %}
 <br>
