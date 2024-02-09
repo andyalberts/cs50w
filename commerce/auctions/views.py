@@ -11,8 +11,11 @@ class CommentForm(forms.Form):
     comment = forms.CharField(widget=forms.Textarea,label="comment")
 
 def index(request):
+    user = request.user
+    
     return render(request, "auctions/index.html", {
-        "listings": Listing.objects.all()
+        "listings": Listing.objects.all(),
+        "user": user
     })
 
 # ----------------- User Handling ------------------------
@@ -92,7 +95,6 @@ def listing(request, id):
 
     if request.method == 'POST':
         user_input = CommentForm(request.POST)
-        
         # comments
         if user_input.is_valid():
             new_comment = Comments(
@@ -103,7 +105,7 @@ def listing(request, id):
             new_comment.save()
             # refreshes comment section after adding one
             comments = Comments.objects.filter(listing=listing)
-
+      
         return render(request, 'auctions/listing.html',
         {"id": listing.id, 
          "title": listing.title, 
@@ -122,30 +124,28 @@ def listing(request, id):
          "comments": comments,
          "owner": owner})
     
-def watchlist(request,id):
-    user = request.user
+def add_rmv_watchlist(request, id):
     listing = Listing.objects.get(pk=id)
+    user = request.user
     watchlist = user.watchlist.all()
+
     if request.method == "POST":
-        user.watchlist.add(listing)
+        if listing not in watchlist:
+            user.watchlist.add(listing)
+        else:
+            user.watchlist.remove(listing)
+        
+        return redirect(request.path)
+    return redirect(request.path)
 
-        return render(request, 'auctions/watchlist.html',{
-            
-            "user": user,
-            "watchlist": watchlist
-            
-            
-        })
-
-    else:
-        print(user)
-        print(listing)
-        print(watchlist)
-        return render(request, 'auctions/watchlist.html',{
-            
-            "user": user,
-            "watchlist": watchlist
-            
-            
-        })
+def watchlist(request):
+    user = request.user
+    watchlist = user.watchlist.all()
+    print(user)
+    print(listing)
+    print(watchlist)
+    return render(request, 'auctions/watchlist.html',{
+        "user": user,
+        "watchlist": watchlist
+    })
 
