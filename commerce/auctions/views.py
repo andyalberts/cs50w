@@ -125,11 +125,17 @@ def listing(request, id):
 def watchlist(request,id):
     user = request.user
     listing = Listing.objects.get(pk=id)
-
+    watchlist = user.watchlist.all()
     if request.method == "POST":
         user.watchlist.add(listing)
 
-        return redirect('watchlist')
+        return render(request, 'auctions/watchlist.html',{
+            
+            "user": user,
+            "watchlist": watchlist
+            
+            
+        })
 
     else:
         print(user)
@@ -138,7 +144,7 @@ def watchlist(request,id):
         return render(request, 'auctions/watchlist.html',{
             
             "user": user,
-            "watchlist": user.watchlist.all()
+            "watchlist": watchlist
             
             
         })
