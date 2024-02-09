@@ -115,6 +115,7 @@ def listing(request, id):
          "comments": comments,
          "owner": owner})
     else:
+        
         return render(request, 'auctions/listing.html',
         {"id": listing.id, 
          "title": listing.title, 
@@ -135,8 +136,8 @@ def add_rmv_watchlist(request, id):
         else:
             user.watchlist.remove(listing)
         
-        return redirect(request.path)
-    return redirect(request.path)
+        return redirect('watchlist')
+    return redirect('watchlist')
 
 def watchlist(request):
     user = request.user
