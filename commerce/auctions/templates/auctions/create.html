@@ -1,7 +1,7 @@
 {% extends 'auctions/layout.html' %}
 
 {% block body %}
-<form method="post" action="{% url 'create' %}" enctype="multipart/form-data">
+<form method="post" action="{% url 'create' %}" id="create "enctype="multipart/form-data">
     {% csrf_token %}
        
         <div class="form-group col-sm-2">
@@ -17,11 +17,14 @@
         <div class="mb-3 col-sm-2">
             <input class="form-control" name="image" id="formFile" type="file">
         </div>
-        <select>
+        <label for="category">Category:</label>
+        <select name="category" id="category">
             {% for category in categories %}
-                    <option>{{ category }}</option> 
+                    <option value="{{ category }}">{{ category }}</option> 
             {% endfor %}
         </select>
+        
+        
         <button type="submit" class="btn btn-primary btn-sm">submit</button>
 </form>
 {% endblock %}

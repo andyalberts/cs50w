@@ -85,7 +85,8 @@ def create_listing(request):
         start_bid = request.POST["start_bid"]
         image = request.FILES.get("image")
         owner = request.user
-        new_entry = Listing(title=title, description=description, start_bid=start_bid, image=image)
+        category = request.POST["category"]
+        new_entry = Listing(title=title, description=description, start_bid=start_bid, image=image, category=category)
         new_entry.save()
         owner.listings.add(new_entry)
 
@@ -119,7 +120,8 @@ def listing(request, id):
          "description": listing.description, 
          "start_bid": listing.start_bid, 
          "comments": comments,
-         "owner": owner})
+         "owner": owner,
+         "category": listing.category})
     else:
         
         return render(request, 'auctions/listing.html',
@@ -129,7 +131,8 @@ def listing(request, id):
          "description": listing.description, 
          "start_bid": listing.start_bid, 
          "comments": comments,
-         "owner": owner})
+         "owner": owner,
+         "category": listing.category})
     
 def category(request,id):
     listing = Listing.objects.get(pk=id)
