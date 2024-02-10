@@ -125,6 +125,11 @@ def listing(request, id):
          "comments": comments,
          "owner": owner})
     
+def category(request,category):
+    # categories = ["Food/Drink", "art", "Electronics", "Toys"]
+    pass
+#---------------- Logged in ---------------------
+
 def add_rmv_watchlist(request, id):
     listing = Listing.objects.get(pk=id)
     user = request.user
