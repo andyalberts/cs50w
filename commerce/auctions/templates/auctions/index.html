@@ -3,11 +3,15 @@
 {% block body %}
     <h2>Active Listings</h2>
 
-{% for listing in listings %}
-{% if listing.is_active %}
-    <li><a href="{% url 'listing' listing.id %}">{{ listing.id }}: {{ listing.title }}</a></li>
-{% endif %}
-{% endfor %}
+    
+    {% for listing in listings %}
+    {% if listing.is_active %}
+    <div class="active-container">
+        <a href="{% url 'listing' listing.id %}"><img src="{{ listing.image.url }}">{{ listing.title }}</a> <br>
+    </div>
+    {% endif %}
+    {% endfor %}
+
 {% for category in categories %}
     {{ category }}
 {% endfor %}
