@@ -16,6 +16,7 @@
               <h5 class="card-title"><a href="{% url 'listing' listing.id %}"> Card title</a></h5>
               <p class="card-text">{{ listing.description }}</p>
               <p class="card-text"><small class="text-muted">${{ listing.start_bid }}</small></p>
+              <p class="card-text"><small class="text-muted">Posted by: {{ user.username }}</small></p>
             </div>
           </div>
         </div>
