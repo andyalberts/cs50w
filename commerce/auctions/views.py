@@ -7,6 +7,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from .models import User, Listing, Comments
 
+categories = ["Food/Drink", 
+              "Art", 
+              "Electronics", 
+              "Toys",
+              "Hobby"]
+
 class CommentForm(forms.Form):
     comment = forms.CharField(widget=forms.Textarea,label="comment")
 
@@ -85,7 +91,7 @@ def create_listing(request):
 
         return redirect('index')
    
-    return render(request, 'auctions/create.html')
+    return render(request, 'auctions/create.html',{"categories":categories})
 
 
 def listing(request, id):
@@ -125,9 +131,12 @@ def listing(request, id):
          "comments": comments,
          "owner": owner})
     
-def category(request,category):
-    # categories = ["Food/Drink", "art", "Electronics", "Toys"]
-    pass
+def category(request,id):
+    listing = Listing.objects.get(pk=id)
+    if request.method == "POST":
+        listing
+        
+    return redirect('index')
 #---------------- Logged in ---------------------
 
 def add_rmv_watchlist(request, id):
