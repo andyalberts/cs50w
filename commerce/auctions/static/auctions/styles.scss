@@ -1,8 +1,9 @@
-$main-color: #1dbcca;
+$main-color: #1da7b4;
 $warning: orange;
 $primary: black;
 
 body{
+    background: url("/media/media/bg.png");
     margin: 20px;
 }
 
@@ -11,6 +12,8 @@ nav{
 }
 h1{
     color: $main-color;
+    background-color: $warning ;
+
 }
 
 .card{
