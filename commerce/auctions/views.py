@@ -78,22 +78,6 @@ def register(request):
 
 # -------------Main Views--------------------------------
 
-def create_listing(request):
-    if request.method == "POST":
-        title = request.POST["title"]
-        description = request.POST["description"]
-        start_bid = request.POST["start_bid"]
-        image = request.FILES.get("image")
-        owner = request.user
-        category = request.POST["category"]
-        new_entry = Listing(title=title, description=description, start_bid=start_bid, image=image, category=category)
-        new_entry.save()
-        owner.listings.add(new_entry)
-
-        return redirect('index')
-   
-    return render(request, 'auctions/create.html',{"categories":categories})
-
 
 def listing(request, id):
     listing = Listing.objects.get(pk=id)
@@ -142,6 +126,24 @@ def category(request,id):
     return redirect('index')
 #---------------- Logged in ---------------------
 
+def create_listing(request):
+    if request.method == "POST":
+        title = request.POST["title"]
+        description = request.POST["description"]
+        start_bid = request.POST["start_bid"]
+        image = request.FILES.get("image")
+        owner = request.user
+        category = request.POST["category"]
+
+        # create
+        new_entry = Listing(title=title, description=description, start_bid=start_bid, image=image, category=category)
+        new_entry.save()
+        owner.listings.add(new_entry)
+
+        return redirect('index')
+   
+    return render(request, 'auctions/create.html',{"categories":categories})
+
 def add_rmv_watchlist(request, id):
     listing = Listing.objects.get(pk=id)
     user = request.user
@@ -167,3 +169,7 @@ def watchlist(request):
         "watchlist": watchlist
     })
 
+def place_bid(request):
+    pass
+    # if request.method == "POST":
+    #     bid = request.POST["bid"]
