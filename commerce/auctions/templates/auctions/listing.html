@@ -5,7 +5,7 @@
 
 
 
-    <div class="card mb-3">
+    <div class="card col-mb-3 mb-3">
         <h5 class="card-title card-header bg-transparent text-center">{{ title }} </h5>
         <img src="{{ image }}" class="img-fluid rounded-start w-25" alt="...">
         <div class="card-body">
@@ -13,23 +13,36 @@
         </div>
         <p class="card-text"><small class="text-muted">${{ start_bid }}</small></p>
         <p class="card-text"><small class="text-muted">Posted by: {{ user.username }}</small></p>
+
+
         {% if user.is_authenticated %}
         <!-- watchlist -->
         <form action="{% url 'add_rmv_watchlist' id=id %}" method="post">
             {% csrf_token %}
             <button type="submit" class="btn btn-outline-warning">Watchlist</button>
         </form>
+
+        <!-- place bid -->
         <form action="{% url 'listing' id=id %}" method="post">
-            {% csrf_token %}
-            <div class="input-group">
-                <textarea class="form-control col-md-6" name="comment" placeholder="comment"  aria-label="entry textarea" rows="4"></textarea>
+            <div class="input-group col-sm-2 mb-3">
+                <span class="input-group-text">$</span>
+                <input type="text" class="form-control" name="bid" placeholder="Bid Amount" aria-label="Amount (to the nearest dollar)">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Place Bid</button>
             </div>
-            <button type="submit">Post Comment</button>
         </form>
         {% endif %}
     </div>
+    <!-- Card End -->
 
-<!-- Comment form -->
+
+    <!-- comments-->
+<form action="{% url 'listing' id=id %}" method="post">
+    {% csrf_token %}
+    <div class="input-group">
+        <textarea class="form-control " name="comment" placeholder="comment"  aria-label="entry textarea" rows="4"></textarea>
+    </div>
+    <button type="submit">Post Comment</button>
+</form>
 
 {% for comment in comments %}
     <li> {{ comment.text }}</li>

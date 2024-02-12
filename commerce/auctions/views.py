@@ -126,6 +126,7 @@ def category(request,id):
     return redirect('index')
 #---------------- Logged in ---------------------
 
+@login_required
 def create_listing(request):
     if request.method == "POST":
         title = request.POST["title"]
@@ -144,6 +145,7 @@ def create_listing(request):
    
     return render(request, 'auctions/create.html',{"categories":categories})
 
+@login_required
 def add_rmv_watchlist(request, id):
     listing = Listing.objects.get(pk=id)
     user = request.user
@@ -158,6 +160,7 @@ def add_rmv_watchlist(request, id):
         return redirect('watchlist')
     return redirect('watchlist')
 
+@login_required
 def watchlist(request):
     user = request.user
     watchlist = user.watchlist.all()
@@ -173,4 +176,5 @@ def place_bid(request,id):
     if request.method == "POST":
         listing = Listing.objects.get(pk=id)
         bid = request.POST["bid"]
+
 
