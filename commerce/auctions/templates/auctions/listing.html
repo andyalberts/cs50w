@@ -23,7 +23,8 @@
         </form>
 
         <!-- place bid -->
-        <form action="{% url 'listing' id=id %}" method="post">
+        <form action="{% url 'bid' id=id %}" method="post">
+            {% csrf_token %}
             <div class="input-group col-sm-2 mb-3">
                 <span class="input-group-text">$</span>
                 <input type="text" class="form-control" name="bid" placeholder="Bid Amount" aria-label="Amount (to the nearest dollar)">

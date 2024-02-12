@@ -5,7 +5,8 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .models import User, Listing, Comments
+from .models import User, Listing, Comments, Bid
+from decimal import *
 
 categories = ["Food/Drink", 
               "Art", 
@@ -174,7 +175,22 @@ def watchlist(request):
 
 def place_bid(request,id):
     if request.method == "POST":
-        listing = Listing.objects.get(pk=id)
-        bid = request.POST["bid"]
+        listing = get_object_or_404(Listing, pk=id)
+        current_bid = listing.bids.latest("bids")
+
+        try:
+            user_bid = Decimal(request.POST["bid"])
+
+        except Decimal.InvalidOperation:
+
+            return redirect('listing')
+        
+        if user_bid > current_bid:
+            listing.bids.add(user_bid)
+        else: 
+            return redirect('listing')
+    return redirect('listing')
+ 
+        
 
 
