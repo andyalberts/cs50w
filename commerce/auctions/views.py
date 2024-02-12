@@ -169,7 +169,8 @@ def watchlist(request):
         "watchlist": watchlist
     })
 
-def place_bid(request):
-    pass
-    # if request.method == "POST":
-    #     bid = request.POST["bid"]
+def place_bid(request,id):
+    if request.method == "POST":
+        listing = Listing.objects.get(pk=id)
+        bid = request.POST["bid"]
+
