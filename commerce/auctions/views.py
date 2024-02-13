@@ -18,11 +18,8 @@ class CommentForm(forms.Form):
     comment = forms.CharField(widget=forms.Textarea,label="comment")
 
 def index(request):
-    user = request.user
-    
     return render(request, "auctions/index.html", {
-        "listings": Listing.objects.all(),
-        "user": user
+        "listings": Listing.objects.all()
     })
 
 # ----------------- User Handling ------------------------

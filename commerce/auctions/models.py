@@ -23,6 +23,7 @@ class User(AbstractUser):
 class Bid(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name='bids')
     bid_amount = models.DecimalField(max_digits=7, decimal_places=2)
+    timestamp = models.DateTimeField(auto_now=False, auto_now_add=False)    
 
 class Comments(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name='comments')
