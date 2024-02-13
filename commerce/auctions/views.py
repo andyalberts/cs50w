@@ -175,12 +175,10 @@ def place_bid(request,id):
         listing = get_object_or_404(Listing, pk=id)
         try:
             user_bid = Decimal(request.POST["bid"])
-
         except Decimal.InvalidOperation:
-
             return redirect('listing')
         
-        if user_bid > listing.start_bid:
+        if user_bid > (listing.start_bid and listing.bids.last().bid_amount):
            new_bid = Bid(listing=listing, bid_amount=user_bid)
            new_bid.save()
         else: 
