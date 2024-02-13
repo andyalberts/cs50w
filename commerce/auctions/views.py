@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required 
 from django.db import IntegrityError
@@ -81,7 +82,8 @@ def listing(request, id):
     listing = Listing.objects.get(pk=id)
     comments = Comments.objects.filter(listing=listing)
     owner = get_object_or_404(User, id=listing.owner.first().id)
-
+    test = messages.get_messages(request)
+    
     if request.method == 'POST':
         user_input = CommentForm(request.POST)
         # comments
@@ -94,7 +96,6 @@ def listing(request, id):
             new_comment.save()
             # refreshes comment section after adding one
             comments = Comments.objects.filter(listing=listing)
-      
         return render(request, 'auctions/listing.html',
         {"id": listing.id, 
          "title": listing.title, 
@@ -103,7 +104,8 @@ def listing(request, id):
          "start_bid": listing.start_bid, 
          "comments": comments,
          "owner": owner,
-         "category": listing.category})
+         "category": listing.category,
+         "messages": test,})
     else:
         
         return render(request, 'auctions/listing.html',
@@ -114,7 +116,8 @@ def listing(request, id):
          "start_bid": listing.start_bid, 
          "comments": comments,
          "owner": owner,
-         "category": listing.category})
+         "category": listing.category,
+         "messages": test,})
     
 def category(request,id):
     listing = Listing.objects.get(pk=id)
@@ -176,13 +179,15 @@ def place_bid(request,id):
         try:
             user_bid = Decimal(request.POST["bid"])
         except Decimal.InvalidOperation:
+            messages.error(request, "Bid amount must be greater than the current bid.")
             return redirect('listing')
         
         if user_bid > (listing.start_bid and listing.bids.last().current_bid):
            new_bid = Bid(listing=listing, current_bid=user_bid)
            new_bid.save()
         else: 
-            return redirect('index')
+            messages.error(request, "Bid amount must be greater than the current bid.")
+            return redirect('listing', id=id )
     return redirect('index')
  
         
