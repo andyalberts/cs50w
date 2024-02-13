@@ -179,7 +179,7 @@ def place_bid(request,id):
             return redirect('listing')
         
         if user_bid > (listing.start_bid and listing.bids.last().current_bid):
-           new_bid = Bid(listing=listing, bid_amount=user_bid)
+           new_bid = Bid(listing=listing, current_bid=user_bid)
            new_bid.save()
         else: 
             return redirect('index')

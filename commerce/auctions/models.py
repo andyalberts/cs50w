@@ -26,7 +26,7 @@ class Bid(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.bid_amount}"
+        return f"{self.current_bid}"
 
 class Comments(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name='comments')
