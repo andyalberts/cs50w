@@ -4,7 +4,7 @@
 
 
 
-
+<!-- THE CARD -->
     <div class="card col-mb-3 mb-3">
         <h5 class="card-title card-header bg-transparent text-center">{{ title }} </h5>
         <img src="{{ image }}" class="img-fluid rounded-start w-25" alt="...">
@@ -27,13 +27,13 @@
             {% csrf_token %}
             <div class="input-group col-sm-2 mb-3">
                 <span class="input-group-text">$</span>
-                <input type="text" class="form-control" name="bid" placeholder="Bid Amount" aria-label="Amount (to the nearest dollar)">
+                <input type="text" class="form-control" name="bid" placeholder="Bid Amount" aria-label="place bid amount">
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Place Bid</button>
             </div>
         </form>
         {% endif %}
     </div>
-    <!-- Card End -->
+<!-- Card End -->
 
 
     <!-- comments-->

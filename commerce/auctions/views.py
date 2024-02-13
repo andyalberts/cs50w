@@ -173,8 +173,6 @@ def watchlist(request):
 def place_bid(request,id):
     if request.method == "POST":
         listing = get_object_or_404(Listing, pk=id)
-        current_bid = listing.bids.latest("bids")
-
         try:
             user_bid = Decimal(request.POST["bid"])
 
@@ -182,11 +180,12 @@ def place_bid(request,id):
 
             return redirect('listing')
         
-        if user_bid > current_bid:
-            listing.bids.add(user_bid)
+        if user_bid > listing.start_bid:
+           new_bid = Bid(listing=listing, bid_amount=user_bid)
+           new_bid.save()
         else: 
-            return redirect('listing')
-    return redirect('listing')
+            return redirect('index')
+    return redirect('index')
  
         
 
