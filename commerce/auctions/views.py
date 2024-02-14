@@ -176,18 +176,25 @@ def watchlist(request):
 def place_bid(request,id):
     if request.method == "POST":
         listing = get_object_or_404(Listing, pk=id)
+        listing_bids = listing.bids.all()
         try:
             user_bid = Decimal(request.POST["bid"])
         except Decimal.InvalidOperation:
             messages.error(request, "Bid amount must be greater than the current bid.")
             return redirect('listing')
-        
-        if user_bid > (listing.start_bid and listing.bids.last().current_bid):
-           new_bid = Bid(listing=listing, current_bid=user_bid)
-           new_bid.save()
+        if listing_bids:
+            if user_bid > (listing.start_bid and listing.bids.last().current_bid):
+                new_bid = Bid(listing=listing, current_bid=user_bid, user=request.user)
+                new_bid.save()
+            else: 
+                messages.error(request, "Bid amount must be greater than the current bid.")
+                return redirect('listing', id=id )
         else: 
-            messages.error(request, "Bid amount must be greater than the current bid.")
-            return redirect('listing', id=id )
+            if user_bid > listing.start_bid:
+                new_bid=Bid(listing=listing, current_bid=user_bid, user=request.user)
+                new_bid.save()
+            else:
+                messages.error(request, "Bid amount must be greater than starting bid")
     return redirect('index')
  
         

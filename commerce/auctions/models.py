@@ -23,6 +23,7 @@ class User(AbstractUser):
 class Bid(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name='bids')
     current_bid = models.DecimalField(max_digits=7, decimal_places=2)
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE, related_name='bidder')
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
