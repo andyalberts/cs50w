@@ -38,6 +38,16 @@
                     <a class="nav-link" href="{% url 'register' %}">Register</a>
                 </li>
             {% endif %}
+            <form method="post" action="{% url 'category' %}">
+                {% csrf_token %}
+                <label for="category">Category:</label>
+                <select name="category" id="category">
+                    {% for category in categories %}
+                            <option value="{{ category }}">{{ category }}</option> 
+                    {% endfor %}
+                </select>
+                <button type="submit">search</button>
+            </form>
         </ul>
         <hr>
         {% block body %}

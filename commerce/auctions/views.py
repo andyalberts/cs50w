@@ -20,10 +20,13 @@ class CommentForm(forms.Form):
 
 def index(request):
     return render(request, "auctions/index.html", {
-        "listings": Listing.objects.all()
+        "listings": Listing.objects.all(),
+        "categories":categories
     })
 
 # ----------------- User Handling ------------------------
+
+# TODO Make sure login handles upper and lowercase letters
 
 def login_view(request):
     if request.method == "POST":
@@ -77,7 +80,9 @@ def register(request):
 
 # -------------Main Views--------------------------------
 
-
+# TODO: Allow user to "close" entry. Listing goes to highest bidder
+# TODO: Show Highest Bidder (include "you" if it is current user)
+    
 def listing(request, id):
     listing = Listing.objects.get(pk=id)
     comments = Comments.objects.filter(listing=listing)
@@ -118,13 +123,29 @@ def listing(request, id):
          "owner": owner,
          "category": listing.category,
          "messages": test,})
+
+@login_required
+def watchlist(request):
+    user = request.user
+    watchlist = user.watchlist.all()
+    print(user)
+    print(listing)
+    print(watchlist)
+    return render(request, 'auctions/watchlist.html',{
+        "user": user,
+        "watchlist": watchlist
+    })
+
+
+# TODO: Find way to add categories to every view context w/o explicitly adding to context
+def category(request):
+    # listing = Listing.objects.all()
+    if request.method == 'POST':
+     category = request.POST["category"]
+     chosen = Listing.objects.filter(category=category)
+     return render(request, 'auctions/category.html', {"chosen":chosen})
     
-def category(request,id):
-    listing = Listing.objects.get(pk=id)
-    if request.method == "POST":
-        listing
-        
-    return redirect('index')
+    return render(request, 'auctions/category.html')
 #---------------- Logged in ---------------------
 
 @login_required
@@ -161,22 +182,12 @@ def add_rmv_watchlist(request, id):
         return redirect('watchlist')
     return redirect('watchlist')
 
-@login_required
-def watchlist(request):
-    user = request.user
-    watchlist = user.watchlist.all()
-    print(user)
-    print(listing)
-    print(watchlist)
-    return render(request, 'auctions/watchlist.html',{
-        "user": user,
-        "watchlist": watchlist
-    })
 
 def place_bid(request,id):
     if request.method == "POST":
         listing = get_object_or_404(Listing, pk=id)
         listing_bids = listing.bids.all()
+        
         try:
             user_bid = Decimal(request.POST["bid"])
         except Decimal.InvalidOperation:
