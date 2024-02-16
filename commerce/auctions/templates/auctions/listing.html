@@ -6,13 +6,15 @@
 
 <!-- THE CARD -->
     <div class="card col-mb-3 mb-3">
+
+        <!-- LISTING -->
         <h5 class="card-title card-header bg-transparent text-center">{{ title }} </h5>
         <img src="{{ image }}" class="img-fluid rounded-start w-25" alt="...">
         <div class="card-body">
         <p class="card-text">{{ description }}</p>
         </div>
         <p class="card-text"><small class="text-muted">${{ start_bid }}</small></p>
-        <p class="card-text"><small class="text-muted">Posted by: {{ user.username }}</small></p>
+        <p class="card-text"><small class="text-muted">Posted by: {{ owner }}</small></p>
 
 
         {% if user.is_authenticated %}
@@ -23,6 +25,11 @@
         </form>
 
         <!-- place bid -->
+        {% if bidder == user.username %}
+            You are latest bidder
+        {% else %}
+            {{ bidder }}: {{ bid }}
+        {% endif %}
         <form action="{% url 'bid' id=id %}" method="post">
             {% csrf_token %}
             <div class="input-group col-sm-2 mb-3">

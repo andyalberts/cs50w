@@ -85,13 +85,14 @@ def register(request):
 
 # TODO: Allow user to "close" entry. Listing goes to highest bidder
 # TODO: Show Highest Bidder (include "you" if it is current user)
-    
 def listing(request, id):
     listing = Listing.objects.get(pk=id)
     comments = Comments.objects.filter(listing=listing)
     owner = get_object_or_404(User, id=listing.owner.first().id)
     test = messages.get_messages(request)
-    
+    latest_bid = listing.bids.last()
+    latest_bidder = latest_bid.user
+
     if request.method == 'POST':
         user_input = CommentForm(request.POST)
         #---comments---
@@ -104,6 +105,7 @@ def listing(request, id):
             new_comment.save()
             # refreshes comment section after adding one
             comments = Comments.objects.filter(listing=listing)
+        print(request.user.username)
         return render(request, 'auctions/listing.html',
         {"id": listing.id, 
          "title": listing.title, 
@@ -113,9 +115,11 @@ def listing(request, id):
          "comments": comments,
          "owner": owner,
          "category": listing.category,
-         "messages": test,})
+         "messages": test,
+         "bidder":latest_bidder,
+         "bid":latest_bid})
     else:
-        
+        print(request.user.username)
         return render(request, 'auctions/listing.html',
         {"id": listing.id, 
          "title": listing.title, 
@@ -125,7 +129,9 @@ def listing(request, id):
          "comments": comments,
          "owner": owner,
          "category": listing.category,
-         "messages": test,})
+         "messages": test,
+         "bidder":latest_bidder,
+         "bid":latest_bid})
 
 @login_required
 def watchlist(request):
