@@ -9,11 +9,14 @@ from django.urls import reverse
 from .models import User, Listing, Comments, Bid
 from decimal import *
 
+
 categories = ["Food/Drink", 
               "Art", 
               "Electronics", 
               "Toys",
               "Hobby"]
+
+c = {"categories":categories}
 
 class CommentForm(forms.Form):
     comment = forms.CharField(widget=forms.Textarea,label="comment")
@@ -91,7 +94,7 @@ def listing(request, id):
     
     if request.method == 'POST':
         user_input = CommentForm(request.POST)
-        # comments
+        #---comments---
         if user_input.is_valid():
             new_comment = Comments(
                 listing=listing,
@@ -133,19 +136,20 @@ def watchlist(request):
     print(watchlist)
     return render(request, 'auctions/watchlist.html',{
         "user": user,
-        "watchlist": watchlist
+        "watchlist": watchlist,
+        "categories":categories
     })
 
 
-# TODO: Find way to add categories to every view context w/o explicitly adding to context
+# TODO: Find way to add categories to every view context w/o explicitly adding variable to all context
 def category(request):
     # listing = Listing.objects.all()
     if request.method == 'POST':
      category = request.POST["category"]
      chosen = Listing.objects.filter(category=category)
-     return render(request, 'auctions/category.html', {"chosen":chosen})
+     return render(request, 'auctions/category.html', {"chosen":chosen, "categories":categories})
     
-    return render(request, 'auctions/category.html')
+    return render(request, 'auctions/category.html',{"categories":categories})
 #---------------- Logged in ---------------------
 
 @login_required
@@ -180,7 +184,7 @@ def add_rmv_watchlist(request, id):
             user.watchlist.remove(listing)
         
         return redirect('watchlist')
-    return redirect('watchlist')
+    return redirect('watchlist',{"categories":categories})
 
 
 def place_bid(request,id):
