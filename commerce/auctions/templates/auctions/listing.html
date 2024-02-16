@@ -25,8 +25,9 @@
         </form>
 
         <!-- place bid -->
-        {% if bidder == user.username %}
-            You are latest bidder
+        <!-- why do I need to use striptags?-->
+        {% if bidder|striptags == logged_in.username|striptags %}
+            <p>You are latest bidder</p>
         {% else %}
             {{ bidder }}: {{ bid }}
         {% endif %}

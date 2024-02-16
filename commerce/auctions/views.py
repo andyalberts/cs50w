@@ -92,6 +92,7 @@ def listing(request, id):
     test = messages.get_messages(request)
     latest_bid = listing.bids.last()
     latest_bidder = latest_bid.user
+    logged_in = request.user
 
     if request.method == 'POST':
         user_input = CommentForm(request.POST)
@@ -105,7 +106,7 @@ def listing(request, id):
             new_comment.save()
             # refreshes comment section after adding one
             comments = Comments.objects.filter(listing=listing)
-        print(request.user.username)
+        print(logged_in.username)
         return render(request, 'auctions/listing.html',
         {"id": listing.id, 
          "title": listing.title, 
@@ -117,9 +118,10 @@ def listing(request, id):
          "category": listing.category,
          "messages": test,
          "bidder":latest_bidder,
-         "bid":latest_bid})
+         "bid":latest_bid,
+         "logged_in":logged_in})
     else:
-        print(request.user.username)
+        print(logged_in.username)
         return render(request, 'auctions/listing.html',
         {"id": listing.id, 
          "title": listing.title, 
@@ -131,7 +133,8 @@ def listing(request, id):
          "category": listing.category,
          "messages": test,
          "bidder":latest_bidder,
-         "bid":latest_bid})
+         "bid":latest_bid,
+         "logged_in":logged_in})
 
 @login_required
 def watchlist(request):
