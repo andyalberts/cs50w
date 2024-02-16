@@ -9,7 +9,7 @@ class Listing(models.Model):
     is_active = models.BooleanField(default=True)
     category = models.CharField(max_length=45, null=True, blank=True)
     def __str__(self):
-        return f"{self.title}, {self.start_bid}"
+        return f"{self.title}"
 
 class User(AbstractUser):
     listings = models.ManyToManyField(Listing, blank=True, related_name="owner")

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Listing, Bid
+from .models import User, Listing, Bid, Comments
 
 # Register your models here.
 class UserAdmin(admin.ModelAdmin):
@@ -11,7 +11,12 @@ class ListingAdmin(admin.ModelAdmin):
 class BidAdmin(admin.ModelAdmin):
     list_display=["listing", "current_bid", "user", "created"]
 
+class CommentsAdmin(admin.ModelAdmin):
+    list_display=["listing","text","user"]
+   
+
 admin.site.register(User, UserAdmin)
 admin.site.register(Listing, ListingAdmin)
 admin.site.register(Bid, BidAdmin)
+admin.site.register(Comments, CommentsAdmin)
 
