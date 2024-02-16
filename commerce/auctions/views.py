@@ -119,7 +119,8 @@ def listing(request, id):
          "messages": test,
          "bidder":latest_bidder,
          "bid":latest_bid,
-         "logged_in":logged_in})
+         "logged_in":logged_in,
+         "categories":categories})
     else:
         print(logged_in.username)
         return render(request, 'auctions/listing.html',
@@ -134,7 +135,8 @@ def listing(request, id):
          "messages": test,
          "bidder":latest_bidder,
          "bid":latest_bid,
-         "logged_in":logged_in})
+         "logged_in":logged_in,
+         "categories":categories})
 
 @login_required
 def watchlist(request):
