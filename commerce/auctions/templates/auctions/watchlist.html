@@ -3,9 +3,10 @@
 {% block body %}
 {% csrf_token %}
 
+<div class="card_display">
 <br>
 {% for item in watchlist %}
-    <div class="card">
+    <div class="card col-mb-3 mb-3" style="max-width: 540px">
         <h5 class="card-title card-header bg-transparent text-center">{{ item.title }} </h5>
         <img src="{{ item.image.url }}" class="img-fluid rounded-start w-25" alt="...">
         <div class="card-body">
@@ -16,5 +17,5 @@
     </div>
 {% endfor %}
 <br>
-
+</div>
 {% endblock %}
