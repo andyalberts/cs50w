@@ -29,7 +29,7 @@
         {% if bidder|striptags == logged_in.username|striptags %}
             <p>You are latest bidder</p>
         {% else %}
-            {{ bidder }}: {{ bid }}
+            Current Bid: {{ bidder }}: {{ bid }}
         {% endif %}
         <form action="{% url 'bid' id=id %}" method="post">
             {% csrf_token %}

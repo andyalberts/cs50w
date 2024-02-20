@@ -21,8 +21,7 @@ c = {"categories":categories}
 class CommentForm(forms.Form):
     comment = forms.CharField(widget=forms.Textarea,label="comment")
 
-# TODO: Make listing price the current bid
-# TODO: Remove inactive listings
+
 def index(request):
     return render(request, "auctions/index.html", {
         "listings": Listing.objects.all(),

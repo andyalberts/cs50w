@@ -16,7 +16,7 @@
             <div class="card-body">
               <h5 class="card-title"> {{ listing.title }}</h5></a>
               <p class="card-text">{{ listing.description }}</p>
-              <p class="card-text"><small class="text-muted">${{ listing.start_bid }}</small></p>
+              <p class="card-text"><small class="text-muted">${{ listing.bids.first }}</small></p>
               <p class="card-text"><small class="text-muted">Posted by: {{ listing.owner.first }}</small></p>
             </div>
           </div>
