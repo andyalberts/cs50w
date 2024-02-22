@@ -2,19 +2,20 @@
 
 {% block body %}
 {% csrf_token %}
-
 <div class="card_display">
-<br>
+    <br>
 {% for item in watchlist %}
-    <div class="card col-mb-3 mb-3" style="max-width: 540px">
-        <h5 class="card-title card-header bg-transparent text-center">{{ item.title }} </h5>
-        <img src="{{ item.image.url }}" class="img-fluid rounded-start w-25" alt="...">
-        <div class="card-body">
-        <p class="card-text">{{ item.description }}</p>
+    {% if item.is_active %}
+        <div class="card col-mb-3 mb-3" style="max-width: 540px">
+            <h5 class="card-title card-header bg-transparent text-center">{{ item.title }} </h5>
+            <img src="{{ item.image.url }}" class="img-fluid rounded-start w-25" alt="...">
+            <div class="card-body">
+            <p class="card-text">{{ item.description }}</p>
+            </div>
+            <p class="card-text"><small class="text-muted">${{ item.start_bid }}</small></p>
+            <p class="card-text"><small class="text-muted">Posted by: {{ item.owner.first }}</small></p>
         </div>
-        <p class="card-text"><small class="text-muted">${{ item.start_bid }}</small></p>
-        <p class="card-text"><small class="text-muted">Posted by: {{ item.owner.first }}</small></p>
-    </div>
+    {% endif %}
 {% endfor %}
 <br>
 </div>
