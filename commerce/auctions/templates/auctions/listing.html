@@ -13,7 +13,7 @@
         <div class="card-body">
         <p class="card-text">{{ description }}</p>
         </div>
-        <p class="card-text"><small class="text-muted">${{ start_bid }}</small></p>
+        <p class="card-text"><small class="text-muted">Start Bid: ${{ start_bid }}</small></p>
         <p class="card-text"><small class="text-muted">Posted by: {{ owner }}</small></p>
 
 
@@ -28,8 +28,10 @@
         <!-- why do I need to use striptags?-->
         {% if bidder|striptags == logged_in.username|striptags %}
             <p>You are latest bidder</p>
-        {% else %}
+        {% elif latest_bidder %}
             Current Bid: {{ bidder }}: {{ bid }}
+        {% else %}
+            No Current Bids.
         {% endif %}
         <form action="{% url 'bid' id=id %}" method="post">
             {% csrf_token %}
@@ -40,6 +42,7 @@
             </div>
         </form>
         {% endif %}
+        <!--Error Message-->
         {% if messages %}
         <ul class="messages">
             {% for message in messages %}

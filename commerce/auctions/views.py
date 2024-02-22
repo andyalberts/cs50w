@@ -92,9 +92,9 @@ def listing(request, id):
     owner = get_object_or_404(User, id=listing.owner.first().id)
     test = messages.get_messages(request)
     latest_bid = listing.bids.last()
-    latest_bidder = latest_bid.user
+    latest_bidder = latest_bid.user if latest_bid else None
     logged_in = request.user
-
+    
     if request.method == 'POST':
         user_input = CommentForm(request.POST)
         #---comments---
