@@ -65,11 +65,12 @@
 </form>
 
 <!-- deactivate-->
-<form action="{% url 'toggle_active' id=id %}" method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger active">Deactivate</button>
-</form>
-
+{% if logged_in == owner %}
+    <form action="{% url 'toggle_active' id=id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger active">Deactivate</button>
+    </form>
+{% endif %}
 
 {% for comment in comments %}
     <li> {{ comment.text }}</li>
