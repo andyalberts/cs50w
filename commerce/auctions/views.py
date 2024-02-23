@@ -230,4 +230,7 @@ def place_bid(request,id):
 def toggle_active(request,id):
     listing = Listing.objects.get(pk=id)
     if request.method == "POST":
-        pass
+        listing.is_active = not listing.is_active 
+        listing.save()
+        return redirect('listing', id=id)
+    return redirect('index')

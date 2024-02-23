@@ -64,6 +64,13 @@
     <button type="submit">Post Comment</button>
 </form>
 
+<!-- deactivate-->
+<form action="{% url 'toggle_active' id=id %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger active">Deactivate</button>
+</form>
+
+
 {% for comment in comments %}
     <li> {{ comment.text }}</li>
     <br>
