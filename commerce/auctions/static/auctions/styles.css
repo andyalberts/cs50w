@@ -1,6 +1,6 @@
 body {
   background: url("/media/media/bg.png");
-  background-repeat: no-repeat;
+  display: float;
   background-size: cover;
   margin: 20px;
 }
