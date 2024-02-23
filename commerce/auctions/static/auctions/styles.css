@@ -1,5 +1,7 @@
 body {
   background: url("/media/media/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
   margin: 20px;
 }
 
@@ -8,8 +10,7 @@ nav {
 }
 
 h1 {
-  color: #1da7b4;
-  background-color: orange;
+  color: rgb(38, 38, 38);
 }
 
 .card {

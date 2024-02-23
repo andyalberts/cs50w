@@ -84,7 +84,7 @@ def register(request):
 
 # -------------Main Views--------------------------------
 
-# TODO: Show current bid
+
 # TODO: Allow user to "close" entry. Listing goes to highest bidder
 def listing(request, id):
     listing = Listing.objects.get(pk=id)

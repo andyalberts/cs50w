@@ -1,9 +1,11 @@
 $main-color: #1da7b4;
-$warning: orange;
-$primary: black;
+$warning: #ffc107;
+$primary: rgb(38, 38, 38);
 
 body{
     background: url("/media/media/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     margin: 20px;
 }
 
@@ -11,8 +13,8 @@ nav{
     background-color: $main-color;
 }
 h1{
-    color: $main-color;
-    background-color: $warning;
+    color: $primary;
+    
 
 }
 
