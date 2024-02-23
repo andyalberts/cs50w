@@ -164,6 +164,20 @@ def category(request):
     
     return render(request, 'auctions/category.html',{"categories":categories})
 #---------------- Logged in ---------------------
+@login_required
+def add_rmv_watchlist(request, id):
+    listing = Listing.objects.get(pk=id)
+    user = request.user
+    watchlist = user.watchlist.all()
+
+    if request.method == "POST":
+        if listing not in watchlist:
+            user.watchlist.add(listing)
+        else:
+            user.watchlist.remove(listing)
+        
+        return redirect('watchlist')
+    return redirect('watchlist',{"categories":categories})
 
 @login_required
 def create_listing(request):
@@ -184,20 +198,6 @@ def create_listing(request):
    
     return render(request, 'auctions/create.html',{"categories":categories})
 
-@login_required
-def add_rmv_watchlist(request, id):
-    listing = Listing.objects.get(pk=id)
-    user = request.user
-    watchlist = user.watchlist.all()
-
-    if request.method == "POST":
-        if listing not in watchlist:
-            user.watchlist.add(listing)
-        else:
-            user.watchlist.remove(listing)
-        
-        return redirect('watchlist')
-    return redirect('watchlist',{"categories":categories})
 
 @login_required
 def place_bid(request,id):
@@ -226,5 +226,8 @@ def place_bid(request,id):
     return redirect('index')
  
         
-
-
+@login_required
+def toggle_active(request,id):
+    listing = Listing.objects.get(pk=id)
+    if request.method == "POST":
+        pass
