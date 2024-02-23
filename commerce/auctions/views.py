@@ -199,7 +199,7 @@ def add_rmv_watchlist(request, id):
         return redirect('watchlist')
     return redirect('watchlist',{"categories":categories})
 
-
+@login_required
 def place_bid(request,id):
     if request.method == "POST":
         listing = get_object_or_404(Listing, pk=id)
