@@ -4,12 +4,12 @@
     <h2>Active Listings</h2>
 
   <div class="col">
-    <div class="row">
+    <div class="row g-0">
     {% for listing in listings %}
     {% if listing.is_active %}
     <div class="card mb-3 mr-3" style="max-width: 540px;">
         <div class="row g-0">
-          <div class="col-md-4"><a href="{% url 'listing' listing.id %}">
+          <div class="col-md-6"><a href="{% url 'listing' listing.id %}">
             <img src="{{ listing.image.url}}" class="img-fluid rounded-start" alt="{{ listing.title }}">
           </div>
           <div class="col-md-8">
