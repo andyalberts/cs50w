@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
 class Listing(models.Model):
     title = models.CharField(max_length=125)
     description = models.CharField(max_length=250, blank=True)
@@ -8,17 +9,17 @@ class Listing(models.Model):
     image = models.ImageField(upload_to='media', null=True, blank=True)
     is_active = models.BooleanField(default=True)
     category = models.CharField(max_length=45, null=True)
-    winner = models.CharField(max_length=45)
     def __str__(self):
         return f"{self.title}"
 
 class User(AbstractUser):
     listings = models.ManyToManyField(Listing, blank=True, related_name="owner")
     watchlist = models.ManyToManyField(Listing, blank=True, related_name="watchers")
+    wins = models.ForeignKey(Listing, on_delete=models.SET_NULL, null=True, blank=True, related_name='winner')
 
     def __str__(self):
         return f"{self.username}"
-
+    
 class Bid(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name='bids')
     current_bid = models.DecimalField(max_digits=7, decimal_places=2, default=0)
