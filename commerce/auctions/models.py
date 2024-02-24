@@ -8,6 +8,7 @@ class Listing(models.Model):
     image = models.ImageField(upload_to='media', null=True, blank=True)
     is_active = models.BooleanField(default=True)
     category = models.CharField(max_length=45, null=True)
+    winner = models.CharField(max_length=45, null=True)
     def __str__(self):
         return f"{self.title}"
 
@@ -17,8 +18,6 @@ class User(AbstractUser):
 
     def __str__(self):
         return f"{self.username}"
-
-
 
 class Bid(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name='bids')

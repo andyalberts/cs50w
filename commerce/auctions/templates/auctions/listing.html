@@ -8,7 +8,7 @@
     <div class="card col-mb-3 mb-3">
 
         <!-- LISTING -->
-        <h5 class="card-title card-header bg-transparent text-center mb-3">{{ title }} </h5>
+        <h5 class="card-title card-header bg-transparent secondary-text-emphasis text-center mb-3">{{ title }} </h5>
         <img src="{{ image }}" class="img-fluid rounded-start w-25" alt="...">
         <div class="card-body">
         <p class="card-text">{{ description }}</p>
@@ -28,15 +28,14 @@
         <!-- why do I need to use striptags?-->
         {% if bidder|striptags == logged_in.username|striptags %}
             <p>You are latest bidder</p>
-        {% elif latest_bidder %}
-            Current Bid: {{ bidder }}: {{ bid }}
+        {% elif bidder %}
+            {{ bidder }} has the current bid of {{ bid }}
         {% else %}
             No Current Bids.
         {% endif %}
         <form action="{% url 'bid' id=id %}" method="post">
             {% csrf_token %}
-            <div class="input-group col-sm-2 mb-3">
-                <span class="input-group-text">$</span>
+            <div class="input-group mb-3">
                 <input type="text" class="form-control" name="bid" placeholder="Bid Amount" aria-label="place bid amount">
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Place Bid</button>
             </div>
