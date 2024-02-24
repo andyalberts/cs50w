@@ -8,7 +8,7 @@ class Listing(models.Model):
     image = models.ImageField(upload_to='media', null=True, blank=True)
     is_active = models.BooleanField(default=True)
     category = models.CharField(max_length=45, null=True)
-    winner = models.CharField(max_length=45, null=True)
+    winner = models.CharField(max_length=45)
     def __str__(self):
         return f"{self.title}"
 

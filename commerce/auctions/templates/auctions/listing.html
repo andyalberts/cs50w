@@ -26,12 +26,21 @@
 
         <!-- place bid -->
         <!-- why do I need to use striptags?-->
-        {% if bidder|striptags == logged_in.username|striptags %}
-            <p>You are latest bidder</p>
-        {% elif bidder %}
-            {{ bidder }} has the current bid of {{ bid }}
+        {% if listing.winner %}
+            {% if listing.winner == logged_in %}
+                <p>You are the winner!</p>
+            {% else %}
+                <p>{{ listing.winner }} is the winner!</p>
+            {% endif %}
+
         {% else %}
-            No Current Bids.
+            {% if bidder|striptags == logged_in.username|striptags %}
+                <p>You are latest bidder</p>
+            {% elif bidder %}
+                {{ bidder }} has the current bid of {{ bid }}
+            {% else %}
+                No Current Bids.
+            {% endif %}
         {% endif %}
         <form action="{% url 'bid' id=id %}" method="post">
             {% csrf_token %}

@@ -233,7 +233,7 @@ def toggle_active(request,id):
     latest_bidder = latest_bid.user
     if request.method == "POST":
         listing.is_active = not listing.is_active 
-        listing.winner = latest_bidder
+        listing.winner = latest_bidder.username
         listing.save()
     
         return redirect('listing', id=id)
