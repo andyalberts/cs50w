@@ -85,7 +85,7 @@ def register(request):
 # -------------Main Views--------------------------------
 
 
-# TODO: Allow user to "close" entry. Listing goes to highest bidder
+# TODO: Allow closed Listing goes to highest bidder
 def listing(request, id):
     listing = Listing.objects.get(pk=id)
     comments = Comments.objects.filter(listing=listing)
@@ -229,8 +229,12 @@ def place_bid(request,id):
 @login_required
 def toggle_active(request,id):
     listing = Listing.objects.get(pk=id)
+    latest_bid = listing.bids.last()
+    latest_bidder = latest_bid.user
     if request.method == "POST":
         listing.is_active = not listing.is_active 
+        listing.winner = latest_bidder.username
         listing.save()
+    
         return redirect('listing', id=id)
     return redirect('index')
