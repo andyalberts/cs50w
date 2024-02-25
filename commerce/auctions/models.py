@@ -9,13 +9,23 @@ class Listing(models.Model):
     image = models.ImageField(upload_to='media', null=True, blank=True)
     is_active = models.BooleanField(default=True)
     category = models.CharField(max_length=45, null=True)
+    winner = models.ForeignKey('User', on_delete=models.SET_NULL, null=True, blank=True, related_name='won_listings')
+
     def __str__(self):
         return f"{self.title}"
+    
+    def set_winner(self):
+        # Get highest bid
+        highest_bid = self.bids.order_by('-current_bid').first()
+
+        if highest_bid:
+            # Get highest bidder and save to winner
+            self.winner = highest_bid.user
+            self.save()
 
 class User(AbstractUser):
     listings = models.ManyToManyField(Listing, blank=True, related_name="owner")
     watchlist = models.ManyToManyField(Listing, blank=True, related_name="watchers")
-    wins = models.ForeignKey(Listing, on_delete=models.SET_NULL, null=True, blank=True, related_name='winner')
 
     def __str__(self):
         return f"{self.username}"

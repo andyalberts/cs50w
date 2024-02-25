@@ -230,11 +230,10 @@ def place_bid(request,id):
 def toggle_active(request,id):
     listing = Listing.objects.get(pk=id)
     latest_bid = listing.bids.last()
-    latest_bidder = latest_bid.user
     if request.method == "POST":
         listing.is_active = not listing.is_active 
-        listing.winner = latest_bidder.username
         listing.save()
+        listing.set_winner()
     
         return redirect('listing', id=id)
     return redirect('index')
