@@ -65,6 +65,7 @@
 
 
     <!-- comments-->
+{% if user.is_authenticated %}
 <form action="{% url 'listing' id=id %}" method="post">
     {% csrf_token %}
     <div class="input-group">
@@ -72,11 +73,13 @@
     </div>
     <button type="submit">Post Comment</button>
 </form>
+{% endif %}
 Comments:
 {% for comment in comments %}
     <li> {{ comment.user }}: {{ comment.text }}</li>
     <br>
 {% endfor %}
+<br>
 <!-- deactivate-->
 {% if logged_in == owner %}
     <form action="{% url 'toggle_active' id=id %}" method="post">
