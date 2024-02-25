@@ -6,8 +6,9 @@
     <br>
 {% for item in watchlist %}
     {% if item.is_active %}
-        <div class="card col-mb-3 mb-3" style="max-width: 540px">
+        <div class="card col-mb-3 mb-3" style="max-width: 540px"><a href="{% url 'listing' item.id %}">7
             <h5 class="card-title card-header bg-transparent text-center">{{ item.title }} </h5>
+            
             <img src="{{ item.image.url }}" class="img-fluid rounded-start w-25" alt="...">
             <div class="card-body">
             <p class="card-text">{{ item.description }}</p>

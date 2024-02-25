@@ -141,7 +141,6 @@ def listing(request, id):
          "categories":categories,
          "listing":listing})
 
-#TODO: Remove inactive listings
 @login_required
 def watchlist(request):
     user = request.user
