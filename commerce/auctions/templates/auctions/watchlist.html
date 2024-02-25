@@ -6,15 +6,20 @@
     <br>
 {% for item in watchlist %}
     {% if item.is_active %}
-        <div class="card col-mb-3 mb-3" style="max-width: 540px"><a href="{% url 'listing' item.id %}">7
-            <h5 class="card-title card-header bg-transparent text-center">{{ item.title }} </h5>
-            
-            <img src="{{ item.image.url }}" class="img-fluid rounded-start w-25" alt="...">
+        <div class="card bg-light col-mb-3 mb-3 mr-3 text-center" style="max-width: 18rem;"><a href="{% url 'listing' item.id %}">
+            <img src="{{ item.image.url }}" class="img-fluid rounded-start" alt="...">
             <div class="card-body">
-            <p class="card-text">{{ item.description }}</p>
-            </div>
-            <p class="card-text"><small class="text-muted">${{ item.start_bid }}</small></p>
-            <p class="card-text"><small class="text-muted">Posted by: {{ item.owner.first }}</small></p>
+                <h5 class="secondary-text-emphasis card-title"> {{ item.title }}</h5></a>
+                <p class="card-text">{{ item.description }}</p>
+                <p class="card-text"><small class="text-muted">${{ item.start_bid }}</small></p>
+                {% if item.bids.all %}
+                <p class="card-text"><small class="text-muted">Current Bid: ${{ item.bids.all.last.current_bid }}</small></p>
+                {% else %}
+                <p class="card-text"><small class="text-muted">No bids yet</small></p>
+                {% endif %}
+                <p class="card-text"><small class="text-muted">Posted by: {{ item.owner.first }}</small></p>
+              </div>
+            
         </div>
     {% endif %}
 {% endfor %}
