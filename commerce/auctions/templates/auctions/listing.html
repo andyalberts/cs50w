@@ -72,7 +72,11 @@
     </div>
     <button type="submit">Post Comment</button>
 </form>
-
+Comments:
+{% for comment in comments %}
+    <li> {{ comment.user }}: {{ comment.text }}</li>
+    <br>
+{% endfor %}
 <!-- deactivate-->
 {% if logged_in == owner %}
     <form action="{% url 'toggle_active' id=id %}" method="post">
@@ -81,10 +85,6 @@
     </form>
 {% endif %}
 
-{% for comment in comments %}
-    <li> {{ comment.text }}</li>
-    <br>
-{% endfor %}
 Owner: {{ owner.username }}
 <br>
 Category: {{ category }}
