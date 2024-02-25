@@ -229,7 +229,6 @@ def place_bid(request,id):
 @login_required
 def toggle_active(request,id):
     listing = Listing.objects.get(pk=id)
-    latest_bid = listing.bids.last()
     if request.method == "POST":
         listing.is_active = not listing.is_active 
         listing.save()
