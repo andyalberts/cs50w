@@ -121,7 +121,8 @@ def listing(request, id):
          "bidder":latest_bidder,
          "bid":latest_bid,
          "logged_in":logged_in,
-         "categories":categories})
+         "categories":categories,
+         "listing":listing})
     else:
         print(logged_in.username)
         return render(request, 'auctions/listing.html',
@@ -137,7 +138,8 @@ def listing(request, id):
          "bidder":latest_bidder,
          "bid":latest_bid,
          "logged_in":logged_in,
-         "categories":categories})
+         "categories":categories,
+         "listing":listing})
 
 #TODO: Remove inactive listings
 @login_required
@@ -232,6 +234,7 @@ def toggle_active(request,id):
     if request.method == "POST":
         listing.is_active = not listing.is_active 
         listing.save()
+        # sets and saves winner
         listing.set_winner()
     
         return redirect('listing', id=id)

@@ -25,12 +25,13 @@
         </form>
 
         <!-- place bid -->
-        <!-- why do I need to use striptags?-->
+        <!-- why do I need to use striptags?
+             Why is username case sensitive? -->
         {% if listing.winner %}
-            {% if listing.winner == logged_in %}
+            {% if listing.winner.username == logged_in.username %}
                 <p>You are the winner!</p>
             {% else %}
-                <p>{{ listing.winner }} is the winner!</p>
+                <p>{{ listing.winner.username }} is the winner!</p>
             {% endif %}
 
         {% else %}
