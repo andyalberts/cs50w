@@ -107,7 +107,6 @@ def listing(request, id):
             new_comment.save()
             # refreshes comment section after adding one
             comments = Comments.objects.filter(listing=listing)
-        print(logged_in.username)
         return render(request, 'auctions/listing.html',
         {"id": listing.id, 
          "title": listing.title, 
@@ -124,7 +123,6 @@ def listing(request, id):
          "categories":categories,
          "listing":listing})
     else:
-        print(logged_in.username)
         return render(request, 'auctions/listing.html',
         {"id": listing.id, 
          "title": listing.title, 
@@ -145,9 +143,6 @@ def listing(request, id):
 def watchlist(request):
     user = request.user
     watchlist = user.watchlist.all()
-    print(user)
-    print(listing)
-    print(watchlist)
     return render(request, 'auctions/watchlist.html',{
         "user": user,
         "watchlist": watchlist,
