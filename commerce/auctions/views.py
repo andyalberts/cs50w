@@ -84,8 +84,6 @@ def register(request):
 
 # -------------Main Views--------------------------------
 
-
-# TODO: Allow closed Listing goes to highest bidder
 def listing(request, id):
     listing = Listing.objects.get(pk=id)
     comments = Comments.objects.filter(listing=listing)
@@ -152,7 +150,6 @@ def watchlist(request):
 
 # TODO: Find way to add categories to every view context w/o explicitly adding variable to all context
 def category(request):
-    # listing = Listing.objects.all()
     if request.method == 'POST':
      category = request.POST["category"]
      chosen = Listing.objects.filter(category=category)
