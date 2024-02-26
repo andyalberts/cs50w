@@ -6,7 +6,7 @@ class Listing(models.Model):
     title = models.CharField(max_length=125)
     description = models.CharField(max_length=250, blank=True)
     start_bid = models.DecimalField(max_digits=7, decimal_places=2)
-    image = models.ImageField(upload_to='media', null=True, blank=True)
+    image = models.ImageField(upload_to='media', default='defaultimg.png', null=True, blank=True)
     is_active = models.BooleanField(default=True)
     category = models.CharField(max_length=45, null=True)
     winner = models.ForeignKey('User', on_delete=models.SET_NULL, null=True, blank=True, related_name='won_listings')

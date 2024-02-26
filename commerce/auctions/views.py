@@ -92,7 +92,6 @@ def listing(request, id):
     latest_bid = listing.bids.last()
     latest_bidder = latest_bid.user if latest_bid else None
     logged_in = request.user
-    
     if request.method == 'POST':
         user_input = CommentForm(request.POST)
         #---comments---
@@ -183,9 +182,14 @@ def create_listing(request):
         category = request.POST["category"]
 
         # create
-        new_entry = Listing(title=title, description=description, start_bid=start_bid, image=image, category=category)
-        new_entry.save()
-        owner.listings.add(new_entry)
+        if image:
+            new_entry = Listing(title=title, description=description, start_bid=start_bid, image=image, category=category)
+            new_entry.save()
+            owner.listings.add(new_entry)
+        else:
+            new_entry = Listing(title=title, description=description, start_bid=start_bid, category=category)
+            new_entry.save()
+            owner.listings.add(new_entry)
 
         return redirect('index')
    

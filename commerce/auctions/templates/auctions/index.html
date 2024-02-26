@@ -9,8 +9,11 @@
     <div class="card bg-light col-mb-3 mb-3 mr-3 text-center" style="max-width: 18rem;">
       <div class="card-body">
           <div class="card-body"><a href="{% url 'listing' listing.id %}" >
+            {% if listing.image %}
             <img src="{{ listing.image.url}}" class="rounded-start" alt="{{ listing.title }}">
-           
+            {% else %}
+            <p>no image</p>
+            {% endif %}
           </div>
           <h5 class="card-title"> {{ listing.title }}</h5></a>
           <p class="card-text">{{ listing.description }}</p>
