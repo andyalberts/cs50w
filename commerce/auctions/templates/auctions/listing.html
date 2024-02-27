@@ -5,11 +5,14 @@
 
 
 <!-- THE CARD -->
-    <div class="card col-mb-3 mb-3">
+    <div class="card col-mb-3 mb-3" style="max-width: 50rem">
 
         <!-- LISTING -->
         <h5 class="card-title card-header bg-transparent secondary-text-emphasis text-center mb-3">{{ title }} </h5>
-        <img src="{{ image }}" class="img-fluid rounded-start w-25" alt="...">
+        <!-- <img src="{{ image }}" class="img-fluid rounded-start w-25" alt="..."> -->
+       
+        <img src="{{ image }}" class="rounded-start" alt="{{ title }}">
+       
         <div class="card-body">
         <p class="card-text">{{ description }}</p>
         </div>
@@ -25,12 +28,13 @@
         </form>
 
         <!-- place bid -->
-        <!-- why do I need to use striptags?-->
+        <!-- why do I need to use striptags?
+             Why is username case sensitive? -->
         {% if listing.winner %}
-            {% if listing.winner == logged_in %}
+            {% if listing.winner.username == logged_in.username %}
                 <p>You are the winner!</p>
             {% else %}
-                <p>{{ listing.winner }} is the winner!</p>
+                <p>{{ listing.winner.username }} is the winner!</p>
             {% endif %}
 
         {% else %}
@@ -64,6 +68,7 @@
 
 
     <!-- comments-->
+{% if user.is_authenticated %}
 <form action="{% url 'listing' id=id %}" method="post">
     {% csrf_token %}
     <div class="input-group">
@@ -71,7 +76,13 @@
     </div>
     <button type="submit">Post Comment</button>
 </form>
-
+{% endif %}
+Comments:
+{% for comment in comments %}
+    <li> {{ comment.user }}: {{ comment.text }}</li>
+    <br>
+{% endfor %}
+<br>
 <!-- deactivate-->
 {% if logged_in == owner %}
     <form action="{% url 'toggle_active' id=id %}" method="post">
@@ -80,10 +91,6 @@
     </form>
 {% endif %}
 
-{% for comment in comments %}
-    <li> {{ comment.text }}</li>
-    <br>
-{% endfor %}
 Owner: {{ owner.username }}
 <br>
 Category: {{ category }}

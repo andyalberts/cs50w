@@ -84,8 +84,6 @@ def register(request):
 
 # -------------Main Views--------------------------------
 
-
-# TODO: Allow closed Listing goes to highest bidder
 def listing(request, id):
     listing = Listing.objects.get(pk=id)
     comments = Comments.objects.filter(listing=listing)
@@ -94,7 +92,6 @@ def listing(request, id):
     latest_bid = listing.bids.last()
     latest_bidder = latest_bid.user if latest_bid else None
     logged_in = request.user
-    
     if request.method == 'POST':
         user_input = CommentForm(request.POST)
         #---comments---
@@ -107,7 +104,6 @@ def listing(request, id):
             new_comment.save()
             # refreshes comment section after adding one
             comments = Comments.objects.filter(listing=listing)
-        print(logged_in.username)
         return render(request, 'auctions/listing.html',
         {"id": listing.id, 
          "title": listing.title, 
@@ -121,9 +117,9 @@ def listing(request, id):
          "bidder":latest_bidder,
          "bid":latest_bid,
          "logged_in":logged_in,
-         "categories":categories})
+         "categories":categories,
+         "listing":listing})
     else:
-        print(logged_in.username)
         return render(request, 'auctions/listing.html',
         {"id": listing.id, 
          "title": listing.title, 
@@ -137,16 +133,13 @@ def listing(request, id):
          "bidder":latest_bidder,
          "bid":latest_bid,
          "logged_in":logged_in,
-         "categories":categories})
+         "categories":categories,
+         "listing":listing})
 
-#TODO: Remove inactive listings
 @login_required
 def watchlist(request):
     user = request.user
     watchlist = user.watchlist.all()
-    print(user)
-    print(listing)
-    print(watchlist)
     return render(request, 'auctions/watchlist.html',{
         "user": user,
         "watchlist": watchlist,
@@ -156,7 +149,6 @@ def watchlist(request):
 
 # TODO: Find way to add categories to every view context w/o explicitly adding variable to all context
 def category(request):
-    # listing = Listing.objects.all()
     if request.method == 'POST':
      category = request.POST["category"]
      chosen = Listing.objects.filter(category=category)
@@ -190,9 +182,14 @@ def create_listing(request):
         category = request.POST["category"]
 
         # create
-        new_entry = Listing(title=title, description=description, start_bid=start_bid, image=image, category=category)
-        new_entry.save()
-        owner.listings.add(new_entry)
+        if image:
+            new_entry = Listing(title=title, description=description, start_bid=start_bid, image=image, category=category)
+            new_entry.save()
+            owner.listings.add(new_entry)
+        else:
+            new_entry = Listing(title=title, description=description, start_bid=start_bid, category=category)
+            new_entry.save()
+            owner.listings.add(new_entry)
 
         return redirect('index')
    
@@ -229,12 +226,11 @@ def place_bid(request,id):
 @login_required
 def toggle_active(request,id):
     listing = Listing.objects.get(pk=id)
-    latest_bid = listing.bids.last()
-    latest_bidder = latest_bid.user
     if request.method == "POST":
         listing.is_active = not listing.is_active 
-        listing.winner = latest_bidder.username
         listing.save()
+        # sets and saves winner
+        listing.set_winner()
     
         return redirect('listing', id=id)
     return redirect('index')

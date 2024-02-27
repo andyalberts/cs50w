@@ -5,14 +5,14 @@
     {% csrf_token %}
        
         <div class="form-group col-sm-2">
-            <input autofocus class="form-control" type="text" name="title" placeholder="Title">
+            <input autofocus class="form-control"  id="validationCustom05" required type="text" name="title" placeholder="Title">
         </div>
         <div class="input-group col-md-6 mb-3">
-            <textarea class="form-control" name="description" placeholder="Description"  aria-label="entry textarea" ></textarea>
+            <textarea class="form-control" name="description" id="validationCustom05" required placeholder="Description"  aria-label="entry textarea" ></textarea>
         </div>  
         <div class="input-group col-sm-2 mb-3">
             <span class="input-group-text">$</span>
-            <input type="text" class="form-control" name="start_bid"placeholder="Starting Bid" aria-label="Amount (to the nearest dollar)">
+            <input type="number" class="form-control" id="validationCustom05" required name="start_bid"placeholder="Starting Bid" aria-label="Amount (to the nearest dollar)">
         </div>
         <div class="mb-3 col-sm-2">
             <input class="form-control" name="image" id="formFile" type="file">
