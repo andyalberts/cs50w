@@ -21,6 +21,7 @@ function compose_email() {
   document.querySelector('#compose-recipients').value = '';
   document.querySelector('#compose-subject').value = '';
   document.querySelector('#compose-body').value = '';
+  
 }
 
 function load_mailbox(mailbox) {
@@ -31,4 +32,12 @@ function load_mailbox(mailbox) {
 
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
+
+  fetch(`emails/${mailbox}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+    })
+  
+  .catch(error => console.error('Error fetching emails:', error));
 }
