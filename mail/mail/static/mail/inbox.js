@@ -5,50 +5,41 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
   document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
   document.querySelector('#compose').addEventListener('click', compose_email);
-  
-  document.querySelector('#compose-form').addEventListener('submit', ()=>send_email);
+  document.querySelector('#send').addEventListener('click', send_email);
+
+  // document.querySelector('#compose-form').addEventListener('submit', send_email);
   
   // By default, load the inbox
   load_mailbox('inbox');
 });
 
 
+// Get the email composition form and add a submit event listener
 function send_email(event){
   event.preventDefault();
 
   let recipients = document.getElementById('compose-recipients').value;
   let subject = document.getElementById('compose-subject').value;
   let body = document.getElementById('compose-body').value;
-
-  fetch('/emails', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-        recipients: recipients,
-        subject: subject,
-        body: body
+    // Make a POST request to send the email
+    fetch('/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          recipients: recipients,
+          subject: subject,
+          body: body
+      })
     })
-  })
-  .then(response => {
-    if (!response.ok) {
-      // If not, throw an error
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    // If the response is ok, try to parse it as JSON
-    return response.json();
-  })
-  .then(result => {
-    document.querySelector('#emails-view').style.display = 'block';
-    document.querySelector('#compose-view').style.display = 'none';
-      // Print result
-    console.log(result);
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
-}
+    .then(response => response.json())
+    .then(result => {
+        // Print result
+        console.log(result);
+    });
+  };
+
 
 function compose_email() {
 
