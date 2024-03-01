@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
   document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
   document.querySelector('#compose').addEventListener('click', compose_email);
-  document.querySelector('#send').addEventListener('click', send_email);
-  document.querySelector('#compose-form').addEventListener('submit', send_email);
+  
+  document.querySelector('#compose-form').addEventListener('submit', ()=>send_email);
   
   // By default, load the inbox
   load_mailbox('inbox');
@@ -31,10 +31,22 @@ function send_email(event){
         body: body
     })
   })
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      // If not, throw an error
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    // If the response is ok, try to parse it as JSON
+    return response.json();
+  })
   .then(result => {
+    document.querySelector('#emails-view').style.display = 'block';
+    document.querySelector('#compose-view').style.display = 'none';
       // Print result
-      console.log(result);
+    console.log(result);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
   });
 }
 
@@ -63,6 +75,7 @@ function load_mailbox(mailbox) {
   fetch(`emails/${mailbox}`)
     .then(response => response.json())
     .then(data => {
+      // Print emails
       console.log(data)
     })
   
