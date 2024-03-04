@@ -21,6 +21,7 @@ function send_email(event){
   let recipients = document.getElementById('compose-recipients').value;
   let subject = document.getElementById('compose-subject').value;
   let body = document.getElementById('compose-body').value;
+  
     // Make a POST request to send the email
     fetch('/emails', {
       method: 'POST',
@@ -37,6 +38,7 @@ function send_email(event){
     .then(result => {
         // Print result
         console.log(result);
+        load_mailbox('sent');
     });
   };
 
@@ -54,21 +56,41 @@ function compose_email() {
   
 }
 
-function load_mailbox(mailbox) {
-  
+function load_mailbox(mailbox) { 
   // Show the mailbox and hide other views
   document.querySelector('#emails-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
-
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
 
-  fetch(`emails/${mailbox}`)
-    .then(response => response.json())
-    .then(data => {
+  fetch(`/emails/${mailbox}`)
+  .then(response => response.json())
+  .then(emails => {
       // Print emails
-      console.log(data)
+      console.log(emails)
+
+      // loops through the emails and renders them
+      emails.forEach(email => render_email(email));
     })
   
   .catch(error => console.error('Error fetching emails:', error));
 }
+
+function render_email(email){
+  const emailDiv = document.createElement('div');
+  emailDiv.className = "email";
+  emailDiv.innerHTML = `<h5>${email.sender}</h5><p>${email.subject}</p><p>${email.timestamp}</p>`;
+  emailDiv.addEventListener('click', () => view_email(email.id));
+  emailDiv.style.backgroundColor = email.read ? 'gray' : 'white';
+  document.querySelector('#emails-view').append(emailDiv);
+}
+
+function view_email(email_id){
+  fetch(`/emails/${email_id}`)
+  .then(response => response.json())
+  .then(email => {
+
+    render_email_content(email);
+  });
+}
+
