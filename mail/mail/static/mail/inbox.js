@@ -70,20 +70,19 @@ function load_mailbox(mailbox) {
       console.log(emails)
 
       // loops through the emails and renders them
-      emails.forEach(email => render_email(email));
+      emails.forEach(email => render_inbox(email));
     })
   
   .catch(error => console.error('Error fetching emails:', error));
 }
 
-function render_email(email){
+function render_inbox(email){
   const emailDiv = document.createElement('div');
   emailDiv.className = "email";
   emailDiv.innerHTML = `
-  <h5>${email.sender}</h5>
-  <p>${email.subject}</p>
-  <p>${email.body}</p>
-  <p>${email.timestamp}</p>`;
+  <strong>${email.sender}</strong>
+  <span>${email.subject}</span>
+  <span>${email.timestamp}</span>`;
   emailDiv.addEventListener('click', () => view_email(email.id));
   emailDiv.style.backgroundColor = email.read ? 'gray' : 'white';
   document.querySelector('#emails-view').append(emailDiv);
@@ -95,7 +94,7 @@ function view_email(email_id){
   .then(email => {
     // Print email
     console.log(email);
-    
+
     // Update innerHTML to display email
     document.querySelector('#emails-view').innerHTML = `
     <h5>From: ${email.sender}</h5>
