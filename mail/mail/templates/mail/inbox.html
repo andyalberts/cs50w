@@ -39,10 +39,10 @@
                 From: <input disabled class="form-control" value="{{ request.user.email }}">
             </div>
             <div class="form-group">
-                To: <input id="compose-recipients" value="Re: {{ recipient }}"  class="form-control">
+                To: <input id="compose-recipients" value="{{ recipient }}"  class="form-control">
             </div>
             <div class="form-group">
-                <input class="form-control" id="compose-subject" placeholder="Subject">
+                <input disabled class="form-control" id="compose-subject" value="Re: "  placeholder="Subject">
             </div>
             <textarea class="form-control" id="compose-body" placeholder="Body"></textarea>
             <input id="send" type="submit" class="btn btn-primary"/>

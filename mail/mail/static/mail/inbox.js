@@ -119,20 +119,13 @@ function view_email(email_id){
   });  
 }
 
-function reply_email(email_id){
+function reply_email(){
   document.querySelector('#reply-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#emails-view').style.display = 'none';
 
-  fetch(`/emails/${email_id}`)
-  document.querySelector('#emails-view').innerHTML = `
-  <h5>From: ${email.sender}</h5>
-  <h5>To: ${email.recipients}</h5>
-  <h5>Subject: ${email.subject}</h5>
-  <p>${email.body}</p>
-  <p>${email.timestamp}</p>
-  <button id="archive">Archive</button>`;
 }
+
 
 
 
