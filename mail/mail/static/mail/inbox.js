@@ -101,8 +101,12 @@ function view_email(email_id){
     <h5>To: ${email.recipients}</h5>
     <h5>Subject: ${email.subject}</h5>
     <p>${email.body}</p>
-    <p>${email.timestamp}</p>`;
+    <p>${email.timestamp}</p>
+    <button id="reply">Reply</button>
+    <button id="archive">Archive</button>`;
 
+    // Add event listener to reply button
+    document.querySelector('#reply').addEventListener('click', () => reply_email(email));
     // Mark email as read
     fetch(`/emails/${email_id}`, {
       method: 'PUT',
@@ -111,5 +115,11 @@ function view_email(email_id){
       })
     })
   });
+}
+
+function reply_email(email){
+  document.querySelector('#emails-view').innerHTML = `
+  
+  `
 }
 
