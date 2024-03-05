@@ -33,13 +33,13 @@
     </div>
 
     <div id="reply-view">
-        <h3>New Email</h3>
+        <h3>Reply Email</h3>
         <form id="compose-form" action="{% url 'compose' %}" method="post">
             <div class="form-group">
                 From: <input disabled class="form-control" value="{{ request.user.email }}">
             </div>
             <div class="form-group">
-                To: <input id="compose-recipients" class="form-control">
+                To: <input id="compose-recipients" value="Re: {{ recipient }}"  class="form-control">
             </div>
             <div class="form-group">
                 <input class="form-control" id="compose-subject" placeholder="Subject">

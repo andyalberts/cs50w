@@ -60,6 +60,7 @@ function load_mailbox(mailbox) {
   // Show the mailbox and hide other views
   document.querySelector('#emails-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
+  document.querySelector('#reply-view').style.display = 'none';
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
 
@@ -77,6 +78,7 @@ function load_mailbox(mailbox) {
 }
 
 function render_inbox(email){
+ 
   const emailDiv = document.createElement('div');
   emailDiv.className = "email";
   emailDiv.innerHTML = `
@@ -114,12 +116,23 @@ function view_email(email_id){
           read: true
       })
     })
-  });
+  });  
 }
 
-function reply_email(email){
+function reply_email(email_id){
+  document.querySelector('#reply-view').style.display = 'block';
+  document.querySelector('#compose-view').style.display = 'none';
+  document.querySelector('#emails-view').style.display = 'none';
+
+  fetch(`/emails/${email_id}`)
   document.querySelector('#emails-view').innerHTML = `
-  
-  `
+  <h5>From: ${email.sender}</h5>
+  <h5>To: ${email.recipients}</h5>
+  <h5>Subject: ${email.subject}</h5>
+  <p>${email.body}</p>
+  <p>${email.timestamp}</p>
+  <button id="archive">Archive</button>`;
 }
+
+
 
