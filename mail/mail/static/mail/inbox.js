@@ -79,7 +79,11 @@ function load_mailbox(mailbox) {
 function render_email(email){
   const emailDiv = document.createElement('div');
   emailDiv.className = "email";
-  emailDiv.innerHTML = `<h5>${email.sender}</h5><p>${email.subject}</p><p>${email.timestamp}</p>`;
+  emailDiv.innerHTML = `
+  <h5>${email.sender}</h5>
+  <p>${email.subject}</p>
+  <p>${email.body}</p>
+  <p>${email.timestamp}</p>`;
   emailDiv.addEventListener('click', () => view_email(email.id));
   emailDiv.style.backgroundColor = email.read ? 'gray' : 'white';
   document.querySelector('#emails-view').append(emailDiv);
@@ -89,8 +93,24 @@ function view_email(email_id){
   fetch(`/emails/${email_id}`)
   .then(response => response.json())
   .then(email => {
+    // Print email
+    console.log(email);
+    
+    // Update innerHTML to display email
+    document.querySelector('#emails-view').innerHTML = `
+    <h5>From: ${email.sender}</h5>
+    <h5>To: ${email.recipients}</h5>
+    <h5>Subject: ${email.subject}</h5>
+    <p>${email.body}</p>
+    <p>${email.timestamp}</p>`;
 
-    render_email_content(email);
+    // Mark email as read
+    fetch(`/emails/${email_id}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+          read: true
+      })
+    })
   });
 }
 
