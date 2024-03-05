@@ -124,7 +124,8 @@ function reply_email(email_id){
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#emails-view').style.display = 'none';
 
-  // fetch options adapted from send_email -- adjust for reply_email
+  // TODO: fetch options adapted from send_email -- adjust for reply_email
+  // !!!!!!!!!! PROBABLY NOT FUNCTIONAL !!!!!!!!!!!!!!!
   fetch(`/emails/${email_id}`, {
     method: 'POST',
     headers: {
