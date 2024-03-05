@@ -108,7 +108,7 @@ function view_email(email_id){
     <button id="archive">Archive</button>`;
 
     // Add event listener to reply button
-    document.querySelector('#reply').addEventListener('click', () => reply_email(email));
+    document.querySelector('#reply').addEventListener('click', () => reply_email(email_id));
     // Mark email as read
     fetch(`/emails/${email_id}`, {
       method: 'PUT',
@@ -119,11 +119,22 @@ function view_email(email_id){
   });  
 }
 
-function reply_email(){
+function reply_email(email_id){
   document.querySelector('#reply-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#emails-view').style.display = 'none';
 
+
+  
+  fetch(`/emails/${email_id}`)
+  .then(response => response.json())
+  .then(email => {
+    console.log(email.sender);
+    let sender = email.sender;
+    console.log(sender);
+    var recipientsField = document.getElementById("recipients")
+    recipientsField.value = sender;
+  });
 }
 
 
