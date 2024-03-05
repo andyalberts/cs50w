@@ -124,16 +124,28 @@ function reply_email(email_id){
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#emails-view').style.display = 'none';
 
-
-  
-  fetch(`/emails/${email_id}`)
+  // fetch options adapted from send_email -- adjust for reply_email
+  fetch(`/emails/${email_id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      recipients: recipients,
+      subject: subject,
+      body: body
+    })
+  })
   .then(response => response.json())
   .then(email => {
-    console.log(email.sender);
     let sender = email.sender;
-    console.log(sender);
     var recipientsField = document.getElementById("recipients")
     recipientsField.value = sender;
+    
+    let sub = email.subject;
+    console.log(sub);
+    var subField = document.getElementById("reSubject")
+    subField.value = `Re: ${sub}`;
   });
 }
 
