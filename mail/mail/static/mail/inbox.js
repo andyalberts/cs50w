@@ -47,9 +47,9 @@ function compose_email() {
   document.querySelector('#compose-view').style.display = 'block';
 
   // Clear out composition fields
-  document.querySelector('#compose-recipients').value = '';
-  document.querySelector('#compose-subject').value = '';
-  document.querySelector('#compose-body').value = '';
+  document.querySelector('#recipients').value = '';
+  document.querySelector('#subject').value = '';
+  document.querySelector('#body').value = '';
   
 }
 
@@ -130,7 +130,7 @@ function reply_email(email_id){
     
     let sub = email.subject;
     console.log(sub);
-    var subField = document.getElementById("reSubject")
+    var subField = document.getElementById("subject")
     subField.value = `Re: ${sub}`;
   });
 }
