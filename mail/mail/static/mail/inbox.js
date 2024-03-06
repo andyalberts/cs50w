@@ -123,23 +123,7 @@ function reply_email(email_id){
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#emails-view').style.display = 'none';
 
-  let recipients = document.getElementById('recipients').value;
-  let subject = document.getElementById('reSubject').value;
-  let body = document.getElementById('reBody').value;
-
-  // TODO: fetch options adapted from send_email -- adjust for reply_email
-  // !!!!!!!!!! PROBABLY NOT FUNCTIONAL !!!!!!!!!!!!!!!
-  fetch(`/emails/${email_id}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      recipients: recipients,
-      subject: subject,
-      body: body
-    })
-  })
+  fetch(`/emails/${email_id}`)
   .then(response => response.json())
   .then(email => {
     let sender = email.sender;
