@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
   load_mailbox('inbox');
 });
 
-
 // Get the email composition form and add a submit event listener
 function send_email(event){
   event.preventDefault();
@@ -123,6 +122,10 @@ function reply_email(email_id){
   document.querySelector('#reply-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#emails-view').style.display = 'none';
+
+  let recipients = document.getElementById('recipients').value;
+  let subject = document.getElementById('reSubject').value;
+  let body = document.getElementById('reBody').value;
 
   // TODO: fetch options adapted from send_email -- adjust for reply_email
   // !!!!!!!!!! PROBABLY NOT FUNCTIONAL !!!!!!!!!!!!!!!
