@@ -22,12 +22,12 @@
                 From: <input disabled class="form-control" value="{{ request.user.email }}">
             </div>
             <div class="form-group">
-                To: <input id="compose-recipients" class="form-control">
+                To: <input id="recipients" class="form-control">
             </div>
             <div class="form-group">
-                <input class="form-control" id="compose-subject" placeholder="Subject">
+                <input class="form-control" id="subject" placeholder="Subject">
             </div>
-            <textarea class="form-control" id="compose-body" placeholder="Body"></textarea>
+            <textarea class="form-control" id="body" placeholder="Body"></textarea>
             <input id="send" type="submit" class="btn btn-primary"/>
         </form>
     </div>
@@ -44,7 +44,7 @@
             <div class="form-group">
                 <input disabled class="form-control"  type="text" id="reSubject" placeholder="Subject">
             </div>
-            <textarea class="form-control" id="compose-body" placeholder="reBody"></textarea>
+            <textarea class="form-control" id="reBody" placeholder="Body"></textarea>
             <input id="send" type="submit" class="btn btn-primary"/>
         </form>
     </div>

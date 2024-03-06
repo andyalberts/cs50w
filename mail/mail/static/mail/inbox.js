@@ -6,8 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
   document.querySelector('#compose').addEventListener('click', compose_email);
   document.querySelector('#send').addEventListener('click', send_email);
-
-  // document.querySelector('#compose-form').addEventListener('submit', send_email);
   
   // By default, load the inbox
   load_mailbox('inbox');
@@ -17,9 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
 function send_email(event){
   event.preventDefault();
 
-  let recipients = document.getElementById('compose-recipients').value;
-  let subject = document.getElementById('compose-subject').value;
-  let body = document.getElementById('compose-body').value;
+  let recipients = document.getElementById('recipients').value;
+  let subject = document.getElementById('subject').value;
+  let body = document.getElementById('body').value;
   
     // Make a POST request to send the email
     fetch('/emails', {
