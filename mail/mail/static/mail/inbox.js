@@ -105,7 +105,7 @@ function view_email(email_id){
     <button id="archive">Archive</button>`;
 
     // Add event listener to reply button
-    document.querySelector('#reply').addEventListener('click', () => reply_email(email_id));
+    document.querySelector('#reply').addEventListener('click', () => reply_email(email));
     // Mark email as read
     fetch(`/emails/${email_id}`, {
       method: 'PUT',
@@ -116,21 +116,36 @@ function view_email(email_id){
   });  
 }
 
-function reply_email(email_id){
+function reply_email(email){
+  
   document.querySelector('#reply-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#emails-view').style.display = 'none';
+  
+  const email_id = email.id;
+  console.log(email_id)
+  const recipients = email.sender;
+  const subject = `Re: ${email.subject}`;
+  const body = `On ${email.timestamp}, ${email.sender} wrote:\n ${email.body}`;
+  
+  document.querySelector('#reRecipients').value = recipients;
+  document.querySelector('#reSubject').value = subject;
+  document.querySelector('#reBody').value = body;
+  
+  console.log(recipients);
+  console.log(subject);
 
+  
   fetch(`/emails/${email_id}`)
   .then(response => response.json())
   .then(email => {
     let sender = email.sender;
-    var recipientsField = document.getElementById("recipients")
+    var recipientsField = document.getElementById("reRecipients")
     recipientsField.value = sender;
     
     let sub = email.subject;
     console.log(sub);
-    var subField = document.getElementById("subject")
+    var subField = document.getElementById("reSubject")
     subField.value = `Re: ${sub}`;
   });
 }
