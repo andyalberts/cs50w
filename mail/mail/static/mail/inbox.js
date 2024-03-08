@@ -171,6 +171,20 @@ function reply_email(email){
 
 }
 
+// create action to archive 
+function archive(email_id){
+  //if not archived -> archive
+
+  //if already archived -> remove from archive
+
+  //return message of success or failure
+}
+
+// view archived emails
+function archive_view(email_id){
+
+
+}
 
 
 
