@@ -110,7 +110,7 @@ function render_inbox(email){
   <span>${email.subject}</span>
   <span>${email.timestamp}</span>`;
   emailDiv.addEventListener('click', () => view_email(email.id));
-  emailDiv.style.backgroundColor = email.read ? 'gray' : 'white';
+  emailDiv.style.backgroundColor = email.read ? '#353535' : '#47474758';
   document.querySelector('#emails-view').append(emailDiv);
 }
 
