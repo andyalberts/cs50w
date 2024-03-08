@@ -171,18 +171,36 @@ function reply_email(email){
 
 }
 
-// create action to archive 
+// CLICK ARCHIVE BUTTON AND CHECK CONSOLE 
 function archive_email(email_id){
   //if not archived -> archive
-  fetch(`/emails/${email_id}`, {
-    method: 'PUT',
-    body: JSON.stringify({
-        archived: true
-    })
-  })
-  //if already archived -> remove from archive
+  fetch(`/emails/${email_id}`)
+  .then(response=>response.json())
+  .then(email => { 
+    console.log(email);
+    if (!email.archived){
+      fetch(`/emails/${email_id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            archived: true
+        })
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.log('Error', error))
+    } else {
+      fetch(`/emails/${email_id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          archived: false
+        })
+      })
+      .then(response=>response.json())
+      .then(data => console.log(data))
+      .catch(error => 'Error', error)
+    }
+   })
 
-  //return message of success or failure
 }
 
 // view archived emails
