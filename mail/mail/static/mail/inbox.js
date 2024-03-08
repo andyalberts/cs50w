@@ -172,9 +172,14 @@ function reply_email(email){
 }
 
 // create action to archive 
-function archive(email_id){
+function archive_email(email_id){
   //if not archived -> archive
-
+  fetch(`/emails/${email_id}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+        archived: true
+    })
+  })
   //if already archived -> remove from archive
 
   //return message of success or failure
