@@ -1,3 +1,7 @@
+// ARCHIVE FEATURE - NEED EVERYTHING EXCEPT BUTTON
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
 
   // Use buttons to toggle between views
@@ -134,6 +138,8 @@ function view_email(email_id){
 
     // Add event listener to reply button
     document.querySelector('#reply').addEventListener('click', () => reply_email(email));
+    // Add event listener to archive button
+    document.querySelector('#archive').addEventListener('click', () => archive_email(email_id));
     // Mark email as read
     fetch(`/emails/${email_id}`, {
       method: 'PUT',
@@ -154,7 +160,7 @@ function reply_email(email){
   console.log(email_id)
   const recipients = email.sender;
   const subject = `${email.subject}`;
-  const body = `On ${email.timestamp}, ${email.sender} wrote: ${email.body}\n`;
+  const body = `On ${email.timestamp}, ${email.sender} wrote: \n${email.body}\n`;
   
   document.querySelector('#reRecipients').value = recipients;
   document.querySelector('#reSubject').value = subject;
