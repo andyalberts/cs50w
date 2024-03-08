@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
   document.querySelector('#compose').addEventListener('click', compose_email);
   document.querySelector('#send').addEventListener('click', send_email);
+  document.querySelector('#send-reply').addEventListener('click', send_reply);
   
   // By default, load the inbox
   load_mailbox('inbox');
@@ -37,13 +38,39 @@ function send_email(event){
         console.log(result);
         load_mailbox('sent');
     });
-  };
+  }
+function send_reply(event){
+  event.preventDefault();
 
+  let recipients = document.getElementById('reRecipients').value;
+  let subject = document.getElementById('reSubject').value;
+  let body = document.getElementById('reBody').value;
+  
+    // Make a POST request to send the email
+    fetch('/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          recipients: recipients,
+          subject: subject,
+          body: body
+      })
+    })
+    .then(response => response.json())
+    .then(result => {
+        // Print result
+        console.log(result);
+        load_mailbox('sent');
+    });
+  }
 
 function compose_email() {
 
   // Show compose view and hide other views
   document.querySelector('#emails-view').style.display = 'none';
+  document.querySelector('#reply-view').style.display = 'none';
   document.querySelector('#compose-view').style.display = 'block';
 
   // Clear out composition fields
@@ -93,13 +120,14 @@ function view_email(email_id){
   .then(email => {
     // Print email
     console.log(email);
-
+    formatText = email.body.replace(/\n/g, '<br>');
+    console.log(formatText);
     // Update innerHTML to display email
     document.querySelector('#emails-view').innerHTML = `
     <h5>From: ${email.sender}</h5>
     <h5>To: ${email.recipients}</h5>
     <h5>Subject: ${email.subject}</h5>
-    <p>${email.body}</p>
+    <p>${formatText}</p>
     <p>${email.timestamp}</p>
     <button id="reply">Reply</button>
     <button id="archive">Archive</button>`;
@@ -118,15 +146,15 @@ function view_email(email_id){
 
 function reply_email(email){
   
-  document.querySelector('#reply-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#emails-view').style.display = 'none';
+  document.querySelector('#reply-view').style.display = 'block';
   
   const email_id = email.id;
   console.log(email_id)
   const recipients = email.sender;
-  const subject = `Re: ${email.subject}`;
-  const body = `On ${email.timestamp}, ${email.sender} wrote:\n ${email.body}`;
+  const subject = `${email.subject}`;
+  const body = `On ${email.timestamp}, ${email.sender} wrote: ${email.body}\n`;
   
   document.querySelector('#reRecipients').value = recipients;
   document.querySelector('#reSubject').value = subject;
@@ -136,18 +164,18 @@ function reply_email(email){
   console.log(subject);
 
   
-  fetch(`/emails/${email_id}`)
-  .then(response => response.json())
-  .then(email => {
-    let sender = email.sender;
-    var recipientsField = document.getElementById("reRecipients")
-    recipientsField.value = sender;
+  // fetch(`/emails/${email_id}`)
+  // .then(response => response.json())
+  // .then(email => {
+  //   let sender = email.sender;
+  //   var recipientsField = document.getElementById("reRecipients")
+  //   recipientsField.value = sender;
     
-    let sub = email.subject;
-    console.log(sub);
-    var subField = document.getElementById("reSubject")
-    subField.value = `Re: ${sub}`;
-  });
+  //   let sub = email.subject;
+  //   console.log(sub);
+  //   var subField = document.getElementById("reSubject")
+  //   subField.value = `Re: ${sub}`;
+  // });
 }
 
 
