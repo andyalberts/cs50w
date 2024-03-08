@@ -169,19 +169,6 @@ function reply_email(email){
   console.log(recipients);
   console.log(subject);
 
-  
-  // fetch(`/emails/${email_id}`)
-  // .then(response => response.json())
-  // .then(email => {
-  //   let sender = email.sender;
-  //   var recipientsField = document.getElementById("reRecipients")
-  //   recipientsField.value = sender;
-    
-  //   let sub = email.subject;
-  //   console.log(sub);
-  //   var subField = document.getElementById("reSubject")
-  //   subField.value = `Re: ${sub}`;
-  // });
 }
 
 
