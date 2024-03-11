@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
   load_mailbox('inbox');
 });
 
-// Get the email composition form and add a submit event listener
+// Send email
 function send_email(event){
   event.preventDefault();
 
@@ -43,6 +43,7 @@ function send_email(event){
         load_mailbox('sent');
     });
   }
+// Send reply
 function send_reply(event){
   event.preventDefault();
 
@@ -69,7 +70,7 @@ function send_reply(event){
         load_mailbox('sent');
     });
   }
-
+// opens the compose email form
 function compose_email() {
 
   // Show compose view and hide other views
@@ -83,7 +84,7 @@ function compose_email() {
   document.querySelector('#body').value = '';
   
 }
-
+// loads selected mailbox
 function load_mailbox(mailbox) { 
   // Show the mailbox and hide other views
   document.querySelector('#emails-view').style.display = 'block';
@@ -104,7 +105,7 @@ function load_mailbox(mailbox) {
   
   .catch(error => console.error('Error fetching emails:', error));
 }
-
+// renders the emails in the inbox
 function render_inbox(email){
  
   const emailDiv = document.createElement('div');
@@ -117,7 +118,7 @@ function render_inbox(email){
   emailDiv.style.backgroundColor = email.read ? '#353535' : '#47474758';
   document.querySelector('#emails-view').append(emailDiv);
 }
-
+// view individual emails
 function view_email(email_id){
   fetch(`/emails/${email_id}`)
   .then(response => response.json())
@@ -149,7 +150,7 @@ function view_email(email_id){
     })
   });  
 }
-
+// opens reply view
 function reply_email(email){
   
   document.querySelector('#compose-view').style.display = 'none';
@@ -187,17 +188,18 @@ function archive_email(email_id){
       })
       .then(response => response.json())
       .then(data => console.log(data))
-      .catch(error => console.log('Error', error))
+      .catch(console.error)
     } else {
       fetch(`/emails/${email_id}`, {
         method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           archived: false
         })
       })
       .then(response=>response.json())
       .then(data => console.log(data))
-      .catch(error => 'Error', error)
+      .catch(console.error);
     }
    })
 
