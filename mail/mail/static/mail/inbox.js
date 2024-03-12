@@ -140,7 +140,7 @@ function view_email(email_id){
     // Add event listener to reply button
     document.querySelector('#reply').addEventListener('click', () => reply_email(email));
     // Add event listener to archive button
-    document.querySelector('#archive').addEventListener('click', () => archive_email(email_id));
+    document.querySelector('#archive').addEventListener('click', () => archive_email(email.id));
     // Mark email as read
     fetch(`/emails/${email_id}`, {
       method: 'PUT',
@@ -179,6 +179,7 @@ function archive_email(email_id){
   .then(response=>response.json())
   .then(email => { 
     console.log(email);
+    // if email is not archived, archive it
     if (!email.archived){
       fetch(`/emails/${email_id}`, {
         method: 'PUT',
@@ -186,9 +187,13 @@ function archive_email(email_id){
             archived: true
         })
       })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(console.error)
+      // convert to json if ok
+      .then(response => { if (!response.ok) {
+        throw new Error(`Failed to fetch data. Status: ${response.status}`);}
+        else {
+       return response.json(); }})
+      .then(data => {console.log(data);})
+      .catch(error => { console.log('Error:', error); });
     } else {
       fetch(`/emails/${email_id}`, {
         method: 'PUT',
@@ -197,13 +202,18 @@ function archive_email(email_id){
           archived: false
         })
       })
-      .then(response=>response.json())
-      .then(data => console.log(data))
-      .catch(console.error);
+      .then(response => { if (!response.ok) {
+      throw new Error(`Failed to fetch data. Status: ${response.status}`);}
+       return response.json(); })
+      .then(data=>{console.log(data);})
+      .catch(error => { console.log('Error:', error); });
     }
    })
 
 }
+
+
+
 
 // view archived emails
 function archive_view(email_id){
