@@ -170,7 +170,7 @@ function reply_email(email){
   console.log(subject);
 
 }
-// CLICK ARCHIVE BUTTON AND CHECK CONSOLE 
+// checks if email is archived, passes input to toggleArchive
 function archive_email(email_id){
   //if not archived -> archive
   fetch(`/emails/${email_id}`)
@@ -186,7 +186,7 @@ function archive_email(email_id){
   })
   .catch(error => console.error('Error fetching emails:', error));
 }
-// view archived emails
+// toggle between archived/un-archived 
 function toggleArchive(email_id, archiveStatus){
  fetch(`/emails/${email_id}`, {
   method: 'PUT',
