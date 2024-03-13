@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // By default, load the inbox
   load_mailbox('inbox');
 });
-
 // Send email
 function send_email(event){
   event.preventDefault();
@@ -42,7 +41,7 @@ function send_email(event){
         console.log(result);
         load_mailbox('sent');
     });
-  }
+}
 // Send reply
 function send_reply(event){
   event.preventDefault();
@@ -69,7 +68,7 @@ function send_reply(event){
         console.log(result);
         load_mailbox('sent');
     });
-  }
+}
 // opens the compose email form
 function compose_email() {
 
@@ -171,55 +170,48 @@ function reply_email(email){
   console.log(subject);
 
 }
-
 // CLICK ARCHIVE BUTTON AND CHECK CONSOLE 
 function archive_email(email_id){
   //if not archived -> archive
   fetch(`/emails/${email_id}`)
   .then(response=>response.json())
-  .then(email => { 
-    console.log(email);
-    // if email is not archived, archive it
-    if (!email.archived){
-      fetch(`/emails/${email_id}`, {
-        method: 'PUT',
-        body: JSON.stringify({
-            archived: true
-        })
-      })
-      // convert to json if ok
-      .then(response => { if (!response.ok) {
-        throw new Error(`Failed to fetch data. Status: ${response.status}`);}
-        else {
-       return response.json(); }})
-      .then(data => {console.log(data);})
-      .catch(error => { console.log('Error:', error); });
-    } else {
-      fetch(`/emails/${email_id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          archived: false
-        })
-      })
-      .then(response => { if (!response.ok) {
-      throw new Error(`Failed to fetch data. Status: ${response.status}`);}
-       return response.json(); })
-      .then(data=>{console.log(data);})
-      .catch(error => { console.log('Error:', error); });
-    }
-   })
+  .then(email => {
 
+  })
 }
-
-
-
-
 // view archived emails
-function archive_view(email_id){
-
+function toggleArchive(email_id, archiveStatus){
+ fetch(`/emails/${email_id}`, {
+  method: 'PUT',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    archived: archiveStatus
+  })
+ })
+ .then(response => {
+  if(!response.ok){
+    throw new Error(`Failed to fetch data. Fetch status: ${response.status}`);
+  } else {
+    if (response.headers.get('content-length')==='0' || response.status === 204){
+      return;
+    }else{
+      return response.json();
+    }
+  }
+ })
+ .then(data=> {
+  if (data) {
+    console.log(data)
+  }else{
+    console.log('No content returned from server')
+  }
+ })
+.catch(error => {
+  console.log('Error', error);
+});
 
 }
+
 
 
 
