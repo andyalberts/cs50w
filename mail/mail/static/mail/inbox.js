@@ -176,8 +176,15 @@ function archive_email(email_id){
   fetch(`/emails/${email_id}`)
   .then(response=>response.json())
   .then(email => {
-
+    if (!emails.archived){
+      let archiveStatus = True;
+      toggleArchive(email.id,archiveStatus);
+    } else {
+      let archiveStatus = False;
+      toggleArchive(email.id,archiveStatus);
+    }
   })
+  .catch(error => console.error('Error fetching emails:', error));
 }
 // view archived emails
 function toggleArchive(email_id, archiveStatus){
