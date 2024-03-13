@@ -176,11 +176,11 @@ function archive_email(email_id){
   fetch(`/emails/${email_id}`)
   .then(response=>response.json())
   .then(email => {
-    if (!emails.archived){
-      let archiveStatus = True;
+    if (!email.archived){
+      let archiveStatus = true;
       toggleArchive(email.id,archiveStatus);
     } else {
-      let archiveStatus = False;
+      let archiveStatus = false;
       toggleArchive(email.id,archiveStatus);
     }
   })
