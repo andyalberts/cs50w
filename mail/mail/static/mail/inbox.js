@@ -137,7 +137,7 @@ function view_email(email_id){
     <button id="archive">Archive</button>`;
 
     // Add event listener to reply button
-    document.querySelector('#reply').addEventListener('click', () => reply_email(email));
+    document.querySelector('#reply').addEventListener('click', () => reply_view(email));
     // Add event listener to archive button
     document.querySelector('#archive').addEventListener('click', () => archive_email(email.id));
     // Mark email as read
@@ -150,7 +150,7 @@ function view_email(email_id){
   });  
 }
 // opens reply view
-function reply_email(email){
+function reply_view(email){
   
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#emails-view').style.display = 'none';
@@ -160,11 +160,11 @@ function reply_email(email){
   console.log(email_id)
   const recipients = email.sender;
   const subject = `${email.subject}`;
-  const body = `On ${email.timestamp}, ${email.sender} wrote: \n${email.body}\n`;
+  const original_email = `On ${email.timestamp}, ${email.sender} wrote: \n${email.body}\n`;
   
   document.querySelector('#reRecipients').value = recipients;
   document.querySelector('#reSubject').value = subject;
-  document.querySelector('#reBody').value = body;
+  document.querySelector('#reEmail').value = original_email;
   
   console.log(recipients);
   console.log(subject);
