@@ -137,7 +137,7 @@ function view_email(email_id){
     <button id="archive">Archive</button>`;
 
     // Add event listener to reply button
-    document.querySelector('#reply').addEventListener('click', () => reply_view(email));
+    document.querySelector('#reply').addEventListener('click', () => reply_email(email));
     // Add event listener to archive button
     document.querySelector('#archive').addEventListener('click', () => archive_email(email.id));
     // Mark email as read
