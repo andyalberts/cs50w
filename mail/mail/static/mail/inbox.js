@@ -160,11 +160,11 @@ function reply_view(email){
   console.log(email_id)
   const recipients = email.sender;
   const subject = `${email.subject}`;
-  const original_email = `On ${email.timestamp}, ${email.sender} wrote: \n${email.body}\n`;
+  const original_email = `On ${email.timestamp}, ${email.sender} wrote: <br>${email.body}`;
   
   document.querySelector('#reRecipients').value = recipients;
   document.querySelector('#reSubject').value = subject;
-  document.querySelector('#reEmail').value = original_email;
+  document.querySelector('#reEmail').innerHTML = original_email;
   
   console.log(recipients);
   console.log(subject);
