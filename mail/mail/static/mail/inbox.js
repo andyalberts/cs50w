@@ -153,7 +153,7 @@ function reply_view(email){
   document.querySelector('#emails-view').style.display = 'none';
   document.querySelector('#reply-view').style.display = 'block';
   
-  const email_id = email.id;
+  
   const recipients = email.sender;
   const subject = `${email.subject}`;
   const original_email = `On ${email.timestamp}, ${email.sender} wrote: <br>${email.body}`;
