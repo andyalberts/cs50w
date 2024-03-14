@@ -8,3 +8,14 @@ body{
 .reEmail{
     max-height: 40px;
 }
+
+.email-content {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 1%;
+  }
+  
+  .timestamp {
+    color: gray;
+    margin-right: 1%;
+  }

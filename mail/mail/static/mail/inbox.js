@@ -107,9 +107,13 @@ function render_inbox(email){
   const emailDiv = document.createElement('div');
   emailDiv.className = "email";
   emailDiv.innerHTML = `
-  <strong>${email.sender}</strong>
-  <span>${email.subject}</span>
-  <span>${email.timestamp}</span>`;
+  <div class="email-content">
+    <div>
+      <strong>${email.sender}</strong>
+      <span>${email.subject}</span>
+    </div>
+    <div class="timestamp">${email.timestamp}</div>
+  </div>`;
   emailDiv.addEventListener('click', () => view_email(email.id));
   emailDiv.style.backgroundColor = email.read ? '#353535' : '#47474758';
   document.querySelector('#emails-view').append(emailDiv);
