@@ -19,3 +19,12 @@ body{
     color: gray;
     margin-right: 1%;
   }
+
+  .compose-view{
+    margin-bottom: 5px;
+  }
+
+  .form-control {
+    background-color:  rgb(218, 218, 218);
+    border: solid;
+  }

@@ -134,8 +134,10 @@ function view_email(email_id){
     <h5>Subject: ${email.subject}</h5>
     <p>${formatText}</p>
     <p>${email.timestamp}</p>
-    <button id="reply">Reply</button>
-    <button id="archive">Archive</button>`;
+    <button id="reply" class="btn btn-secondary mt-2">Reply</button>
+    <button id="archive" class="btn btn-secondary mt-2">Archive</button>
+   `;
+    
 
     // Add event listener to reply button
     document.querySelector('#reply').addEventListener('click', () => reply_view(email));
