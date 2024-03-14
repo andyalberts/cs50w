@@ -136,13 +136,20 @@ function view_email(email_id){
     <p>${email.timestamp}</p>
     <button id="reply" class="btn btn-secondary mt-2">Reply</button>
     <button id="archive" class="btn btn-secondary mt-2">Archive</button>
+    <p id="confirmArchive"></p>
    `;
     
 
     // Add event listener to reply button
     document.querySelector('#reply').addEventListener('click', () => reply_view(email));
     // Add event listener to archive button
-    document.querySelector('#archive').addEventListener('click', () => archive_email(email.id));
+    document.querySelector('#archive').addEventListener('click',() => {
+      if(!email.archived){
+        document.querySelector('#confirmArchive').innerHTML = 'Archived', archive_email(email.id)
+      }else{
+        document.querySelector('#confirmArchive').innerHTML = 'Removed From Archive', archive_email(email.id)
+      }
+    });
     // Mark email as read
     fetch(`/emails/${email_id}`, {
       method: 'PUT',
