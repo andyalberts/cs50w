@@ -1,6 +1,3 @@
-// ARCHIVE FEATURE - NEED EVERYTHING EXCEPT BUTTON
-
-
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -137,7 +134,7 @@ function view_email(email_id){
     <button id="archive">Archive</button>`;
 
     // Add event listener to reply button
-    document.querySelector('#reply').addEventListener('click', () => reply_email(email));
+    document.querySelector('#reply').addEventListener('click', () => reply_view(email));
     // Add event listener to archive button
     document.querySelector('#archive').addEventListener('click', () => archive_email(email.id));
     // Mark email as read
@@ -157,7 +154,6 @@ function reply_view(email){
   document.querySelector('#reply-view').style.display = 'block';
   
   const email_id = email.id;
-  console.log(email_id)
   const recipients = email.sender;
   const subject = `${email.subject}`;
   const original_email = `On ${email.timestamp}, ${email.sender} wrote: <br>${email.body}`;
