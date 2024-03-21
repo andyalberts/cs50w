@@ -28,7 +28,7 @@
                 <input class="form-control" id="subject" placeholder="Subject">
             </div>
             <textarea class="form-control" id="body" placeholder="Body"></textarea>
-            <input id="send" type="submit" class="btn btn-secondary mt-2"/>
+            <input id="send" type="submit" class="btn btn-primary"/>
         </form>
     </div>
 
@@ -42,16 +42,13 @@
                 To: <input class="form-control" type="text"  placeholder="Recipients" id="reRecipients">
             </div>
             <div class="form-group">
-               Subject: <input disabled class="form-control"  type="text" id="reSubject" placeholder="Subject">
+                Subject: <input disabled class="form-control"  type="text" id="reSubject" placeholder="Subject">
             </div>
             <div class="card pl-2 mb-2">
                 <p id="reEmail"></p>
             </div>
-            
-            <textarea class="form-control" id="reBody" rows="4" placeholder="Reply"></textarea>
-            
-            <!-- <textarea class="form-control h-25" id="reBody" placeholder="Reply"></textarea> -->
-            <input id="send-reply" type="submit" class="btn btn-secondary mt-2"/>
+            <textarea class="form-control" id="reBody" placeholder="Reply"></textarea>
+            <input id="send-reply" type="submit" class="btn btn-primary"/>
         </form>
     </div>
 {% endblock %}
