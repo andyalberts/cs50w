@@ -10,7 +10,7 @@
       <div class="card-body">
           <div class="card-body"><a href="{% url 'listing' listing.id %}" >
             {% if listing.image %}
-            <img src="{{ listing.image.url}}" class="rounded-start" alt="{{ listing.title }}">
+            <img src="{{ listing.image.url }}" class="rounded-start" alt="{{ listing.title }}">
             {% else %}
             <p>no image</p>
             {% endif %}
