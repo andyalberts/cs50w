@@ -123,10 +123,9 @@ function view_email(email_id){
   fetch(`/emails/${email_id}`)
   .then(response => response.json())
   .then(email => {
-    // Print email
-    console.log(email);
+    // Applies line breaks to email body
     formatText = email.body.replace(/\n/g, '<br>');
-    console.log(formatText);
+
     // Update innerHTML to display email
     document.querySelector('#emails-view').innerHTML = `
     <h5>From: ${email.sender}</h5>
