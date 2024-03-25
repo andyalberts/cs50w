@@ -5,7 +5,9 @@
 <!-- User Posting Card (Static) -->
 <div class="card m-4">
     <div class="card-body row g-0 ">
-        <p style="padding: 10px; font-size: 18px; background-color:slateblue; border-radius: 20px; color: white;">Image</p>
+        <div id="poster-img"  style="padding: 10px; font-size: 18px; background-color:slateblue; border-radius: 20px; color: white;">
+            Image
+        </div>
         <div class="col-md-4">
             <!-- Post Textarea and Submit Button -->
             <div class="input-group mb-3">
@@ -16,5 +18,21 @@
     </div>
 </div>
 <!-- Display Posts (Dynamic) -->
-<div id="posts"></div>
+<div id="posts">
+    <div class="card m-4">
+        <div class="card-body row g-0 ">
+            <div class="user-pic">
+                Image
+            </div>
+            <div class="col-md-4">
+                <h2 class="card-title "><a href="https://google.com">username</a><br></h2>
+                <p class="mb-4 text-secondary">posted on Mar 25 2024</p>
+                
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <a href="#" class="card-link">Like</a>
+                <a href="#" class="card-link">Comment</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,6 +1,14 @@
-
 body {
   background-color: #768698;
+}
+
+.user-pic {
+  padding: 10px;
+  font-size: 18px;
+  background-color: slateblue;
+  border-radius: 20px;
+  color: white;
+  width: 300px;
 }
 
 /*# sourceMappingURL=styles.css.map */
