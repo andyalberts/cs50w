@@ -3,12 +3,25 @@ body {
 }
 
 .user-pic {
-  padding: 10px;
-  font-size: 18px;
+  padding: 70px;
+  font-size: 12px;
   background-color: slateblue;
-  border-radius: 20px;
+  border-radius: 50%;
+  height: 180px;
+  width: 180px;
   color: white;
-  width: 300px;
+  text-align: center;
+}
+
+.poster-pic {
+  padding: 10px;
+  font-size: 10px;
+  background-color: slateblue;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  color: white;
+  text-align: center;
 }
 
 /*# sourceMappingURL=styles.css.map */
