@@ -1,24 +1,25 @@
 $slate: #768698;
+$darkslate: #48525e;
 
 
 body{
     background-color: $slate;
 }
 
-.user-pic{
+.post-pic{
     padding: 70px;
     font-size: 12px;
-    background-color:slateblue;
+    background-color:$darkslate;
     border-radius: 50%;
     height: 180px;
     width: 180px;
     color: white;
     text-align: center;
 }
-.poster-pic{
+.user-pic{
     padding: 10px;
     font-size: 10px;
-    background-color:slateblue;
+    background-color:$darkslate;
     border-radius: 50%;
     height: 50px;
     width: 50px;

@@ -2,10 +2,10 @@ body {
   background-color: #768698;
 }
 
-.user-pic {
+.post-pic {
   padding: 70px;
   font-size: 12px;
-  background-color: slateblue;
+  background-color: #48525e;
   border-radius: 50%;
   height: 180px;
   width: 180px;
@@ -13,10 +13,10 @@ body {
   text-align: center;
 }
 
-.poster-pic {
+.user-pic {
   padding: 10px;
   font-size: 10px;
-  background-color: slateblue;
+  background-color: #48525e;
   border-radius: 50%;
   height: 50px;
   width: 50px;
