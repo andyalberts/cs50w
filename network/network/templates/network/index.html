@@ -3,6 +3,7 @@
 {% block body %}
 
 <!-- User Posting Card (Static) -->
+
 <div class="card m-4">
     <div class="card-body row g-0 ">
         <div class="user-pic">
@@ -11,8 +12,8 @@
         <div class="col-md-4">
             <!-- Post Textarea and Submit Button -->
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="post content" aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Post</button>
+                <input type="text" id="post-text" class="form-control" placeholder="post content" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <input value="Post" id="post" type="submit" class="btn btn-primary"/>
             </div>
         </div>
     </div>
@@ -35,4 +36,6 @@
         </div>
     </div>
 </div>
+
+
 {% endblock %}
