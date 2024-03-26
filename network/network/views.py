@@ -61,3 +61,10 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "network/register.html")
+
+
+def submit_post(request):
+    pass
+    # if post, collect text, datetime, user 
+    # create new post object -> .save()
+    # reload index w updated posts 
