@@ -1,6 +1,7 @@
+import json
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 
@@ -64,7 +65,10 @@ def register(request):
 
 
 def submit_post(request):
-    pass
-    # if post, collect text, datetime, user 
-    # create new post object -> .save()
-    # reload index w updated posts 
+    
+    if request.method != "POST":
+        return JsonResponse({"error": "POST request required."}, status=400)
+    
+    data = json.loads(request.body)
+
+    

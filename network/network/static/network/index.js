@@ -8,7 +8,7 @@ function submit_post(event){
     // usr and datetime taken care of elsewhere
     let text = document.getElementById('post-text').value;
 
-        fetch('/???', {
+        fetch('/post', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
