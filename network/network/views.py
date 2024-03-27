@@ -71,4 +71,5 @@ def submit_post(request):
     
     data = json.loads(request.body)
 
-    
+    text = data.get("text","")
+
