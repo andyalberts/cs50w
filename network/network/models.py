@@ -10,3 +10,12 @@ class Post(models.Model):
     text = models.CharField(max_length=255, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user": self.user,
+            "text": self.text,
+            "timestamp": self.timestamp.strftime("%b %d %Y, %I:%M %p"),
+            "likes": self.likes
+        }

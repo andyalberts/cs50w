@@ -2,7 +2,7 @@ import json
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from .models import User
@@ -65,9 +65,9 @@ def register(request):
 
 
 def submit_post(request):
-    
     if request.method == "POST":
-        text = request.POST["post_text"]
-        print(text)
-        return HttpResponseRedirect('')
-    return HttpResponseRedirect('')
+        print("PoSt")
+        return redirect('index')
+    else:
+        print("gET")
+        return redirect('index')
