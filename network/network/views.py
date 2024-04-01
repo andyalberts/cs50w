@@ -65,9 +65,7 @@ def register(request):
 
 
 def submit_post(request):
-    if request.method == "POST":
-        print("PoSt")
-        return redirect('index')
-    else:
-        print("gET")
-        return redirect('index')
+   if request.method != "POST":
+        return JsonResponse({"error": "POST request required."}, status=400)
+   
+   data = json.loads(request.body)
