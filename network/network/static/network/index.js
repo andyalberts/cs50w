@@ -1,11 +1,9 @@
-document.addEventListener('DOMContentLoaded', function(){
-    document.querySelector('#hide').addEventListener('click', hide);
-    
-});
+function buttonClicked(){
+    document.querySelector('#go-text').innerHTML = "Go"
+    console.log("Button clicked");
+}
 
-function hide(event){  
-    event.preventDefault();
-    document.querySelector('#body-view').style.display = 'none';
-    document.querySelector('#seen').innerHTML = "unlocked";
-    console.log('hidden');
+window.onload=function(){
+  var btn = document.getElementById("go-button");
+  btn.addEventListener("click", buttonClicked, true);
 }
