@@ -1,44 +1,49 @@
 {% extends "network/layout.html" %}
+{% load static %}
 
 {% block body %}
+<button type="button" id="unlock"></button>
 
-<!-- User Posting Card (Static) -->
-
-<div class="card m-4">
-    <div class="card-body row g-0 ">
-        <div class="user-pic">
-            Image
-        </div>
-        <form action="{% url 'submit_post' %}" method="post">
-        <div class="col-md-4">
-            <!-- Post Textarea and Submit Button -->
-                {% csrf_token %}
-                <div class="input-group mb-3">
-                    <input type="text" name="post_text" class="form-control" placeholder="post content" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <input type="submit" class="btn btn-primary">
-                </div>
-            </form>
-        </div>  
-    </div>
-</div>
-<!-- Display Posts (Dynamic) for loop -->
-<div id="posts">
+<div id="main-view">
+    <!-- User Posting Card (Static) -->
     <div class="card m-4">
         <div class="card-body row g-0 ">
-            <div class="post-pic">
+            <div class="user-pic">
                 Image
             </div>
+            <form action="{% url 'submit_post' %}" method="post">
             <div class="col-md-4">
-                <h2 class="card-title "><a href="https://google.com">username</a><br></h2>
-                <p class="mb-4 text-secondary">posted on Mar 25 2024</p>
-                
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <a href="#" class="card-link">Like</a>
-                <a href="#" class="card-link">Edit</a>
+                <!-- Post Textarea and Submit Button -->
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <input type="text" name="post_text" class="form-control" placeholder="post content" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <input type="submit" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>  
+        </div>
+    </div>
+
+
+    <!-- Display Posts (Dynamic) for loop -->
+    <div id="posts">
+        <div class="card m-4">
+            <div class="card-body row g-0 ">
+                <div class="post-pic">
+                    Image
+                </div>
+                <div class="col-md-4">
+                    <h2 class="card-title "><a href="https://google.com">username</a><br></h2>
+                    <p class="mb-4 text-secondary">posted on Mar 25 2024</p>
+                    
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <a href="#" class="card-link">Like</a>
+                    <a href="#" class="card-link">Edit</a>
+                </div>
             </div>
         </div>
     </div>
+    <p id="seen"></p>
 </div>
-
 
 {% endblock %}

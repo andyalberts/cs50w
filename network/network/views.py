@@ -65,7 +65,8 @@ def register(request):
 
 
 def submit_post(request):
-   if request.method != "POST":
-        return JsonResponse({"error": "POST request required."}, status=400)
+    pass
+#    if request.method != "POST":
+#         return JsonResponse({"error": "POST request required."}, status=400)
    
-   data = json.loads(request.body)
+#    data = json.loads(request.body)
