@@ -11,19 +11,18 @@
             <div class="user-pic">
                 Image
             </div>
-            <form action="{% url 'submit_post' %}" method="post">
+            <!-- <form action="{% url 'submit_post' %}" method="post"> -->
             <div class="col-md-4">
                 <!-- Post Textarea and Submit Button -->
-                    {% csrf_token %}
+                    <!-- {% csrf_token %} -->
                     <div class="input-group mb-3">
                         <input type="text" name="post_text" class="form-control" placeholder="post content" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <input type="submit" class="btn btn-primary">
+                        <input id="submit_post" type="submit" class="btn btn-primary">
                     </div>
-                </form>
+                <!-- </form> -->
             </div>  
         </div>
     </div>
-
 
     <!-- Display Posts (Dynamic) for loop -->
     <div id="posts">
