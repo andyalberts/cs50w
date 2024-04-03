@@ -1,11 +1,12 @@
 import json
+from json import JSONDecodeError
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from .models import User
+from .models import User, Post
 
 
 def index(request):
@@ -65,8 +66,20 @@ def register(request):
 
 
 def submit_post(request):
-    pass
-#    if request.method != "POST":
-#         return JsonResponse({"error": "POST request required."}, status=400)
-   
-#    data = json.loads(request.body)
+    if request.method == "POST":
+
+        try:
+            data = json.loads(request.body)
+            post = data.get("text", "")
+        except JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON."}, status=400)
+
+        user_post = Post(
+            user=request.user,
+            text=post
+        )  
+        user_post.save()
+        
+        return JsonResponse({"message": "Content Posted Successfully."}, status=201)
+
+    return JsonResponse({"error": "POST request required."}, status=400)
