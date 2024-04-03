@@ -15,8 +15,17 @@ function buttonClicked(){
 
 function submit_post(event){
     // POST request to submit_post view
-    // stringify
-    // convert post to json
-    //save post, reload page to reflect new post(dynamically)
-    
+    fetch('/submit_post', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            // set variable values
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+            //save post, reload page to reflect new post(dynamically)
+    });
 }
