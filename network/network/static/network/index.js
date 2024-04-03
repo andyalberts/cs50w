@@ -15,17 +15,20 @@ function buttonClicked(){
 
 function submit_post(event){
     // POST request to submit_post view
+     let user_post = document.getElementById('post').value;
+
     fetch('/submit_post', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            // set variable values
+            user_post: user_post
         })
     })
     .then(response => response.json())
     .then(data => {
-            //save post, reload page to reflect new post(dynamically)
-    });
+            //save post to database
+            console.log(data);
+        });
 }
