@@ -25,7 +25,7 @@ function submit_post(event){
     })    
     .then(data => {
         console.log('Success:', data);
-        
+        document.querySelector('#post_text').value = '';
         });
 }
 
