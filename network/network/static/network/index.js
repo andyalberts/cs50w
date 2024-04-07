@@ -44,3 +44,5 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+function display_posts(){}

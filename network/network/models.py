@@ -2,11 +2,9 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-class User(AbstractUser):
-    pass
 
 class Post(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey('User', on_delete=models.CASCADE, blank=True, null=True)
     text = models.CharField(max_length=255, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
@@ -16,6 +14,9 @@ class Post(models.Model):
             "id": self.id,
             "user": self.user,
             "text": self.text,
-            "timestamp": self.timestamp.strftime("%b %d %Y, %I:%M %p"),
+            "timestamp": self.timestamp.strftime("%B %d %Y, %I:%M %p"),
             "likes": self.likes
         }
+
+class User(AbstractUser):
+    posts = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="user_posts", null=True)
