@@ -18,6 +18,7 @@ function submit_post(event){
         })
     })
     .then(response => {
+        // Check if response can return as JSON
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -45,4 +46,3 @@ function getCookie(name) {
     return cookieValue;
 }
 
-function display_posts(){}

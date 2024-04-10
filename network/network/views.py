@@ -69,11 +69,13 @@ def submit_post(request):
     if request.method == "POST":
 
         try:
+            # Get data from body of fetch request
             data = json.loads(request.body)
             post = data.get("text", "")
         except JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON."}, status=400)
 
+        # Create and save post
         user_post = Post(
             user=request.user,
             text=post
