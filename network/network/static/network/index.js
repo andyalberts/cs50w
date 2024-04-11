@@ -56,9 +56,15 @@ function getCookie(name) {
 
 // Load individual posts to send to render_post
 function load_posts(request){
-    // fetch all posts
-    // posts.forEach(post => render_posts)(post)) << something like that
-}
+    //fetch single post and forEach them
+    fetch('/get_post')
+    .then(response => response.json)
+    .then(posts => {
+        console.log(posts);
+    })
+    .catch(error => console.error('Error Loading Post', error));
+}    // posts.forEach(post => render_posts)(post)) << something like that
+
 
 // Display each post sent from load_posts
 function render_posts(request){
