@@ -2,42 +2,16 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#submit_post').addEventListener('click', submit_post);
 });
 
-// function submit_post(event){
-//     event.preventDefault();
-
-//     // POST request to submit_post view
-//     let text = document.getElementById('post_text').value;
-//     console.log(text);
-
-//     fetch('/submit_post', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'X-CSRFToken': getCookie('csrftoken')
-//         },
-//         body: JSON.stringify({
-//             text: text
-//         })
-//     })
-//     .then(response => {
-//         // Check if response can return as JSON
-//         if (!response.ok) {
-//             throw new Error('Network response was not ok');
-//         }
-//         return response.json();
-//     })    
-//     .then(data => {
-//         console.log('Success:', data);
-//         document.querySelector('#post_text').value = '';
-//         });
-// }
 
 async function submit_post(event){
     event.preventDefault();
 
+    // retrieves user post text from input field 
     let text = document.getElementById('post_text').value;
     console.log(text);
     try{
+
+        // retrieves data from fetch, assigns value to response
         const response = await fetch('/submit_post',{
             method: 'POST',
             headers: {
@@ -48,13 +22,14 @@ async function submit_post(event){
                 text: text
             })
         });
-
+        // unless it doesn't
         if (!response.ok){
             throw new Error('Network response was not ok');
         }
-
+        // waits for body response to be read as JSON
         const data = await response.json();
         console.log('Success', data);
+        // Reset value of post box to blank after post submit
         document.querySelector('#post_text').value = '';
     } catch(error) {
         console.error('Error:', error);
