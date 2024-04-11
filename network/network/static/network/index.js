@@ -46,3 +46,16 @@ function getCookie(name) {
     return cookieValue;
 }
 
+// Load individual posts to send to render_post
+function load_posts(request){
+    // fetch all posts
+    // posts.forEach(post => render_posts)(post)) << something like that
+}
+
+// Display each post sent from load_posts
+function render_posts(request){
+    //createElement div with post cards that need to be run through a for loop
+        //like button, comment, edit, username (clickable => profile), post time/date
+
+    // event listeners for "like" "comment" "edit"
+}
