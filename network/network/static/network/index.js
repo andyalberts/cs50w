@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#submit_post').addEventListener('click', submit_post);
+    load_posts();
 });
 
 
@@ -58,9 +59,9 @@ function getCookie(name) {
 function load_posts(request){
     //fetch single post and forEach them
     fetch('/get_post')
-    .then(response => response.json)
+    .then(response => response.json())
     .then(posts => {
-        console.log(posts);
+        console.log(posts)
     })
     .catch(error => console.error('Error Loading Post', error));
 }    // posts.forEach(post => render_posts)(post)) << something like that
