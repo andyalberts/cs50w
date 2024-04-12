@@ -87,6 +87,13 @@ def submit_post(request):
     return JsonResponse({"error": "POST request required."}, status=400)
 
 def get_posts(request):
-    
+    if request.method == "GET":
+        posts = Post.objects.all()
+
+        return JsonResponse(posts.serialize())
+
+    return HttpResponse({"error": "GET request expected"}, status=404)
+
+
     # if request.method GET return serialized post
     pass
