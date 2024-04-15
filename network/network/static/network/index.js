@@ -1,12 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('#submit_post').addEventListener('click', submit_post);
+    const submitPostButton = document.querySelector('#submit_post');
+    if (submitPostButton) {
+        submitPostButton.addEventListener('click', submit_post);
+    }
     load_posts();
 });
+
 
 
 async function submit_post(event){
     event.preventDefault();
 
+    let csrftoken = getCookie('csrftoken');
     // retrieves user post text from input field 
     let text = document.getElementById('post_text').value;
     console.log(text);
@@ -17,7 +22,7 @@ async function submit_post(event){
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
+                'X-CSRFToken': csrftoken
             },
             body: JSON.stringify({
                 text: text
@@ -38,7 +43,6 @@ async function submit_post(event){
 
 }
 
-
 // Function to get a cookie by name
 function getCookie(name) {
     let cookieValue = null;
@@ -55,10 +59,11 @@ function getCookie(name) {
     return cookieValue;
 }
 
+
 // Load individual posts to send to render_post
 function load_posts(request){
     //fetch single post and forEach them
-    fetch('/get_post')
+    fetch('/get_posts')
     .then(response => response.json())
     .then(posts => {
         console.log(posts)

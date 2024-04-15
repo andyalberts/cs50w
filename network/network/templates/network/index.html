@@ -3,12 +3,14 @@
 
 {% block body %}
 <div id="main-view">
+
     <!-- User Posting Card (Static) -->
     <div class="card m-4">
         <div class="card-body row g-0 ">
             <div class="user-pic">
                 Image
             </div>
+            {% if user.is_authenticated %}
             <form action="{% url 'submit_post' %}" method="post">
             {% csrf_token %}
             <div class="col-md-4">
@@ -17,7 +19,8 @@
                     <input id="submit_post" type="submit" class="btn btn-primary">
                 </div>
             </div>  
-        </form>
+            </form>
+            {% endif %}
         </div>
     </div>
 

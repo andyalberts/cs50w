@@ -1,6 +1,7 @@
 import json
 from json import JSONDecodeError
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
@@ -10,7 +11,10 @@ from .models import User, Post
 
 
 def index(request):
-    return render(request, "network/index.html")
+    if request.user.is_authenticated:
+        return render(request, "network/index.html")
+    else:
+        return HttpResponseRedirect(reverse("login"))
 
 
 def login_view(request):
@@ -64,7 +68,7 @@ def register(request):
     else:
         return render(request, "network/register.html")
 
-
+@login_required
 def submit_post(request):
     if request.method == "POST":
 
@@ -90,9 +94,8 @@ def get_posts(request):
     if request.method == "GET":
         posts = Post.objects.all()
 
-        return JsonResponse(posts.serialize())
-
-    return HttpResponse({"error": "GET request expected"}, status=404)
+        return JsonResponse({"posts": [post.serialize() for post in posts]})
+    return JsonResponse({"error": "GET request expected"}, status=400)
 
 
     # if request.method GET return serialized post
