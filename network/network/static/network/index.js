@@ -63,7 +63,11 @@ function getCookie(name) {
 // Load individual posts to send to render_post
 function load_posts(request){
     //fetch single post and forEach them
-    fetch('/get_posts')
+    fetch('/get_posts', {
+        headers:{
+            accept: 'application/json',
+        }
+    })
     .then(response => response.json())
     .then(posts => {
         console.log(posts)
