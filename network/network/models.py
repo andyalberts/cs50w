@@ -19,4 +19,6 @@ class Post(models.Model):
         }
 
 class User(AbstractUser):
-    posts = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="user_posts", null=True)
+    pass
+
+# access all posts of a user with <user>.post_set.all()
