@@ -82,7 +82,7 @@ function load_posts(request){
                 throw new Error('Invalid post data received');
             }
         // send posts to render_posts to be displayed
-        data.forEach(post => render_posts(post));
+        data.posts.forEach(post => render_posts(post));
     })
     .catch(error => console.error('Error Loading Post', error));
 }

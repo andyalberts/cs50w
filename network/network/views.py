@@ -92,10 +92,10 @@ def submit_post(request):
 
 def get_posts(request):
     if request.method == "GET":
-        posts = Post.objects.all()  
+        posts = Post.objects.all()
 
         return JsonResponse({"posts": [post.serialize() for post in posts]})
-    return JsonResponse({"error": "GET request expected"}, status=400)
+    # return JsonResponse({"error": "GET request expected"}, status=400)
 
 
     # if request.method GET return serialized post
