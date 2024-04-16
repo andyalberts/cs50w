@@ -68,17 +68,34 @@ function load_posts(request){
             accept: 'application/json',
         }
     })
-    .then(response => response.json())
-    .then(posts => {
-        console.log(posts)
+    .then(response => {
+        // Check if response is successful
+        if (!response.ok) {
+            throw new Error('Failed to fetch posts');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data)
+        if(!data.posts || !Array.isArray(data.posts))
+            {
+                throw new Error('Invalid post data received');
+            }
+        // send posts to render_posts to be displayed
+        data.forEach(post => render_posts(post));
     })
     .catch(error => console.error('Error Loading Post', error));
-}    // posts.forEach(post => render_posts)(post)) << something like that
-
+}
 
 // Display each post sent from load_posts
-function render_posts(request){
-    //createElement div with post cards that need to be run through a for loop
+function render_posts(post){
+    const postsDiv = document.createElement('div');
+    postsDiv.className = "posts";
+    postsDiv.innerHTML=`
+    <div class="post-content>
+    <p>${post.text}</p>
+    </div>
+    `
         //like button, comment, edit, username (clickable => profile), post time/date
 
     // event listeners for "like" "comment" "edit"
