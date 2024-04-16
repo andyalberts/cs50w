@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (submitPostButton) {
         submitPostButton.addEventListener('click', submit_post);
     }
+
     load_posts();
 });
 
@@ -61,7 +62,7 @@ function getCookie(name) {
 
 
 // Load individual posts to send to render_post
-function load_posts(request){
+function load_posts(){
     //fetch single post and forEach them
     fetch('/get_posts', {
         headers:{
@@ -75,14 +76,14 @@ function load_posts(request){
         }
         return response.json();
     })
-    .then(data => {
-        console.log(data)
-        if(!data.posts || !Array.isArray(data.posts))
+    .then(posts => {
+        console.log(posts)
+        if(!posts.posts || !Array.isArray(posts.posts))
             {
-                throw new Error('Invalid post data received');
+                throw new Error('Invalid post posts received');
             }
         // send posts to render_posts to be displayed
-        data.posts.forEach(post => render_posts(post));
+        posts.posts.forEach(post => render_posts(post));
     })
     .catch(error => console.error('Error Loading Post', error));
 }
@@ -92,10 +93,11 @@ function render_posts(post){
     const postsDiv = document.createElement('div');
     postsDiv.className = "posts";
     postsDiv.innerHTML=`
-    <div class="post-content>
+   
     <p>${post.text}</p>
-    </div>
-    `
+    
+    `;
+    document.querySelector('#display-posts').append(postsDiv); 
         //like button, comment, edit, username (clickable => profile), post time/date
 
     // event listeners for "like" "comment" "edit"
