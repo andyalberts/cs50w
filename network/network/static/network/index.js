@@ -97,7 +97,8 @@ function render_posts(post){
     <p>${post.text}</p>
     
     `;
-    document.querySelector('#display-posts').append(postsDiv); 
+    document.querySelector('#display-posts').prepend(postsDiv); 
+
         //like button, comment, edit, username (clickable => profile), post time/date
 
     // event listeners for "like" "comment" "edit"
