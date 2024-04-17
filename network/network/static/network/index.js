@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (submitPostButton) {
         submitPostButton.addEventListener('click', submit_post);
     }
-
     load_posts();
 });
 
@@ -62,7 +61,8 @@ function getCookie(name) {
 
 
 // Load individual posts to send to render_post
-function load_posts(){
+function load_posts( ){
+   
     //fetch single post and forEach them
     fetch('/get_posts', {
         headers:{
@@ -94,12 +94,17 @@ function render_posts(post){
     postsDiv.className = "posts";
     postsDiv.innerHTML=`
    
-    <p>${post.text}</p>
+    <h1>${post.user}</h1>
+    <h5>${post.text}</h5>
+    <p>${post.timestamp}</p>
+    <p> ${post.likes} Likes </p>
     
     `;
     document.querySelector('#display-posts').prepend(postsDiv); 
+}
+
+
 
         //like button, comment, edit, username (clickable => profile), post time/date
 
     // event listeners for "like" "comment" "edit"
-}
