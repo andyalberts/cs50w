@@ -70,7 +70,7 @@ function load_posts( ){
         }
     })
     .then(response => {
-        // Check if response is successful
+        // Check if response is readable json -> converts to js object
         if (!response.ok) {
             throw new Error('Failed to fetch posts');
         }
@@ -93,13 +93,15 @@ function render_posts(post){
     const postsDiv = document.createElement('div');
     postsDiv.className = "posts";
     postsDiv.innerHTML=`
-   
+    <div class="card">
     <h1>${post.user}</h1>
     <h5>${post.text}</h5>
     <p>${post.timestamp}</p>
     <p> ${post.likes} Likes </p>
+    </div>
     
     `;
+
     document.querySelector('#display-posts').prepend(postsDiv); 
 }
 
