@@ -84,12 +84,14 @@ function load_posts( ){
             }
         // send posts to render_posts to be displayed
         posts.posts.forEach(post => render_posts(post));
+
     })
     .catch(error => console.error('Error Loading Post', error));
 }
 
 // Display each post sent from load_posts
 function render_posts(post){
+    console.log(post);
     const postsDiv = document.createElement('div');
     postsDiv.className = "posts";
     postsDiv.innerHTML=`
@@ -101,8 +103,22 @@ function render_posts(post){
     </div>
     
     `;
-
     document.querySelector('#display-posts').prepend(postsDiv); 
+        // WORTH FIGURING OUT vvvvv 
+        // watch console. posts is returned as object -> needs to be an array
+
+    // const postsHTML = post.map(post => `
+    //     <div class="card">
+    //         <h1>${post.user}</h1>
+    //         <h5>${post.text}</h5>
+    //         <p>${post.timestamp}</p>
+    //         <p>${post.likes} Likes</p>
+    //     </div>
+    // `).join('');
+
+    // console.log(postsHTML);
+//     const postsContainer = document.querySelector('#display-posts');
+//     postsContainer.innerHTML = postsHTML + postsContainer.innerHTML;
 }
 
 
