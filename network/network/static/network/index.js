@@ -95,7 +95,7 @@ function render_posts(post){
     const postsDiv = document.createElement('div');
     postsDiv.className = "posts";
     postsDiv.innerHTML=`
-    <div class="card">
+    <div class="card m-4">
     <h1>${post.user}</h1>
     <h5>${post.text}</h5>
     <p>${post.timestamp}</p>
