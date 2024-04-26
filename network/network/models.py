@@ -20,7 +20,7 @@ class Post(models.Model):
 
 class User(AbstractUser):
     followers = models.ManyToManyField(Post, blank=True, related_name="followers")
-
+    following = models.ManyToManyField(Post, blank=True, related_name="following")
     def __str__(self):
         return f"{self.username}"
 

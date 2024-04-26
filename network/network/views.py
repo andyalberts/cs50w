@@ -102,8 +102,9 @@ def get_posts(request):
     # if request.method GET return serialized post
     pass
 
-def user_profile(request):
+def user_profile(request, id):
     if request.method == "GET":
+        user = User.objects.filter(pk=id)
         # retrieve all users -> load fields into template context
         # load users posts -> append/prepend 
         return render(request, "network/profile.html")
