@@ -83,7 +83,8 @@ function load_posts( ){
                 throw new Error('Invalid post posts received');
             }
         // send posts to render_posts to be displayed
-        posts.posts.forEach(post => render_posts(post));
+        render_posts(posts);
+        // posts.posts.forEach(post => render_posts(post));
 
     })
     .catch(error => console.error('Error Loading Post', error));
@@ -91,38 +92,34 @@ function load_posts( ){
 
 // Display each post sent from load_posts
 function render_posts(post){
-    console.log(post);
-    const postsDiv = document.createElement('div');
-    postsDiv.className = "posts";
-    postsDiv.innerHTML=`
-    <div class="card m-4">
-    <h1>${post.user}</h1>
-    <h5>${post.text}</h5>
-    <p>${post.timestamp}</p>
-    <p> ${post.likes} Likes </p>
-    </div>
+    // console.log(post);
+    // const postsDiv = document.createElement('div');
+    // postsDiv.className = "posts";
+    // postsDiv.innerHTML=`
+    // <div class="card m-4">
+    // <h1>${post.user}</h1>
+    // <h5>${post.text}</h5>
+    // <p>${post.timestamp}</p>
+    // <p> ${post.likes} Likes </p>
+    // </div>
     
-    `;
-    document.querySelector('#display-posts').prepend(postsDiv); 
+    // `;
+    // document.querySelector('#display-posts').prepend(postsDiv); 
         // WORTH FIGURING OUT vvvvv 
         // watch console. posts is returned as object -> needs to be an array
+    const data = post.posts;
+    const postsHTML = data.map(post => `
+        <div class="card">
+            <h1>${post.user}</h1>
+            <h5>${post.text}</h5>
+            <p>${post.timestamp}</p>
+            <p>${post.likes} Likes</p>
+        </div>
+    `).join('');
 
-    // const postsHTML = post.map(post => `
-    //     <div class="card">
-    //         <h1>${post.user}</h1>
-    //         <h5>${post.text}</h5>
-    //         <p>${post.timestamp}</p>
-    //         <p>${post.likes} Likes</p>
-    //     </div>
-    // `).join('');
-
-    // console.log(postsHTML);
-//     const postsContainer = document.querySelector('#display-posts');
-//     postsContainer.innerHTML = postsHTML + postsContainer.innerHTML;
+    console.log(postsHTML);
+    const postsContainer = document.querySelector('#display-posts');
+    postsContainer.innerHTML = postsHTML + postsContainer.innerHTML;
 }
-
-
-
-        //like button, comment, edit, username (clickable => profile), post time/date
 
     // event listeners for "like" "comment" "edit"

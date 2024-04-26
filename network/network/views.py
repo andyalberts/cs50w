@@ -91,6 +91,7 @@ def submit_post(request):
     return JsonResponse({"error": "POST request required."}, status=400)
 
 def get_posts(request):
+
     if request.method == "GET":
         posts = Post.objects.all()
 
@@ -100,3 +101,7 @@ def get_posts(request):
 
     # if request.method GET return serialized post
     pass
+
+def user_profile(request):
+    if request.method == "GET":
+        return render(request, "network/profile.html")
