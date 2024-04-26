@@ -19,6 +19,9 @@ class Post(models.Model):
         }
 
 class User(AbstractUser):
-    pass
+    followers = models.ManyToManyField(Post, blank=True, related_name="followers")
+
+    def __str__(self):
+        return f"{self.username}"
 
 # access all posts of a user with <user>.post_set.all()
