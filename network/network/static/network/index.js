@@ -3,9 +3,18 @@ document.addEventListener('DOMContentLoaded', function() {
     if (submitPostButton) {
         submitPostButton.addEventListener('click', submit_post);
     }
+
+    const toggle = document.getElementById('main-view');
+    document.querySelector('#blank').addEventListener('click', ()=>
+    {
+        if (toggle.style.display === 'none'){
+            toggle.style.display = '';
+        } else {
+            toggle.style.display= 'none';
+        }
+    });
     load_posts();
 });
-
 
 
 async function submit_post(event){
@@ -58,7 +67,6 @@ function getCookie(name) {
     }
     return cookieValue;
 }
-
 
 // Load individual posts to send to render_post
 function load_posts( ){
