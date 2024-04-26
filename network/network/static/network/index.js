@@ -92,21 +92,7 @@ function load_posts( ){
 
 // Display each post sent from load_posts
 function render_posts(post){
-    // console.log(post);
-    // const postsDiv = document.createElement('div');
-    // postsDiv.className = "posts";
-    // postsDiv.innerHTML=`
-    // <div class="card m-4">
-    // <h1>${post.user}</h1>
-    // <h5>${post.text}</h5>
-    // <p>${post.timestamp}</p>
-    // <p> ${post.likes} Likes </p>
-    // </div>
-    
-    // `;
-    // document.querySelector('#display-posts').prepend(postsDiv); 
-        // WORTH FIGURING OUT vvvvv 
-        // watch console. posts is returned as object -> needs to be an array
+  
     const data = post.posts;
     const postsHTML = data.map(post => `
         <div class="card">
