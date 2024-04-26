@@ -104,4 +104,7 @@ def get_posts(request):
 
 def user_profile(request):
     if request.method == "GET":
+        # retrieve all users -> load fields into template context
+        # load users posts -> append/prepend 
         return render(request, "network/profile.html")
+

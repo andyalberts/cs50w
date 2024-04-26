@@ -117,3 +117,5 @@ function render_posts(post){
 }
 
     // event listeners for "like" "comment" "edit"
+
+// make follow function as dynamic feature on user profile 
