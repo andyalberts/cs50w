@@ -104,13 +104,13 @@ def get_posts(request):
 
 def user_profile(request, id):
     if request.method == "GET":
-        user = User.objects.filter(pk=id)
+        user = User.objects.get(pk=id)
+        print(user)
         followers = user.followers.all()
         following = user.following.all()
-        # retrieve all users -> load fields into template context
         # load users posts -> append/prepend 
         return render(request, "network/profile.html", {
-            "followers": followers,
-            "following": following
+            "followers": followers.__len__,
+            "following": following.__len__
         })
 

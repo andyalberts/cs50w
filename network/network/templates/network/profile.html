@@ -10,5 +10,10 @@
 <!-- # of follows -->
 <!-- posts loop from context ?:append here or view?  -->
 
+<p>Followers: {{ followers }}</p>
+<p>Following: {{ following }}</p>
+{% endblock %}
 
+{% block script %}
+    <script src="{% static 'network/index.js' %}"></script>
 {% endblock %}

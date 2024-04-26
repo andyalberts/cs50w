@@ -13,5 +13,5 @@ urlpatterns = [
     path("submit_post", views.submit_post, name="submit_post"),
     path("get_posts", views.get_posts, name="get_posts"),
 
-    path("profile", views.user_profile, name="profile")
+    path("profile/<int:id>", views.user_profile, name="profile")
 ]
