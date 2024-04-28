@@ -126,6 +126,9 @@ function render_posts(post){
     `).join('');
 
     const postsContainer = document.querySelector('#display-posts');
+    if (!postsContainer){
+        return;
+    }
     postsContainer.innerHTML="";
     postsContainer.innerHTML = postsHTML + postsContainer.innerHTML;
 }
