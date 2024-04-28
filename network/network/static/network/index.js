@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // submit button for posts
     const submitPostButton = document.querySelector('#submit_post');
     if (submitPostButton) {
         submitPostButton.addEventListener('click', submit_post);
     }
-
+    // useless toggle show/hide button
     const toggle = document.getElementById('main-view');
     document.querySelector('#blank').addEventListener('click', ()=>
     {
@@ -13,7 +14,21 @@ document.addEventListener('DOMContentLoaded', function() {
             toggle.style.display= 'none';
         }
     });
-    load_posts();
+
+    // paginator 
+    let currentPage = 1;
+    document.querySelector('#next-button').addEventListener('click', () => {
+        currentPage++;
+        load_posts(currentPage);
+    });
+
+    document.querySelector('#prev-button').addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            load_posts(currentPage);
+        }
+    });
+    load_posts(currentPage);
 });
 
 
@@ -69,10 +84,10 @@ function getCookie(name) {
 }
 
 // Load individual posts to send to render_post
-function load_posts( ){
+function load_posts(page){
    
     //fetch single post and forEach them
-    fetch('/get_posts', {
+    fetch(`/posts?page=${page}`, {
         headers:{
             accept: 'application/json',
         }
@@ -111,7 +126,6 @@ function render_posts(post){
         </div>
     `).join('');
 
-    console.log(postsHTML);
     const postsContainer = document.querySelector('#display-posts');
     postsContainer.innerHTML = postsHTML + postsContainer.innerHTML;
 }

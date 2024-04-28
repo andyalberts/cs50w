@@ -2,6 +2,7 @@ import json
 from json import JSONDecodeError
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
@@ -90,16 +91,14 @@ def submit_post(request):
 
     return JsonResponse({"error": "POST request required."}, status=400)
 
-def get_posts(request):
-
+def posts(request):
     if request.method == "GET":
+        page_number = request.GET.get('page', 1)
         posts = Post.objects.all()
+        paginator = Paginator(posts,10)
+        page_posts = paginator.get_page(page_number)
+        return JsonResponse({"posts": [post.serialize() for post in page_posts]})
 
-        return JsonResponse({"posts": [post.serialize() for post in posts]})
-    # return JsonResponse({"error": "GET request expected"}, status=400)
-
-
-    # if request.method GET return serialized post
     pass
 
 def user_profile(request, id):
