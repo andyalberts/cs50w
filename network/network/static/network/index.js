@@ -5,20 +5,28 @@ document.addEventListener('DOMContentLoaded', function() {
         submitPostButton.addEventListener('click', submit_post);
     }
 
-    // paginator 
-    let currentPage = 1;
-    document.querySelector('#next-button').addEventListener('click', () => {
-        document.querySelector('.card').innerHTML = '';
-        currentPage++;
-        load_posts(currentPage);
-    });
-
-    document.querySelector('#prev-button').addEventListener('click', () => {
-        if (currentPage > 1) {
-            currentPage--;
-            load_posts(currentPage);
-        }
-    });
+     // paginator 
+     let currentPage = 1;
+     const nextButton = document.querySelector('#next-button');
+     const prevButton = document.querySelector('#prev-button');
+ 
+     // Add event listeners only if the buttons are present
+     if (nextButton) {
+         nextButton.addEventListener('click', () => {
+             document.querySelector('.card').innerHTML = '';
+             currentPage++;
+             load_posts(currentPage);
+         });
+     }
+ 
+     if (prevButton) {
+         prevButton.addEventListener('click', () => {
+             if (currentPage > 1) {
+                 currentPage--;
+                 load_posts(currentPage);
+             }
+         });
+     }
     load_posts(currentPage);
 });
 
