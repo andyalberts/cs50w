@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
      // Add event listeners only if the buttons are present
      if (nextButton) {
          nextButton.addEventListener('click', () => {
-             document.querySelector('.card').innerHTML = '';
+             document.querySelector('.postcard').innerHTML = '';
              currentPage++;
              load_posts(currentPage);
          });
@@ -131,6 +131,7 @@ function render_posts(post){
     }
     postsContainer.innerHTML="";
     postsContainer.innerHTML = postsHTML + postsContainer.innerHTML;
+    window.scrollTo(0,0);
 }
 
     // event listeners for "like" "comment" "edit"
