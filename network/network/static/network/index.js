@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // paginator 
     let currentPage = 1;
     document.querySelector('#next-button').addEventListener('click', () => {
+        document.querySelector('.card').innerHTML = '';
         currentPage++;
         load_posts(currentPage);
     });
@@ -127,6 +128,7 @@ function render_posts(post){
     `).join('');
 
     const postsContainer = document.querySelector('#display-posts');
+    postsContainer.innerHTML="";
     postsContainer.innerHTML = postsHTML + postsContainer.innerHTML;
 }
 
