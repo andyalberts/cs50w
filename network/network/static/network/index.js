@@ -4,16 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (submitPostButton) {
         submitPostButton.addEventListener('click', submit_post);
     }
-    // useless toggle show/hide button
-    const toggle = document.getElementById('main-view');
-    document.querySelector('#blank').addEventListener('click', ()=>
-    {
-        if (toggle.style.display === 'none'){
-            toggle.style.display = '';
-        } else {
-            toggle.style.display= 'none';
-        }
-    });
 
     // paginator 
     let currentPage = 1;
