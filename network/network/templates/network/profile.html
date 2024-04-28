@@ -12,7 +12,15 @@
 <p>{{ username }}</p>
 <p>Followers: {{ followers }}</p>
 <p>Following: {{ following }}</p>
-<p>{{ posts }}</p>
+<div>
+    {% for post in posts %}
+        <ul>
+            <li>
+                {{ post.timestamp }}
+                {{ post.text }}</li>
+        </ul>
+    {% endfor %}
+</div>
 {% endblock %}
 
 {% block script %}

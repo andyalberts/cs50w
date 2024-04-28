@@ -104,19 +104,19 @@ def posts(request):
 
     pass
 
-
 # TODO: Render user posts through JS 
 def user_profile(request, id):
     if request.method == "GET":
-
+        posts = Post.objects.filter(user=id)
         user = User.objects.get(pk=id)
         print(user)
+        print(posts)
         followers = user.followers.all()
         following = user.following.all()
 
         # load users posts -> append/prepend 
         return render(request, "network/profile.html", {
-    
+            "posts":posts.all(),
             "username": user.username,
             "followers": followers.__len__,
             "following": following.__len__,

@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
     load_posts(currentPage);
 });
 
-
 async function submit_post(event){
     event.preventDefault();
 
@@ -126,14 +125,17 @@ function render_posts(post){
     `).join('');
 
     const postsContainer = document.querySelector('#display-posts');
-    if (!postsContainer){
-        return;
+    const userPosts = document.querySelector('#user-posts');
+    // only moves forward if on index (postContainer exists)
+    if (postsContainer){
+        postsContainer.innerHTML="";
+        postsContainer.innerHTML = postsHTML + postsContainer.innerHTML;
+        window.scrollTo(0,0);
     }
-    postsContainer.innerHTML="";
-    postsContainer.innerHTML = postsHTML + postsContainer.innerHTML;
-    window.scrollTo(0,0);
+    
+   
 }
 
-    // event listeners for "like" "comment" "edit"
+ // event listeners for "like" "comment" "edit"
 
 // make follow function as dynamic feature on user profile 
