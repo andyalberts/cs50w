@@ -107,10 +107,9 @@ def posts(request):
 # TODO: Render user posts through JS 
 def user_profile(request, id):
     if request.method == "GET":
-        posts = Post.objects.filter(user=id)
+        # retrieve user posts, following, followers
         user = User.objects.get(pk=id)
-        print(user)
-        print(posts)
+        posts = Post.objects.filter(user=id)
         followers = user.followers.all()
         following = user.following.all()
 

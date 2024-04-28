@@ -9,15 +9,24 @@
 <!-- # of followers -->
 <!-- # of follows -->
 <!-- posts loop from context ?:append here or view?  -->
-<p>{{ username }}</p>
+<h1>{{ username }}</h1>
+{% if user.is_authenticated %}
+    <button id="follow">Follow</button>
+{% endif %}
 <p>Followers: {{ followers }}</p>
 <p>Following: {{ following }}</p>
 <div>
     {% for post in posts %}
         <ul>
-            <li>
-                {{ post.timestamp }}
-                {{ post.text }}</li>
+            <div class="card w-75">
+                <h1>{{post.user}}</h1>
+                <h5>{{post.text}}</h5>
+                <p>{{post.timestamp}}</p>
+                <p>{{post.likes}} Likes</p>
+            </div>
+             
+            
+            
         </ul>
     {% endfor %}
 </div>
