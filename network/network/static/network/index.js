@@ -119,7 +119,7 @@ function render_posts(post){
   
     const data = post.posts;
     const postsHTML = data.map(post => `
-        <div class="card">
+        <div class="card postcard">
             <h1>${post.user}</h1>
             <h5>${post.text}</h5>
             <p>${post.timestamp}</p>
