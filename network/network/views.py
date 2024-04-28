@@ -94,8 +94,10 @@ def submit_post(request):
 def posts(request):
     if request.method == "GET":
         page_number = request.GET.get('page', 1)
+        # retrieve posts, order them by timestamp desc
         posts = Post.objects.all()
         by_time = posts.order_by("-timestamp").all()
+        # show 7 posts per page
         paginator = Paginator(by_time,7)
         page_posts = paginator.get_page(page_number)
         return JsonResponse({"posts": [post.serialize() for post in page_posts]})
