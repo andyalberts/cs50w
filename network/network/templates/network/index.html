@@ -7,25 +7,26 @@
 <div id="main-view">
 
     <!-- User Posting Card (Static) -->
-    <div class="card m-4">
-        <div class="card-body row g-0 ">
-            <div class="user-pic">
-                Image
-            </div>
-            {% if user.is_authenticated %}
-            <form action="{% url 'submit_post' %}" method="post">
-            {% csrf_token %}
-            <div class="col-md-4">
-                <div class="input-group mb-3">
-                    <input id="post_text" type="text" name="post_text" class="form-control" placeholder="post content"  aria-describedby="button-addon2">
-                    <input id="submit_post" type="submit" class="btn btn-primary">
+    {% if user.is_authenticated %}
+        <div class="card m-4">
+            <div class="card-body row g-0 ">
+                <div class="user-pic">
+                    Image
                 </div>
-            </div>  
-            </form>
-            {% endif %}
+                
+                <form action="{% url 'submit_post' %}" method="post">
+                {% csrf_token %}
+                <div class="col-md-4">
+                    <div class="input-group mb-3">
+                        <input id="post_text" type="text" name="post_text" class="form-control" placeholder="post content"  aria-describedby="button-addon2">
+                        <input id="submit_post" type="submit" class="btn btn-primary">
+                    </div>
+                </div>  
+                </form>
+            
+            </div>
         </div>
-    </div>
-
+    {% endif %}
     <!-- Display all posts -->
     <div id="display-posts">
         <div></div>
