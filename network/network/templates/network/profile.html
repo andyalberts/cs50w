@@ -10,9 +10,12 @@
 <!-- # of follows -->
 <!-- posts loop from context ?:append here or view?  -->
 <h1>{{ username }}</h1>
+
+
 {% if user.is_authenticated %}
     <button id="follow">Follow</button>
 {% endif %}
+
 <p>Followers: {{ followers }}</p>
 <p>Following: {{ following }}</p>
 <div>

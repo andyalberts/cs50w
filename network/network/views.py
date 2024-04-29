@@ -104,7 +104,6 @@ def posts(request):
 
     pass
 
-# TODO: Render user posts through JS 
 def user_profile(request, id):
     if request.method == "GET":
         # retrieve user posts, following, followers
