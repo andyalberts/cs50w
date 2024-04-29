@@ -59,6 +59,7 @@ async function submit_post(event){
         console.log('Success', data);
         // Reset value of post box to blank after post submit
         document.querySelector('#post_text').value = '';
+        load_posts();
     } catch(error) {
         console.error('Error:', error);
     }
