@@ -137,6 +137,16 @@ function render_posts(post){
    
 }
 
- // event listeners for "like" "comment" "edit"
+function follow_user(user_id){
+    // load user_id object 
+    fetch(`profile/${user_id}`)
+    .then(response=>response.json())
+    .then(user => {
+        
+    })
+    // retrieve followers list
+    // if current user is on list -> remove from list
+    // if current user is NOT on list -> add to list
 
-// make follow function as dynamic feature on user profile 
+
+}

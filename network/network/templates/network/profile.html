@@ -11,9 +11,9 @@
 <!-- posts loop from context ?:append here or view?  -->
 <h1>{{ username }}</h1>
 
-
 {% if user.is_authenticated %}
-    <button id="follow">Follow</button>
+<button id="follow">Follow</button>
+<!-- toggle message for follow/unfollow-->
 {% endif %}
 
 <p>Followers: {{ followers }}</p>
