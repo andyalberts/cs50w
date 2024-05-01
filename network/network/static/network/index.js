@@ -139,7 +139,7 @@ function render_posts(post){
 
 function follow_user(user_id){
     // load user_id object 
-    fetch(`profile/${user_id}`)
+    fetch(`user/${user_id}`)
     .then(response=>response.json())
     .then(user => {
         

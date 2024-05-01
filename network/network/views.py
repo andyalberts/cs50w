@@ -120,3 +120,17 @@ def user_profile(request, id):
             "following": following.__len__,
         })
 
+def user(request, user_id):
+    try:
+        user = User.objects.get(pk=user_id)
+    except User.DoesNotExist:
+        return JsonResponse({"error": "User not found"}, status=404)
+    
+    if request.method == "GET":
+
+        pass
+
+pass
+    
+    
+
