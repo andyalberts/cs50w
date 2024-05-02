@@ -107,7 +107,6 @@ function load_posts(page){
         // send posts to render_posts to be displayed
         render_posts(posts);
         // posts.posts.forEach(post => render_posts(post));
-
     })
     .catch(error => console.error('Error Loading Post', error));
 }
@@ -139,7 +138,9 @@ function render_posts(post){
 
 function follow_user(user_id){
     // load user_id object 
-    fetch(`user/${user_id}`)
+    fetch(`user/${user_id}`,{
+        method
+    })
     .then(response=>response.json())
     .then(user => {
         

@@ -19,8 +19,8 @@ class Post(models.Model):
         }
 
 class User(AbstractUser):
-    followers = models.ManyToManyField(Post, blank=True, related_name="followers")
-    following = models.ManyToManyField(Post, blank=True, related_name="following")
+    followers = models.CharField(max_length=42, blank=True)
+    following = models.CharField(max_length=42, blank=True)
     def __str__(self):
         return f"{self.username}"
 
