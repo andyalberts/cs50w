@@ -138,11 +138,11 @@ function render_posts(post){
 
 function follow_user(user_id){
     // load user_id object 
-    fetch(`user/${user_id}`,{
+    fetch(`user/${user_id}/follow`,{
         method: 'PUT',
         headers: {
             body:JSONstringify({
-                
+
             })
         }
     })
@@ -150,6 +150,7 @@ function follow_user(user_id){
     .then(user => {
         
     })
+   
     // retrieve followers list
     // if current user is on list -> remove from list
     // if current user is NOT on list -> add to list

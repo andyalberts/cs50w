@@ -5,10 +5,10 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
-from .models import User, Post
+from models import User, Post
 
 
 def index(request):
@@ -120,17 +120,13 @@ def user_profile(request, id):
             "following": following.__len__,
         })
 
-def user(request, user_id):
-    try:
-        user = User.objects.get(pk=user_id)
-    except User.DoesNotExist:
-        return JsonResponse({"error": "User not found"}, status=404)
+def follow_user(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    current_user = request.user
+    if request.method == 'PUT':
+        user.followers.add(current_user)
+        current_user.
+        user.save()
+        return JsonResponse({'message': 'User followed successfully'})
     
-    if request.method == "GET":
-        
-        pass
-
-pass
-    
-    
-
+    return JsonResponse({'error': 'Method not allowed'}, status=405)
