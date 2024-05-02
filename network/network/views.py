@@ -120,10 +120,13 @@ def user_profile(request, id):
             "following": following.__len__,
         })
 
+@login_required
 def follow_user(request, user_id):
     user = get_object_or_404(User, pk=user_id)
-    current_user = request.user
+    current_user_id = request.user.id
     if request.method == 'PUT':
+        current_user = get_object_or_404(User, pk=current_user_id)
+        current_user.following.add(user)
         user.followers.add(current_user)
         user.save()
         return JsonResponse({'message': 'User followed successfully'})
