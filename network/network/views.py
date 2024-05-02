@@ -125,7 +125,6 @@ def follow_user(request, user_id):
     current_user = request.user
     if request.method == 'PUT':
         user.followers.add(current_user)
-        current_user.
         user.save()
         return JsonResponse({'message': 'User followed successfully'})
     
