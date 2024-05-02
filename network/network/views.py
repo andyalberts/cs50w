@@ -127,7 +127,7 @@ def user(request, user_id):
         return JsonResponse({"error": "User not found"}, status=404)
     
     if request.method == "GET":
-        return JsonResponse
+        
         pass
 
 pass
