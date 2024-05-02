@@ -19,9 +19,9 @@ class Post(models.Model):
         }
 
 class User(AbstractUser):
-    followers = models.CharField(max_length=42, blank=True)
-    following = models.CharField(max_length=42, blank=True)
+    followers = models.ManyToManyField('self', related_name='following', symmetrical=False)
+    
     def __str__(self):
-        return f"{self.username}"
+        return self.username
 
 # access all posts of a user with <user>.post_set.all()
