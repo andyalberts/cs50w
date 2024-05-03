@@ -137,18 +137,22 @@ function render_posts(post){
 }
 
 function follow_user(user_id){
-    // load user_id object 
+    let target_user = document.querySelector('.target_user').value
+    let current_user = document.querySelector('.logged_in').value
+    let csrftoken = getCookie('csrftoken');
     fetch(`user/${user_id}/follow`,{
-        method: 'PUT',
-        headers: {
-            body:JSONstringify({
-                
-            })
-        }
+        method: 'PATCH',
+        headers: { 
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken },
+        body:JSONstringify({
+            target_user: target_user,
+            current_user: current_user
+        })
     })
     .then(response=>response.json())
-    .then(user => {
-        
+    .then(users => {
+        console.log(users)
     })
    
     // retrieve followers list

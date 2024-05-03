@@ -130,7 +130,6 @@ def follow_user(request, user_id):
     # gets current user, and target user to follow
     target_user = get_object_or_404(User, pk=user_id)
     current_user_id = request.user.id
-
     current_user = get_object_or_404(User, pk=current_user_id)
     current_user.following.add(target_user)
     target_user.followers.add(current_user)
