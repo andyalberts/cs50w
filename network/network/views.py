@@ -7,6 +7,8 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from django.views.decorators.http import require_http_methods
+
 
 from .models import User, Post
 
@@ -123,17 +125,15 @@ def user_profile(request, id):
         })
 
 @login_required
+@require_http_methods
 def follow_user(request, user_id):
     # gets current user, and target user to follow
     target_user = get_object_or_404(User, pk=user_id)
     current_user_id = request.user.id
-    # adds current user to target user followers
-    # adds target user to current user following
-    if request.method == 'PUT':
-        current_user = get_object_or_404(User, pk=current_user_id)
-        current_user.following.add(target_user)
-        target_user.followers.add(current_user)
-        target_user.save()
-        return JsonResponse({'message': 'User followed successfully'})
+
+    current_user = get_object_or_404(User, pk=current_user_id)
+    current_user.following.add(target_user)
+    target_user.followers.add(current_user)
+
+    return JsonResponse({'message': 'User followed successfully'})
     
-    return JsonResponse({'error': 'Method not allowed'}, status=405)
