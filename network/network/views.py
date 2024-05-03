@@ -109,6 +109,7 @@ def user_profile(request, id):
         # retrieve user posts, following, followers
         user = User.objects.get(pk=id)
         posts = Post.objects.filter(user=id)
+        current_user = request.user
         followers = user.followers.all()
         following = user.following.all()
 
@@ -116,19 +117,23 @@ def user_profile(request, id):
         return render(request, "network/profile.html", {
             "posts":posts.all(),
             "username": user.username,
+            "logged_in": current_user,
             "followers": followers.__len__,
             "following": following.__len__,
         })
 
 @login_required
 def follow_user(request, user_id):
-    user = get_object_or_404(User, pk=user_id)
+    # gets current user, and target user to follow
+    target_user = get_object_or_404(User, pk=user_id)
     current_user_id = request.user.id
+    # adds current user to target user followers
+    # adds target user to current user following
     if request.method == 'PUT':
         current_user = get_object_or_404(User, pk=current_user_id)
-        current_user.following.add(user)
-        user.followers.add(current_user)
-        user.save()
+        current_user.following.add(target_user)
+        target_user.followers.add(current_user)
+        target_user.save()
         return JsonResponse({'message': 'User followed successfully'})
     
     return JsonResponse({'error': 'Method not allowed'}, status=405)

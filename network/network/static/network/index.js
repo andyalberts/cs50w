@@ -142,7 +142,7 @@ function follow_user(user_id){
         method: 'PUT',
         headers: {
             body:JSONstringify({
-
+                
             })
         }
     })
