@@ -5,12 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
         submitPostButton.addEventListener('click', submit_post);
     }
 
-     // paginator 
+     // -------------- INDEX POST PAGINATOR -------------------
      let currentPage = 1;
      const nextButton = document.querySelector('#next-button');
      const prevButton = document.querySelector('#prev-button');
  
-     // Add event listeners only if the buttons are present
      if (nextButton) {
          nextButton.addEventListener('click', () => {
              document.querySelector('.postcard').innerHTML = '';
@@ -27,7 +26,16 @@ document.addEventListener('DOMContentLoaded', function() {
              }
          });
      }
+     // load posts on index template
     load_posts(currentPage);
+
+    //---------- follow button ----------
+    // follow_button.addEventListener('click', follow_user(target_user_id));
+    
+    if (follow_button) {
+        follow_button.addEventListener('click', follow_user());
+       
+    }
 });
 
 async function submit_post(event){
@@ -136,8 +144,12 @@ function render_posts(post){
    
 }
 
-function follow_user(user_id){
+
+// NEW PLAN: In user_profile view, return everything as jsonresponse instead of rendering w context
+// fetch the json info in the JS function and create the html element in this function
+function follow_user(){
     let target_user = document.querySelector('.target_user').value
+    let target_user_id = target_user.id 
     let current_user = document.querySelector('.logged_in').value
     let csrftoken = getCookie('csrftoken');
     fetch(`user/${user_id}/follow`,{
