@@ -127,7 +127,7 @@ function render_posts(post){
         `
         <div class="card postcard">
         <h1><a href="/profile/${post.user.id}"> ${post.user.username}</a></h1>
-        <h5>${post.text}</h5>
+        <p>${post.text}</p>
         <p>${post.timestamp}</p>
         <p>${post.likes} Likes</p>
         </div>
