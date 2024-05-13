@@ -143,6 +143,6 @@ def follow_user(request, id):
     current_user = request.user
 
     target_user.followers.add(current_user)
-    return HttpResponseRedirect(reverse("index"))
+    return JsonResponse({'message': 'User followed successfully'})
 
     

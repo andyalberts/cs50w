@@ -19,7 +19,7 @@ class Post(models.Model):
         }
 
 class User(AbstractUser):
-    followers = models.ManyToManyField('self', related_name='following', symmetrical=False)
+    followers = models.ManyToManyField('self', related_name='following', symmetrical=False, blank=True)
     
     def __str__(self):
         return self.username
