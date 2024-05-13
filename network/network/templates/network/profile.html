@@ -16,7 +16,8 @@
 {% if is_following %}
     <p>You are already following this user.</p>
 {% else %}
-    <button onclick="follow_user(event,'{{ target_user.id }}')">Follow</button>
+    <button class="followButton" onclick="follow_user(event,'{{ target_user.id }}')">Follow</button>
+    <div class="followMessage"></div>
 {% endif %}
 <!-- toggle message for follow/unfollow-->
 {% endif %}

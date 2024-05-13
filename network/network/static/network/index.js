@@ -167,4 +167,7 @@ function follow_user(event,user_id){
         // Handle fetch error
         console.error('Error:', error);
     });
+
+    document.querySelector(".followMessage").innerHTML = "You are now following this user.";
+    document.querySelector(".followButton").style.display = "none";
 }
