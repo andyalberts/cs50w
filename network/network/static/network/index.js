@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {
     //---------- follow button ----------
     // follow_button.addEventListener('click', follow_user(target_user_id));
     
-    if (follow_button) {
-        follow_button.addEventListener('click', follow_user());
+    // if (follow_button) {
+    //     follow_button.addEventListener('click', follow_user());
        
-    }
+    // }
 });
 
 async function submit_post(event){
@@ -147,29 +147,24 @@ function render_posts(post){
 
 // NEW PLAN: In user_profile view, return everything as jsonresponse instead of rendering w context
 // fetch the json info in the JS function and create the html element in this function
-function follow_user(){
-    let target_user = document.querySelector('.target_user').value
-    let target_user_id = target_user.id 
-    let current_user = document.querySelector('.logged_in').value
-    let csrftoken = getCookie('csrftoken');
-    fetch(`user/${user_id}/follow`,{
-        method: 'PATCH',
-        headers: { 
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken },
-        body:JSONstringify({
-            target_user: target_user,
-            current_user: current_user
-        })
-    })
-    .then(response=>response.json())
-    .then(users => {
-        console.log(users)
-    })
-   
-    // retrieve followers list
-    // if current user is on list -> remove from list
-    // if current user is NOT on list -> add to list
 
-
+// TODO: Change URL to user_profile - use patch method -> avoid reloading page
+function follow_user(event,user_id){
+    event.preventDefault();
+    fetch(`follow/${user_id}`)
+    .then(response=>{
+        if(response.ok){
+            response.json()
+            console.log(response);
+            console.log('User followed successfully!!')
+        } 
+        else {
+            console.log(response);
+            console.error('Failed to follow user', response.statusText);
+        }
+    })
+    .catch(error => {
+        // Handle fetch error
+        console.error('Error:', error);
+    });
 }

@@ -107,6 +107,7 @@ def posts(request):
     pass
 
 def user_profile(request, id):
+    current_user = request.user
     if request.method == "GET":
         # retrieve user posts, following, followers
         target_user = User.objects.get(pk=id)
@@ -115,28 +116,33 @@ def user_profile(request, id):
         followers = target_user.followers.all()
         following = target_user.following.all()
 
+        is_following = logged_in in followers
         # load users posts -> append/prepend 
         return render(request, "network/profile.html", {
             "posts":posts.all(),
             "target_user": target_user,
             "logged_in": logged_in,
-            "followers": followers.__len__,
-            "following": following.__len__,
+            "followers": followers.count(),
+            "following": following.count(),
+            "is_following": is_following,
         })
+    elif request.method == "POST":
+       follow = target_user.followers.add(current_user)
+       follow.save()
+    return JsonResponse({'message': 'User followed successfully'})
 
-@require_http_methods(["PATCH"])
+
 @login_required
-def follow_user(request):
+def follow_user(request, id):
     # target_user = get_object_or_404(User, pk=user_id)
     # current_user_id = request.user.id
     # current_user = get_object_or_404(User, pk=current_user_id)
     # current_user.following.add(target_user)
     # target_user.followers.add(current_user)
-    data = json.loads(request.body)
-    target_user = data.get("target_user", "")
-    current_user = data.get("current_user", "")
+    target_user = User.objects.get(pk=id)
+    current_user = request.user
 
-    current_user.following.add(target_user)
     target_user.followers.add(current_user)
-    return JsonResponse({'message': 'User followed successfully'})
+    return HttpResponseRedirect(reverse("index"))
+
     

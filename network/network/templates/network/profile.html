@@ -12,9 +12,13 @@
 <h1 class="target_user">{{ target_user }}</h1>
 
 {% if user.is_authenticated %}
-<button id="follow_button">Follow</button>
+
+{% if is_following %}
+    <p>You are already following this user.</p>
+{% else %}
+    <button onclick="follow_user(event,'{{ target_user.id }}')">Follow</button>
+{% endif %}
 <!-- toggle message for follow/unfollow-->
-<div class="logged_in">{{ logged_in }}</div>
 {% endif %}
 
 <p>Followers: {{ followers }}</p>
