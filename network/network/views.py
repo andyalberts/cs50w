@@ -142,6 +142,10 @@ def follow_user(request, id):
     target_user = User.objects.get(pk=id)
     current_user = request.user
 
+    if target_user in current_user.following.all():
+        current_user.following.remove(target_user)
+        return JsonResponse({'message': 'User unfollowed successfully'})
+
     target_user.followers.add(current_user)
     return JsonResponse({'message': 'User followed successfully'})
 
