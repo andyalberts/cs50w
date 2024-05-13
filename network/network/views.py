@@ -117,7 +117,6 @@ def user_profile(request, id):
         following = target_user.following.all()
 
         is_following = logged_in in followers
-        # load users posts -> append/prepend 
         return render(request, "network/profile.html", {
             "posts":posts.all(),
             "target_user": target_user,

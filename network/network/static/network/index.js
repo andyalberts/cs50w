@@ -144,11 +144,6 @@ function render_posts(post){
    
 }
 
-
-// NEW PLAN: In user_profile view, return everything as jsonresponse instead of rendering w context
-// fetch the json info in the JS function and create the html element in this function
-
-// TODO: Change URL to user_profile - use patch method -> avoid reloading page
 function follow_user(event,user_id){
     event.preventDefault();
     fetch(`follow/${user_id}`)
@@ -157,6 +152,7 @@ function follow_user(event,user_id){
             response.json()
             console.log(response);
             console.log('User followed successfully!!')
+            window.location.reload();
         } 
         else {
             console.log(response);
@@ -168,6 +164,4 @@ function follow_user(event,user_id){
         console.error('Error:', error);
     });
 
-    document.querySelector(".followMessage").innerHTML = "You are now following this user.";
-    document.querySelector(".followButton").style.display = "none";
 }
