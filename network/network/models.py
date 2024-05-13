@@ -12,7 +12,10 @@ class Post(models.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "user": self.user.username,
+            "user": {
+                "id": self.user.id,  # Access the id of the associated User
+                "username": self.user.username
+            },
             "text": self.text,
             "timestamp": self.timestamp.strftime("%B %d %Y, %I:%M %p"),
             "likes": self.likes

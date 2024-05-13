@@ -114,26 +114,27 @@ function load_posts(page){
             }
         // send posts to render_posts to be displayed
         render_posts(posts);
-        // posts.posts.forEach(post => render_posts(post));
     })
     .catch(error => console.error('Error Loading Post', error));
 }
 
 // Display each post sent from load_posts
 function render_posts(post){
-  
     const data = post.posts;
-    const postsHTML = data.map(post => `
+    console.log('Data:', data);
+    
+    const postsHTML = data.map(post =>
+        `
         <div class="card postcard">
-            <h1>${post.user}</h1>
-            <h5>${post.text}</h5>
-            <p>${post.timestamp}</p>
-            <p>${post.likes} Likes</p>
+        <h1><a href="/profile/${post.user.id}"> ${post.user.username}</a></h1>
+        <h5>${post.text}</h5>
+        <p>${post.timestamp}</p>
+        <p>${post.likes} Likes</p>
         </div>
     `).join('');
-
+    console.log(postsHTML);
     const postsContainer = document.querySelector('#display-posts');
-    const userPosts = document.querySelector('#user-posts');
+    // const userPosts = document.querySelector('#user-posts');
     // only moves forward if on index (postContainer exists)
     if (postsContainer){
         postsContainer.innerHTML="";
