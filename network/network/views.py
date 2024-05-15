@@ -107,15 +107,18 @@ def posts(request):
     pass
 def following(request):
     if request.method == "GET":
+        page_number = request.GET.get('page', 1)
         user = request.user
         following = user.following.all()
         posts_from_followed = Post.objects.filter(user__in=following).all()
-        print('postsfromfollowed',posts_from_followed)
+        by_time = posts_from_followed.order_by("-timestamp").all()
+        paginator = Paginator(by_time,7)
+        page_posts = paginator.get_page(page_number)
+        # return JsonResponse({"posts": [post.serialize() for post in page_posts]})
         return render(request,"network/following.html",{
-            "posts":posts_from_followed
+            "posts":page_posts
         })
 
-        # return JsonResponse({"posts": [post.serialize() for post in posts_from_followed]})
         # page_number = request.GET.get('page', 1)
         # # retrieve posts, order them by timestamp desc
         # posts = Post.objects.all()
