@@ -33,6 +33,32 @@ document.addEventListener('DOMContentLoaded', function() {
         // load posts on index template
         load_posts(currentPage);
     }
+
+    // if (path === '/following'){
+    //     // -------------- INDEX POST PAGINATOR -------------------
+    //     let currentPage = 1;
+    //     const nextButton = document.querySelector('#next-button');
+    //     const prevButton = document.querySelector('#prev-button');
+    
+    //     if (nextButton) {
+    //         nextButton.addEventListener('click', () => {
+    //             document.querySelector('.postcard').innerHTML = '';
+    //             currentPage++;
+    //             load_following_posts(currentPage);
+    //         });
+    //     }
+    
+    //     if (prevButton) {
+    //         prevButton.addEventListener('click', () => {
+    //             if (currentPage > 1) {
+    //                 currentPage--;
+    //                 load_following_posts(currentPage);
+    //             }
+    //         });
+    //     }
+    //     // load posts on index template
+    //     load_following_posts(currentPage);
+    // }
 });
 
 async function submit_post(event){
@@ -92,6 +118,32 @@ function load_posts(page){
    
     //fetch all posts and paginate them
     fetch(`/posts?page=${page}`, {
+        headers:{
+            accept: 'application/json',
+        }
+    })
+    .then(response => {
+        // Check if response is readable json -> converts to js object
+        if (!response.ok) {
+            throw new Error('Failed to fetch posts');
+        }
+        return response.json();
+    })
+    .then(posts => {
+        console.log(posts)
+        if(!posts.posts || !Array.isArray(posts.posts))
+            {
+                throw new Error('Invalid post posts received');
+            }
+        // send posts to render_posts to be displayed
+        render_posts(posts);
+    })
+    .catch(error => console.error('Error Loading Post', error));
+}
+function load_following_posts(page){
+   
+    //fetch all posts and paginate them
+    fetch(`/following?page=${page}`, {
         headers:{
             accept: 'application/json',
         }

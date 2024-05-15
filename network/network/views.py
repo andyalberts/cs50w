@@ -19,7 +19,6 @@ def index(request):
     else:
         return HttpResponseRedirect(reverse("login"))
 
-
 def login_view(request):
     if request.method == "POST":
 
@@ -114,20 +113,8 @@ def following(request):
         by_time = posts_from_followed.order_by("-timestamp").all()
         paginator = Paginator(by_time,7)
         page_posts = paginator.get_page(page_number)
-        # return JsonResponse({"posts": [post.serialize() for post in page_posts]})
-        return render(request,"network/following.html",{
-            "posts":page_posts
-        })
-
-        # page_number = request.GET.get('page', 1)
-        # # retrieve posts, order them by timestamp desc
-        # posts = Post.objects.all()
-        # by_time = posts.order_by("-timestamp").all()
-        # # show 7 posts per page
-        # paginator = Paginator(by_time,7)
-        # page_posts = paginator.get_page(page_number)
-        # return JsonResponse({"posts": [post.serialize() for post in page_posts]})
-
+        return JsonResponse({"posts": [post.serialize() for post in page_posts]})
+     
     pass
 
 def user_profile(request, id):
@@ -157,11 +144,6 @@ def user_profile(request, id):
 
 @login_required
 def follow_user(request, id):
-    # target_user = get_object_or_404(User, pk=user_id)
-    # current_user_id = request.user.id
-    # current_user = get_object_or_404(User, pk=current_user_id)
-    # current_user.following.add(target_user)
-    # target_user.followers.add(current_user)
     target_user = User.objects.get(pk=id)
     current_user = request.user
 

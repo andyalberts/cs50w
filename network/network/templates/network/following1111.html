@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block body %}
-{% for post in posts %}
+<!-- {% for post in posts %}
     <ul>
         <div class="card w-75">
             <h1>{{post.user}}</h1>
@@ -11,7 +11,10 @@
             <p>{{post.likes}} Likes</p>
         </div>
     </ul>
-    {% endfor %}
+    {% endfor %} -->
+    <div id="display-posts">
+        <div></div>
+    </div>
     <button id="prev-button">Prev</button>
     <button id="next-button">Next</button>
 {% endblock %}
