@@ -105,7 +105,8 @@ def posts(request):
         return JsonResponse({"posts": [post.serialize() for post in page_posts]})
 
     pass
-def followed_posts(request):
+def following(request):
+    user = request.user
     if request.method == "GET":
         page_number = request.GET.get('page', 1)
         # retrieve posts, order them by timestamp desc

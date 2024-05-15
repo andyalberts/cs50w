@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // submit button for posts
+   //checks current page path
     var path = window.location.pathname;
     console.log(path)
-
+    
     if (path === '/'){
         const submitPostButton = document.querySelector('#submit_post');
         if (submitPostButton) {
