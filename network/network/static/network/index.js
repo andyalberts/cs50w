@@ -1,41 +1,38 @@
 document.addEventListener('DOMContentLoaded', function() {
     // submit button for posts
-    const submitPostButton = document.querySelector('#submit_post');
-    if (submitPostButton) {
-        submitPostButton.addEventListener('click', submit_post);
-    }
+    var path = window.location.pathname;
+    console.log(path)
 
-     // -------------- INDEX POST PAGINATOR -------------------
-     let currentPage = 1;
-     const nextButton = document.querySelector('#next-button');
-     const prevButton = document.querySelector('#prev-button');
- 
-     if (nextButton) {
-         nextButton.addEventListener('click', () => {
-             document.querySelector('.postcard').innerHTML = '';
-             currentPage++;
-             load_posts(currentPage);
-         });
-     }
- 
-     if (prevButton) {
-         prevButton.addEventListener('click', () => {
-             if (currentPage > 1) {
-                 currentPage--;
-                 load_posts(currentPage);
-             }
-         });
-     }
-     // load posts on index template
-    load_posts(currentPage);
+    if (path === '/'){
+        const submitPostButton = document.querySelector('#submit_post');
+        if (submitPostButton) {
+            submitPostButton.addEventListener('click', submit_post);
+        }
 
-    //---------- follow button ----------
-    // follow_button.addEventListener('click', follow_user(target_user_id));
+        // -------------- INDEX POST PAGINATOR -------------------
+        let currentPage = 1;
+        const nextButton = document.querySelector('#next-button');
+        const prevButton = document.querySelector('#prev-button');
     
-    // if (follow_button) {
-    //     follow_button.addEventListener('click', follow_user());
-       
-    // }
+        if (nextButton) {
+            nextButton.addEventListener('click', () => {
+                document.querySelector('.postcard').innerHTML = '';
+                currentPage++;
+                load_posts(currentPage);
+            });
+        }
+    
+        if (prevButton) {
+            prevButton.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    load_posts(currentPage);
+                }
+            });
+        }
+        // load posts on index template
+        load_posts(currentPage);
+    }
 });
 
 async function submit_post(event){
@@ -93,7 +90,7 @@ function getCookie(name) {
 // Load individual posts to send to render_post
 function load_posts(page){
    
-    //fetch single post and forEach them
+    //fetch all posts and paginate them
     fetch(`/posts?page=${page}`, {
         headers:{
             accept: 'application/json',
@@ -132,7 +129,6 @@ function render_posts(post){
         <p>${post.likes} Likes</p>
         </div>
     `).join('');
-    console.log(postsHTML);
     const postsContainer = document.querySelector('#display-posts');
     // const userPosts = document.querySelector('#user-posts');
     // only moves forward if on index (postContainer exists)
