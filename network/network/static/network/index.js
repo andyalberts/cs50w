@@ -162,14 +162,14 @@ function load_following_posts(page){
         console.log(response);
         return response.json();
     })
-    .then(posts => {
-        console.log(posts)
-        if(!posts.posts || !Array.isArray(posts.posts))
+    .then(post => {
+        console.log(post)
+        if(!post.posts || !Array.isArray(post.posts))
             {
                 throw new Error('Invalid post posts received');
             }
         // send posts to render_posts to be displayed
-        render_posts(posts);
+        render_posts(post);
     })
     .catch(error => console.error('Error Loading Post', error));
 }
@@ -178,7 +178,6 @@ function load_following_posts(page){
 function render_posts(post){
     const data = post.posts;
     console.log('Data:', data);
-    
     const postsHTML = data.map(post =>
         `
         <div class="card postcard">
