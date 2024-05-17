@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
    //checks current page path
     var path = window.location.pathname;
     console.log(path)
-    
     if (path === '/'){
         const submitPostButton = document.querySelector('#submit_post');
         if (submitPostButton) {
@@ -65,6 +64,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
    
 });
+
+function edit_view(request){
+document.querySelector('#post-text').innerHTML = 'none';
+}
 
 async function submit_post(event){
     event.preventDefault();
@@ -182,20 +185,18 @@ function render_posts(post){
         `
         <div class="card postcard">
         <h1><a href="/profile/${post.user.id}"> ${post.user.username}</a></h1>
-        <p>${post.text}</p>
+        <p id="post-text">${post.text}</p>
         <p>${post.timestamp}</p>
         <p>${post.likes} Likes</p>
+        <button class="edit-post">Edit</button>
         </div>
     `).join('');
     const postsContainer = document.querySelector('#display-posts');
-    // const userPosts = document.querySelector('#user-posts');
-    // only moves forward if on index (postContainer exists)
     if (postsContainer){
         postsContainer.innerHTML="";
         postsContainer.innerHTML = postsHTML + postsContainer.innerHTML;
         window.scrollTo(0,0);
     }
-    
    
 }
 
