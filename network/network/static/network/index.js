@@ -33,32 +33,37 @@ document.addEventListener('DOMContentLoaded', function() {
         // load posts on index template
         load_posts(currentPage);
     }
+    if (path === '/following'){
+        const submitPostButton = document.querySelector('#submit_post');
+        if (submitPostButton) {
+            submitPostButton.addEventListener('click', submit_post);
+        }
 
-    // if (path === '/following'){
-    //     // -------------- INDEX POST PAGINATOR -------------------
-    //     let currentPage = 1;
-    //     const nextButton = document.querySelector('#next-button');
-    //     const prevButton = document.querySelector('#prev-button');
+        // -------------- INDEX POST PAGINATOR -------------------
+        let currentPage = 1;
+        const nextButton = document.querySelector('#next-button');
+        const prevButton = document.querySelector('#prev-button');
     
-    //     if (nextButton) {
-    //         nextButton.addEventListener('click', () => {
-    //             document.querySelector('.postcard').innerHTML = '';
-    //             currentPage++;
-    //             load_following_posts(currentPage);
-    //         });
-    //     }
+        if (nextButton) {
+            nextButton.addEventListener('click', () => {
+                document.querySelector('.postcard').innerHTML = '';
+                currentPage++;
+                load_following_posts(currentPage);
+            });
+        }
     
-    //     if (prevButton) {
-    //         prevButton.addEventListener('click', () => {
-    //             if (currentPage > 1) {
-    //                 currentPage--;
-    //                 load_following_posts(currentPage);
-    //             }
-    //         });
-    //     }
-    //     // load posts on index template
-    //     load_following_posts(currentPage);
-    // }
+        if (prevButton) {
+            prevButton.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    load_following_posts(currentPage);
+                }
+            });
+        }
+        // load posts on index template
+        load_following_posts(currentPage);
+    }
+   
 });
 
 async function submit_post(event){
@@ -127,6 +132,7 @@ function load_posts(page){
         if (!response.ok) {
             throw new Error('Failed to fetch posts');
         }
+        console.log(response);
         return response.json();
     })
     .then(posts => {
@@ -143,7 +149,7 @@ function load_posts(page){
 function load_following_posts(page){
    
     //fetch all posts and paginate them
-    fetch(`/following?page=${page}`, {
+    fetch(`/following_posts?page=${page}`, {
         headers:{
             accept: 'application/json',
         }
@@ -153,6 +159,7 @@ function load_following_posts(page){
         if (!response.ok) {
             throw new Error('Failed to fetch posts');
         }
+        console.log(response);
         return response.json();
     })
     .then(posts => {

@@ -104,12 +104,22 @@ def posts(request):
         return JsonResponse({"posts": [post.serialize() for post in page_posts]})
 
     pass
-def following(request):
+
+def following_page(request):
+    if request.method == "GET":
+        return render(request, "network/following.html")
+    pass
+
+
+
+# page to display followers
+def following_posts(request):
     if request.method == "GET":
         page_number = request.GET.get('page', 1)
         user = request.user
         following = user.following.all()
         posts_from_followed = Post.objects.filter(user__in=following).all()
+        print(following)
         by_time = posts_from_followed.order_by("-timestamp").all()
         paginator = Paginator(by_time,7)
         page_posts = paginator.get_page(page_number)
