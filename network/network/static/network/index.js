@@ -210,12 +210,22 @@ function renderPosts(post){
             if (postTextElement){
                 postTextElement.innerHTML = `
                 <textarea></textarea>
-                <button>submit</button>`;
+                <button class="save-post" data-post-id="${postId}">Save</button>`;
 
             }
         }
     });
    });
+   const saveButtons = document.querySelectorAll('.save-post');
+   saveButtons.forEach(button=> {
+    button.addEventListener('click', function(event){
+        const postId = event.getAttribute('data-post-id');
+        const postElement = document.querySelector(`#post-${postId}`);
+        if(postElement){
+            
+        }
+    })
+   })
 }
 
 // Function to follow user
