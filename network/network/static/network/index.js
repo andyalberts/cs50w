@@ -65,10 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
    
 });
 
-function edit_view(request){
-document.querySelector('#post-text').innerHTML = 'none';
-}
-
 async function submitPost(event){
     event.preventDefault();
 
@@ -149,6 +145,8 @@ function loadPosts(page){
     })
     .catch(error => console.error('Error Loading Post', error));
 }
+
+// Load posts from users on following list
 function loadFollowingPosts(page){
    
     //fetch all posts and paginate them
@@ -200,6 +198,7 @@ function renderPosts(post){
    
 }
 
+// Function to follow user
 function followUser(event,user_id){
     event.preventDefault();
     fetch(`follow/${user_id}`)
