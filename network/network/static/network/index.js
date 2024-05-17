@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (path === '/'){
         const submitPostButton = document.querySelector('#submit_post');
         if (submitPostButton) {
-            submitPostButton.addEventListener('click', submit_post);
+            submitPostButton.addEventListener('click', submitPost);
         }
 
         // -------------- INDEX POST PAGINATOR -------------------
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
             nextButton.addEventListener('click', () => {
                 document.querySelector('.postcard').innerHTML = '';
                 currentPage++;
-                load_posts(currentPage);
+                loadPosts(currentPage);
             });
         }
     
@@ -25,17 +25,17 @@ document.addEventListener('DOMContentLoaded', function() {
             prevButton.addEventListener('click', () => {
                 if (currentPage > 1) {
                     currentPage--;
-                    load_posts(currentPage);
+                    loadPosts(currentPage);
                 }
             });
         }
         // load posts on index template
-        load_posts(currentPage);
+        loadPosts(currentPage);
     }
     if (path === '/following'){
         const submitPostButton = document.querySelector('#submit_post');
         if (submitPostButton) {
-            submitPostButton.addEventListener('click', submit_post);
+            submitPostButton.addEventListener('click', submitPost);
         }
 
         // -------------- INDEX POST PAGINATOR -------------------
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
             nextButton.addEventListener('click', () => {
                 document.querySelector('.postcard').innerHTML = '';
                 currentPage++;
-                load_following_posts(currentPage);
+                loadFollowingPosts(currentPage);
             });
         }
     
@@ -55,12 +55,12 @@ document.addEventListener('DOMContentLoaded', function() {
             prevButton.addEventListener('click', () => {
                 if (currentPage > 1) {
                     currentPage--;
-                    load_following_posts(currentPage);
+                    loadFollowingPosts(currentPage);
                 }
             });
         }
         // load posts on index template
-        load_following_posts(currentPage);
+        loadFollowingPosts(currentPage);
     }
    
 });
@@ -69,7 +69,7 @@ function edit_view(request){
 document.querySelector('#post-text').innerHTML = 'none';
 }
 
-async function submit_post(event){
+async function submitPost(event){
     event.preventDefault();
 
     let csrftoken = getCookie('csrftoken');
@@ -98,7 +98,7 @@ async function submit_post(event){
         console.log('Success', data);
         // Reset value of post box to blank after post submit
         document.querySelector('#post_text').value = '';
-        load_posts();
+        loadPosts();
     } catch(error) {
         console.error('Error:', error);
     }
@@ -122,7 +122,7 @@ function getCookie(name) {
 }
 
 // Load individual posts to send to render_post
-function load_posts(page){
+function loadPosts(page){
    
     //fetch all posts and paginate them
     fetch(`/posts?page=${page}`, {
@@ -144,12 +144,12 @@ function load_posts(page){
             {
                 throw new Error('Invalid post posts received');
             }
-        // send posts to render_posts to be displayed
-        render_posts(posts);
+        // send posts to renderPosts to be displayed
+        renderPosts(posts);
     })
     .catch(error => console.error('Error Loading Post', error));
 }
-function load_following_posts(page){
+function loadFollowingPosts(page){
    
     //fetch all posts and paginate them
     fetch(`/following_posts?page=${page}`, {
@@ -171,14 +171,14 @@ function load_following_posts(page){
             {
                 throw new Error('Invalid post posts received');
             }
-        // send posts to render_posts to be displayed
-        render_posts(post);
+        // send posts to renderPosts to be displayed
+        renderPosts(post);
     })
     .catch(error => console.error('Error Loading Post', error));
 }
 
-// Display each post sent from load_posts
-function render_posts(post){
+// Display each post sent from loadPosts
+function renderPosts(post){
     const data = post.posts;
     console.log('Data:', data);
     const postsHTML = data.map(post =>
@@ -200,7 +200,7 @@ function render_posts(post){
    
 }
 
-function follow_user(event,user_id){
+function followUser(event,user_id){
     event.preventDefault();
     fetch(`follow/${user_id}`)
     .then(response=>{
