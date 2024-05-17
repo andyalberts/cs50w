@@ -179,23 +179,43 @@ function loadFollowingPosts(page){
 function renderPosts(post){
     const data = post.posts;
     console.log('Data:', data);
+
     const postsHTML = data.map(post =>
         `
-        <div class="card postcard">
+        <div class="card postcard" id="post-${post.id}" >
         <h1><a href="/profile/${post.user.id}"> ${post.user.username}</a></h1>
-        <p id="post-text">${post.text}</p>
+        <p class="post-text">${post.text}</p>
         <p>${post.timestamp}</p>
         <p>${post.likes} Likes</p>
-        <button class="edit-post">Edit</button>
+        <button class="edit-post" data-post-id="${post.id}" >Edit</button>
         </div>
     `).join('');
+
+    // Displays posts on page 
     const postsContainer = document.querySelector('#display-posts');
     if (postsContainer){
         postsContainer.innerHTML="";
         postsContainer.innerHTML = postsHTML + postsContainer.innerHTML;
         window.scrollTo(0,0);
     }
-   
+
+    // edit button functionality
+   const editButtons = document.querySelectorAll('.edit-post');
+   editButtons.forEach(button => {
+    button.addEventListener('click', function(event) {
+        const postId = event.target.getAttribute('data-post-id');
+        const postElement = document.querySelector(`#post-${postId}`);
+        if (postElement){
+            const postTextElement = postElement.querySelector('.post-text');
+            if (postTextElement){
+                postTextElement.innerHTML = `
+                <textarea></textarea>
+                <button>submit</button>`;
+
+            }
+        }
+    });
+   });
 }
 
 // Function to follow user
