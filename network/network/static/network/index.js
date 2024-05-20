@@ -185,6 +185,10 @@ function renderPosts(post){
         <div class="card postcard mb-3" id="post-${post.id}" >
         <h1><a href="/profile/${post.user.id}"> ${post.user.username}</a></h1>
         <p class="post-text">${post.text}</p>
+            <div class="edit-area mt-3 d-none">
+            <textarea class="form-control mb-2">${post.text}</textarea>
+            <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
+            </div>
         <p>${post.timestamp}</p>
         <p>${post.likes} Likes</p>
         <button class="btn btn-primary edit-post " data-post-id="${post.id}" >Edit</button>
@@ -209,13 +213,16 @@ function renderPosts(post){
         const postId = event.target.getAttribute('data-post-id');
         const postElement = document.querySelector(`#post-${postId}`);
         if (postElement){
-            const postTextElement = postElement.querySelector('.post-text');
-            const postInnerText = postTextElement.innerHTML
-            postElement.querySelector('.post-text').innerHTML = `
-            <div class="edit-area mt-3">
-                <textarea class="form-control mb-2">${postInnerText}</textarea>
-                <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
-            </div>`
+            postElement.querySelector('.post-text').classList.add('d-none');
+            postElement.querySelector('.edit-area').classList.remove('d-none');
+            // const postTextElement = postElement.querySelector('.post-text');
+            // const postInnerText = postTextElement.innerHTML;
+
+            // postElement.querySelector('.post-text').innerHTML = `
+            // <div class="edit-area mt-3">
+            //     <textarea class="form-control mb-2">${postInnerText}</textarea>
+            //     <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
+            // </div>`
         }
     });
    });
@@ -225,19 +232,15 @@ function renderPosts(post){
         const postId = event.target.getAttribute('data-post-id');
         const postElement = document.querySelector(`#post-${postId}`);
         if (postElement){
+            const textarea = postElement.querySelector('.edit-area textarea')
             const postTextElement = postElement.querySelector('.post-text');
-            if (postTextElement){
-                postTextElement.textContent = textarea.value;
-                console.log
-                postTextElement.classList.remove('d-none');
-                postElement.querySelector('.edit-area').classList.add('d-none');
-
-            }
+            postTextElement.innerHTML = textarea.value;
+            postElement.querySelector('.post-text').classList.remove('d-none');
+            postElement.querySelector('.edit-area').classList.add('d-none');
+          
         }
     });
    });
-
-
 }
 
 // Function to follow user
