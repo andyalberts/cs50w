@@ -103,26 +103,11 @@ def posts(request):
 
     pass
 
-def following_page(request):
-    if request.method == "GET":
-        return render(request, "network/following.html")
-    pass
 
-
-
-# page to display followers
-def following_posts(request):
-    if request.method == "GET":
-        page_number = request.GET.get('page', 1)
-        user = request.user
-        following = user.following.all()
-        posts_from_followed = Post.objects.filter(user__in=following).all()
-        print(following)
-        by_time = posts_from_followed.order_by("-timestamp").all()
-        paginator = Paginator(by_time,7)
-        page_posts = paginator.get_page(page_number)
-        return JsonResponse({"posts": [post.serialize() for post in page_posts]})
-     
+def get_post(request,id):
+    if request.method == "PATCH":
+        pass
+        
     pass
 
 def user_profile(request, id):
@@ -149,6 +134,25 @@ def user_profile(request, id):
        follow.save()
     return JsonResponse({'message': 'User followed successfully'})
 
+# page to display followers
+def following_page(request):
+    if request.method == "GET":
+        return render(request, "network/following.html")
+    pass
+
+def following_posts(request):
+    if request.method == "GET":
+        page_number = request.GET.get('page', 1)
+        user = request.user
+        following = user.following.all()
+        posts_from_followed = Post.objects.filter(user__in=following).all()
+        print(following)
+        by_time = posts_from_followed.order_by("-timestamp").all()
+        paginator = Paginator(by_time,7)
+        page_posts = paginator.get_page(page_number)
+        return JsonResponse({"posts": [post.serialize() for post in page_posts]})
+     
+    pass
 
 @login_required
 def follow_user(request, id):

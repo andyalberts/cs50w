@@ -239,12 +239,11 @@ function renderPosts(post){
 }
 
 // TODO: MAKE savePost FUNCTION
-async function savePost(postId,editedPost){
-    
-    
+function savePost(postId,editedPost){
     //patch post(postId), with editedPost text
     console.log(postId, editedPost);
 
+    fetch()
 }
 // Function to follow user
 function followUser(event,user_id){
