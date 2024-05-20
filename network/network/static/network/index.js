@@ -215,14 +215,6 @@ function renderPosts(post){
         if (postElement){
             postElement.querySelector('.post-text').classList.add('d-none');
             postElement.querySelector('.edit-area').classList.remove('d-none');
-            // const postTextElement = postElement.querySelector('.post-text');
-            // const postInnerText = postTextElement.innerHTML;
-
-            // postElement.querySelector('.post-text').innerHTML = `
-            // <div class="edit-area mt-3">
-            //     <textarea class="form-control mb-2">${postInnerText}</textarea>
-            //     <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
-            // </div>`
         }
     });
    });
@@ -234,15 +226,26 @@ function renderPosts(post){
         if (postElement){
             const textarea = postElement.querySelector('.edit-area textarea')
             const postTextElement = postElement.querySelector('.post-text');
+            const editedPost = textarea.value;
+            // assigns value of user input 'textarea' to post-text and changes to that view
             postTextElement.innerHTML = textarea.value;
             postElement.querySelector('.post-text').classList.remove('d-none');
             postElement.querySelector('.edit-area').classList.add('d-none');
-          
+            // TODO: MAKE CLICK GO TO savePost FUNCTION
+            savePost(postId, editedPost);
         }
     });
    });
 }
 
+// TODO: MAKE savePost FUNCTION
+async function savePost(postId,editedPost){
+    
+    
+    //patch post(postId), with editedPost text
+    console.log(postId, editedPost);
+
+}
 // Function to follow user
 function followUser(event,user_id){
     event.preventDefault();
