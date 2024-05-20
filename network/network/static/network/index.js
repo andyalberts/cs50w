@@ -187,11 +187,8 @@ function renderPosts(post){
         <p class="post-text">${post.text}</p>
         <p>${post.timestamp}</p>
         <p>${post.likes} Likes</p>
-        <button class="btn btn-primary edit-post" data-post-id="${post.id}" >Edit</button>
-            <div class="edit-area mt-3">
-                <textarea class="form-control mb-2">${post.text}</textarea>
-                <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
-            </div>
+        <button class="btn btn-primary edit-post " data-post-id="${post.id}" >Edit</button>
+            
         </div>
     `).join('');
 
@@ -212,8 +209,13 @@ function renderPosts(post){
         const postId = event.target.getAttribute('data-post-id');
         const postElement = document.querySelector(`#post-${postId}`);
         if (postElement){
-            postElement.querySelector('.post-text').classList.add('d-none');
-            postElement.querySelector('.edit-area').classList.remove('d-none');
+            const postTextElement = postElement.querySelector('.post-text');
+            const postInnerText = postTextElement.innerHTML
+            postElement.querySelector('.post-text').innerHTML = `
+            <div class="edit-area mt-3">
+                <textarea class="form-control mb-2">${postInnerText}</textarea>
+                <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
+            </div>`
         }
     });
    });
@@ -226,6 +228,7 @@ function renderPosts(post){
             const postTextElement = postElement.querySelector('.post-text');
             if (postTextElement){
                 postTextElement.textContent = textarea.value;
+                console.log
                 postTextElement.classList.remove('d-none');
                 postElement.querySelector('.edit-area').classList.add('d-none');
 
