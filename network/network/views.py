@@ -177,5 +177,11 @@ def follow_user(request, id):
     return JsonResponse({'message': 'User followed successfully'})
 
 def like_post(request, id):
+    post = get_object_or_404(Post, pk=id)
+    current_user = request.user
+
+    # example of how to access likes -> check if user in likes -> display un/like
+    # latest = Post.objects.latest("id")
+    # likes = latest.likes.all()
     
     pass
