@@ -92,6 +92,7 @@ def submit_post(request):
 
     return JsonResponse({"error": "POST request required."}, status=400)
 
+#get all posts -> paginate
 def posts(request):
     if request.method == "GET":
         page_number = request.GET.get('page', 1)
@@ -102,24 +103,24 @@ def posts(request):
         paginator = Paginator(by_time,7)
         page_posts = paginator.get_page(page_number)
         return JsonResponse({"posts": [post.serialize() for post in page_posts]})
-
     pass
-
 
 @login_required
 def save_edit(request,id):
     if request.method == "PATCH":
-            data = json.loads(request.body)
-            new_text = data.get("text","")
-            post = get_object_or_404(Post, pk=id)
-            
-            if post.user != request.user:
-                return JsonResponse({'error':'you are unable to edit this post'})
-            
-            post.text = new_text
-            post.save()
+        data = json.loads(request.body)
+        new_text = data.get("text","")
+        post = get_object_or_404(Post, pk=id)
+        
+        # users can only edit their own posts
+        if post.user != request.user:
+            return JsonResponse({'error':'you are unable to edit this post'})
+        
+        # save edit to post in text field 
+        post.text = new_text
+        post.save()
 
-            return JsonResponse({'message':'user followed successfully', 'post': post.serialize()})
+        return JsonResponse({'message':'user followed successfully', 'post': post.serialize()})
     return JsonResponse({'error':'request type not accepted'}, status=405)
 
 def user_profile(request, id):
@@ -131,8 +132,8 @@ def user_profile(request, id):
         logged_in = request.user
         followers = target_user.followers.all()
         following = target_user.following.all()
-
         is_following = logged_in in followers
+
         return render(request, "network/profile.html", {
             "posts":posts.all(),
             "target_user": target_user,
