@@ -183,16 +183,18 @@ function renderPosts(post){
     const postsHTML = data.map(post =>
         `
         <div class="card postcard mb-3" id="post-${post.id}" >
+        <div class="card-body">
         <h1><a href="/profile/${post.user.id}"> ${post.user.username}</a></h1>
         <p class="post-text">${post.text}</p>
-            <div class="edit-area mt-3 d-none">
-            <textarea class="form-control mb-2">${post.text}</textarea>
-            <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
-            </div>
+        <div class="edit-area mt-3 d-none">
+        <textarea class="form-control mb-2">${post.text}</textarea>
+        <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
+        </div>
         <p>${post.timestamp}</p>
         <p>${post.likes} Likes</p>
+        <a href="#" class="card-link">Like</a>
         <button class="btn btn-primary edit-post " data-post-id="${post.id}" >Edit</button>
-            
+        </div>
         </div>
     `).join('');
 
