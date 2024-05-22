@@ -239,7 +239,6 @@ function renderPosts(post){
    });
 }
 
-// TODO: MAKE saveEdit FUNCTION
 function saveEdit(postId,editedPost){
     //patch post(postId), with editedPost text
     console.log(postId, editedPost);
@@ -293,5 +292,5 @@ function followUser(event,user_id){
 }
 
 function likePost(id){
-    
+    //POST user to Post likes field 
 }

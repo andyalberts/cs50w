@@ -11,7 +11,7 @@ class UserAdmin(admin.ModelAdmin):
     inlines = [PostInline]
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ["user","text","likes","timestamp"]
+    list_display = ["user","text","timestamp"]
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Post, PostAdmin)

@@ -7,7 +7,7 @@ class Post(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE, blank=True, null=True)
     text = models.CharField(max_length=255, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
-    likes = models.IntegerField(default=0)
+    likes = models.ManyToManyField('User', related_name='liked', blank=True)
 
     def serialize(self):
         return {
@@ -23,7 +23,6 @@ class Post(models.Model):
 
 class User(AbstractUser):
     followers = models.ManyToManyField('self', related_name='following', symmetrical=False, blank=True)
-    
     def __str__(self):
         return self.username
 

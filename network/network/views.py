@@ -177,4 +177,5 @@ def follow_user(request, id):
     return JsonResponse({'message': 'User followed successfully'})
 
 def like_post(request, id):
+    
     pass
