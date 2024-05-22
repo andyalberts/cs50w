@@ -10,10 +10,7 @@ from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 
-
-
 from .models import User, Post
-
 
 def index(request):
     if request.user.is_authenticated:
@@ -179,4 +176,5 @@ def follow_user(request, id):
     target_user.followers.add(current_user)
     return JsonResponse({'message': 'User followed successfully'})
 
-    
+def like_post(request, id):
+    pass

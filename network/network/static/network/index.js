@@ -291,3 +291,7 @@ function followUser(event,user_id){
     });
 
 }
+
+function likePost(id){
+    
+}
