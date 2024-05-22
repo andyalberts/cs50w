@@ -8,6 +8,8 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_exempt
+
 
 
 from .models import User, Post
@@ -69,9 +71,9 @@ def register(request):
         return render(request, "network/register.html")
 
 @login_required
+@csrf_exempt
 def submit_post(request):
     if request.method == "POST":
-
         try:
             # Get data from body of fetch request
             data = json.loads(request.body)
@@ -104,11 +106,21 @@ def posts(request):
     pass
 
 
-def get_post(request,id):
+@login_required
+def save_edit(request,id):
     if request.method == "PATCH":
-        pass
-        
-    pass
+            data = json.loads(request.body)
+            new_text = data.get("text","")
+            post = get_object_or_404(Post, pk=id)
+            
+            if post.user != request.user:
+                return JsonResponse({'error':'you are unable to edit this post'})
+            
+            post.text = new_text
+            post.save()
+
+            return JsonResponse({'message':'user followed successfully', 'post': post.serialize()})
+    return JsonResponse({'error':'request type not accepted'}, status=405)
 
 def user_profile(request, id):
     current_user = request.user

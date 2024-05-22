@@ -218,6 +218,7 @@ function renderPosts(post){
         }
     });
    });
+   // ---save button ---
    const saveButtons = document.querySelectorAll('.save-post');
    saveButtons.forEach(button=> {
     button.addEventListener('click', function(event){
@@ -231,19 +232,42 @@ function renderPosts(post){
             postTextElement.innerHTML = textarea.value;
             postElement.querySelector('.post-text').classList.remove('d-none');
             postElement.querySelector('.edit-area').classList.add('d-none');
-            // TODO: MAKE CLICK GO TO savePost FUNCTION
-            savePost(postId, editedPost);
+            //MAKE CLICK GO TO savePost FUNCTION
+            saveEdit(postId, editedPost);
         }
     });
    });
 }
 
-// TODO: MAKE savePost FUNCTION
-function savePost(postId,editedPost){
+// TODO: MAKE saveEdit FUNCTION
+function saveEdit(postId,editedPost){
     //patch post(postId), with editedPost text
     console.log(postId, editedPost);
-
-    fetch()
+    let csrftoken = getCookie('csrftoken'); 
+    fetch(`/save_edit/${postId}`,{
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },
+        body:JSON.stringify({
+            text:editedPost
+        })
+    })
+    .then(response=>{
+        if(response.ok){
+            response.json();
+            console.log('ok',response);
+        }
+        else{
+            console.error('Failed to save post', response.statusText);
+            console.log(response);
+        }
+    })
+    .catch(error => {
+        // Handle fetch error
+        console.error('Error:', error);
+    });
 }
 // Function to follow user
 function followUser(event,user_id){
