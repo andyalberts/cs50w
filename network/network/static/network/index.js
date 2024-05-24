@@ -242,12 +242,15 @@ function renderPosts(post){
    });
 
    // ----- like button functionality -----
-   const likeButtons = document.querySelector('.like-post');
+   const likeButtons = document.querySelectorAll('.like-post');
    likeButtons.forEach(button=>{
     button.addEventListener('click',function(event){
-        const postId = document.target.getAttribute('data-post-id');
+        const postId = event.target.getAttribute('data-post-id');
+        const postElement = document.querySelector(`#post-${postId}`);
+        if (postElement){
         likePost(postId);
-    })
+    }
+    });
    });
 
 }
@@ -304,6 +307,21 @@ function followUser(event,user_id){
 
 }
 
-function likePost(id){
-    //POST user to Post likes field 
+function likePost(postId){
+    console.log(postId);
+    let csrftoken = getCookie('csrftoken'); 
+    fetch(`/like_post/${postId}`) 
+    .then(response=>{
+        if(response.ok){
+            response.json();
+            console.log('like',response)
+        }
+        else{
+            console.error('Failed to save post', response.statusText);
+            console.log(response);
+        }
+    })
+    .catch(error => {
+        console.error('Error', error);
+    })
 }
