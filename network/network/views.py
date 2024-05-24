@@ -176,9 +176,17 @@ def follow_user(request, id):
     target_user.followers.add(current_user)
     return JsonResponse({'message': 'User followed successfully'})
 
+@login_required
 def like_post(request, id):
     post = get_object_or_404(Post, pk=id)
     current_user = request.user
+
+    if current_user in post.likes.all():
+        post.likes.remove(current_user)
+        return JsonResponse({'message': 'Post successfully unliked'})
+    
+    post.likes.add(current_user)
+    return JsonResponse({'message': 'Post successfully liked'})
 
     # example of how to access likes -> check if user in likes -> display un/like
     # latest = Post.objects.latest("id")

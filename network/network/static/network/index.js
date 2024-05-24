@@ -191,8 +191,8 @@ function renderPosts(post){
         <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
         </div>
         <p>${post.timestamp}</p>
-        <p>${post.likes} Likes</p>
-        <a href="#" class="card-link">Like</a>
+        <p>${post.likes.count} Likes</p>
+        <button class="btn btn-primary like-post " data-post-id="${post.id}" >Like</button>
         <button class="btn btn-primary edit-post " data-post-id="${post.id}" >Edit</button>
         </div>
         </div>
@@ -220,7 +220,8 @@ function renderPosts(post){
         }
     });
    });
-   // ---save button ---
+
+   // ----- save button functionality -----
    const saveButtons = document.querySelectorAll('.save-post');
    saveButtons.forEach(button=> {
     button.addEventListener('click', function(event){
@@ -239,6 +240,16 @@ function renderPosts(post){
         }
     });
    });
+
+   // ----- like button functionality -----
+   const likeButtons = document.querySelector('.like-post');
+   likeButtons.forEach(button=>{
+    button.addEventListener('click',function(event){
+        const postId = document.target.getAttribute('data-post-id');
+        likePost(postId);
+    })
+   });
+
 }
 
 function saveEdit(postId,editedPost){
@@ -278,7 +289,7 @@ function followUser(event,user_id){
         if(response.ok){
             response.json()
             console.log(response);
-            console.log('User followed successfully!!')
+            console.log('User followed successfully!!');
             window.location.reload();
         } 
         else {
