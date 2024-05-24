@@ -187,8 +187,4 @@ def like_post(request, id):
         
         post.likes.add(current_user)
         return JsonResponse({'message': 'Post successfully liked'})
-
-    # example of how to access likes -> check if user in likes -> display un/like
-    # latest = Post.objects.latest("id")
-    # likes = latest.likes.all()
     

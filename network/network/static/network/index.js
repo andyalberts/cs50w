@@ -192,7 +192,8 @@ function renderPosts(post){
         </div>
         <p>${post.timestamp}</p>
         <p>${post.likes.count} Likes</p>
-        <button class="btn btn-primary like-post " data-post-id="${post.id}" >Like</button>
+        <button onclick="likePost(event,'${post.id}')" class="btn btn-primary like-post " data-post-id="${post.id}" >Like</button>
+        <button class="btn btn-primary like-post " data-post-id="${post.id}" >like</button>
         <button class="btn btn-primary edit-post " data-post-id="${post.id}" >Edit</button>
         </div>
         </div>
@@ -242,16 +243,16 @@ function renderPosts(post){
    });
 
    // ----- like button functionality -----
-   const likeButtons = document.querySelectorAll('.like-post');
-   likeButtons.forEach(button=>{
-    button.addEventListener('click',function(event){
-        const postId = event.target.getAttribute('data-post-id');
-        const postElement = document.querySelector(`#post-${postId}`);
-        if (postElement){
-        likePost(postId);
-    }
-    });
-   });
+//    const likeButtons = document.querySelectorAll('.like-post');
+//    likeButtons.forEach(button=>{
+//     button.addEventListener('click',function(event){
+//         const postId = event.target.getAttribute('data-post-id');
+//         const postElement = document.querySelector(`#post-${postId}`);
+//         if (postElement){
+//         likePost(event,postId);
+//     }
+//     });
+//    });
 
 }
 
@@ -307,14 +308,15 @@ function followUser(event,user_id){
 
 }
 
-function likePost(postId){
+function likePost(event,postId){
+    event.preventDefault();
     console.log(postId);
-    let csrftoken = getCookie('csrftoken'); 
     fetch(`/like_post/${postId}`) 
     .then(response=>{
         if(response.ok){
             response.json();
-            console.log('like',response)
+            console.log('like',response);
+            window.location.reload();
         }
         else{
             console.error('Failed to save post', response.statusText);
