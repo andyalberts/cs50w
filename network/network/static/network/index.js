@@ -179,7 +179,7 @@ function loadFollowingPosts(page){
 function renderPosts(post){
     const data = post.posts;
     console.log('Data:', data);
-
+    
     const postsHTML = data.map(post =>
         `
         <div class="card postcard mb-3" id="post-${post.id}" >
@@ -191,14 +191,14 @@ function renderPosts(post){
         <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
         </div>
         <p>${post.timestamp}</p>
-        <p>${post.likes.count} Likes</p>
-        <button onclick="likePost(event,'${post.id}')" class="btn btn-primary like-post " data-post-id="${post.id}" >Like</button>
-        <button class="btn btn-primary like-post " data-post-id="${post.id}" >like</button>
+        <p id="like-count-${post.id}" >${post.likes.count} Likes</p>
+        <button class="like-button" id="like-button-${post.id }" data-post-id="${post.id }"" >like</button>
         <button class="btn btn-primary edit-post " data-post-id="${post.id}" >Edit</button>
         </div>
         </div>
     `).join('');
-
+       
+    
     // Displays posts on page 
     const postsContainer = document.querySelector('#display-posts');
     if (postsContainer){
@@ -206,7 +206,6 @@ function renderPosts(post){
         postsContainer.innerHTML = postsHTML + postsContainer.innerHTML;
         window.scrollTo(0,0);
     }
-
     // ------- edit button functionality --------
 
    const editButtons = document.querySelectorAll('.edit-post');
@@ -219,6 +218,7 @@ function renderPosts(post){
             postElement.querySelector('.post-text').classList.add('d-none');
             postElement.querySelector('.edit-area').classList.remove('d-none');
         }
+     
     });
    });
 
@@ -243,16 +243,19 @@ function renderPosts(post){
    });
 
    // ----- like button functionality -----
-//    const likeButtons = document.querySelectorAll('.like-post');
-//    likeButtons.forEach(button=>{
-//     button.addEventListener('click',function(event){
-//         const postId = event.target.getAttribute('data-post-id');
-//         const postElement = document.querySelector(`#post-${postId}`);
-//         if (postElement){
-//         likePost(event,postId);
-//     }
-//     });
-//    });
+   const likeButtons = document.querySelectorAll('.like-button');
+   likeButtons.forEach(button=>{
+    button.addEventListener('click',function(event){
+        const postId = event.target.getAttribute('data-post-id');
+        const postElement = document.querySelector(`#post-${postId}`);
+        if (postElement){
+            postLikes = postElement.querySelector(`#like-count-${postId}`);
+            likePost(event,postId);
+    }
+    });
+   });
+
+
 
 }
 
@@ -288,6 +291,7 @@ function saveEdit(postId,editedPost){
 // Function to follow user
 function followUser(event,user_id){
     event.preventDefault();
+
     fetch(`follow/${user_id}`)
     .then(response=>{
         if(response.ok){
@@ -311,13 +315,21 @@ function followUser(event,user_id){
 function likePost(event,postId){
     event.preventDefault();
     console.log(postId);
-    fetch(`/like_post/${postId}`) 
+    const csrftoken = getCookie('csrftoken');
+
+    fetch(`/like_post/${postId}`,{
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },
+    
+        }) 
     .then(response=>{
         if(response.ok){
             response.json();
             console.log('like',response);
-            window.location.reload();
-        }
+         }
         else{
             console.error('Failed to save post', response.statusText);
             console.log(response);
@@ -325,5 +337,5 @@ function likePost(event,postId){
     })
     .catch(error => {
         console.error('Error', error);
-    })
+    });    
 }
