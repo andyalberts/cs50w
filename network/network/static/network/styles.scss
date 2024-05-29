@@ -1,9 +1,14 @@
 $slate: #768698;
-$darkslate: #48525e;
-
+$darkslate: #3d454f;
+$darkerslate: #343a40;
 
 body{
-    background-color: $slate;
+    background-color: #222;
+}
+
+.side-nav{
+    display: block;
+    height: 100%;
 }
 
 .post-pic{
@@ -29,7 +34,21 @@ body{
 
 .postcard{
     max-width: 90%;
+    background-color: $slate;
     margin-left: auto;
     margin-right: auto;
     padding-left: 15px;
 }
+
+.make-post-card{
+    max-width: 90%;
+    background-color: $slate;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+}
+
+a{
+    color: $darkerslate;
+}
+

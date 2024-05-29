@@ -8,7 +8,7 @@
 
     <!-- User Posting Card (Static) -->
     {% if user.is_authenticated %}
-        <div class="card m-4">
+        <div class="make-post-card card mb-3 mt-4">
             <div class="card-body row g-0 ">
                 <div class="user-pic">
                     Image
@@ -18,8 +18,8 @@
                 {% csrf_token %}
                 <div class="col-md-4">
                     <div class="input-group mb-3">
-                        <input id="post_text" type="text" name="post_text" class="form-control" placeholder="post content"  aria-describedby="button-addon2">
-                        <input id="submit_post" type="submit" class="btn btn-primary">
+                        <textarea class="post-input form-control-md" id="post_text" type="text" name="post_text"  placeholder="What's on your mind?"  aria-describedby="button-addon2"></textarea>  
+                        <input id="submit_post" type="submit" class="btn btn-secondary">
                     </div>
                 </div>  
                 </form>

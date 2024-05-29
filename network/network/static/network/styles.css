@@ -1,11 +1,16 @@
 body {
-  background-color: #768698;
+  background-color: #222;
+}
+
+.side-nav {
+  display: block;
+  height: 100%;
 }
 
 .post-pic {
   padding: 70px;
   font-size: 12px;
-  background-color: #48525e;
+  background-color: #3d454f;
   border-radius: 50%;
   height: 180px;
   width: 180px;
@@ -16,7 +21,7 @@ body {
 .user-pic {
   padding: 10px;
   font-size: 10px;
-  background-color: #48525e;
+  background-color: #3d454f;
   border-radius: 50%;
   height: 50px;
   width: 50px;
@@ -26,9 +31,22 @@ body {
 
 .postcard {
   max-width: 90%;
+  background-color: #768698;
   margin-left: auto;
   margin-right: auto;
   padding-left: 15px;
+}
+
+.make-post-card {
+  max-width: 90%;
+  background-color: #768698;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+}
+
+a {
+  color: #343a40;
 }
 
 /*# sourceMappingURL=styles.css.map */
