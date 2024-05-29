@@ -318,7 +318,7 @@ function likePost(event,postId){
     const csrftoken = getCookie('csrftoken');
 
     fetch(`/like_post/${postId}`,{
-        method: 'PATCH',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken
@@ -327,13 +327,16 @@ function likePost(event,postId){
         }) 
     .then(response=>{
         if(response.ok){
-            response.json();
+            return response.json();
             console.log('like',response);
          }
         else{
             console.error('Failed to save post', response.statusText);
             console.log(response);
         }
+    })
+    .then(data => {
+        console.log("itsdata",data);
     })
     .catch(error => {
         console.error('Error', error);

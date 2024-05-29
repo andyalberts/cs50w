@@ -178,9 +178,10 @@ def follow_user(request, id):
 
 @login_required
 def like_post(request, id):
-    if request.method == 'PATCH':
+    if request.method == 'POST':
         post = get_object_or_404(Post, pk=id)
         user = request.user
+
         if user in post.likes.all():
             post.likes.remove(user)
             liked = False
@@ -190,6 +191,8 @@ def like_post(request, id):
 
         likes_count = post.likes.count()
 
-        return JsonResponse({'good': 'job'})
+        return JsonResponse({
+            'liked': liked,
+            'count': likes_count})
     
     return JsonResponse({'error': 'Invalid request'}, status=400)
