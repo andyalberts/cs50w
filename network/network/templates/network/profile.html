@@ -10,16 +10,16 @@
 <!-- # of follows -->
 <!-- posts loop from context ?:append here or view?  -->
 <h1 class="target_user">{{ target_user }}</h1>
-
-{% if user.is_authenticated %}
-    {% if is_following %}
-        <button class="followButton" onclick="followUser(event,'{{ target_user.id }}')">Following</button>
-    {% else %}
-        <button class="followButton" onclick="followUser(event,'{{ target_user.id }}')">Follow</button>
+{% if target_user != logged_in %}
+    {% if user.is_authenticated %}
+        {% if is_following %}
+            <button class="followButton" onclick="followUser(event,'{{ target_user.id }}')">Following</button>
+        {% else %}
+            <button class="followButton" onclick="followUser(event,'{{ target_user.id }}')">Follow</button>
+        {% endif %}
+    <!-- toggle message for follow/unfollow-->
     {% endif %}
-<!-- toggle message for follow/unfollow-->
 {% endif %}
-
 <p>Followers: {{ followers }}</p>
 <p>Following: {{ following }}</p>
 <div>
@@ -29,7 +29,7 @@
                 <h1>{{post.user}}</h1>
                 <h5>{{post.text}}</h5>
                 <p>{{post.timestamp}}</p>
-                <p>{{post.likes}} Likes</p>
+                <p>{{post.likes.count}} Likes</p>
             </div>
         </ul>
     {% endfor %}

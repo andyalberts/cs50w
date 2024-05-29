@@ -121,18 +121,24 @@ def save_edit(request,id):
     return JsonResponse({'error':'request type not accepted'}, status=405)
 
 def user_profile(request, id):
-    current_user = request.user
+    # current_user = request.user
     if request.method == "GET":
         # retrieve user posts, following, followers
         target_user = User.objects.get(pk=id)
         posts = Post.objects.filter(user=id)
+        page_number = request.GET.get('page', 1)
+
+        by_time = posts.order_by("-timestamp").all()
+        paginator = Paginator(by_time,7)
+        page_posts = paginator.get_page(page_number)
+
         logged_in = request.user
         followers = target_user.followers.all()
         following = target_user.following.all()
         is_following = logged_in in followers
 
         return render(request, "network/profile.html", {
-            "posts":posts.all(),
+            "posts":page_posts,
             "target_user": target_user,
             "logged_in": logged_in,
             "followers": followers.count(),
