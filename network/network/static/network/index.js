@@ -328,7 +328,6 @@ function likePost(event,postId){
     .then(response=>{
         if(response.ok){
             return response.json();
-            console.log('like',response);
          }
         else{
             console.error('Failed to save post', response.statusText);
@@ -336,7 +335,13 @@ function likePost(event,postId){
         }
     })
     .then(data => {
-        console.log("itsdata",data);
+        if (data) {
+            console.log("itsdata", data);
+            // Update the DOM with the new like count and like status
+            document.getElementById(`like-count-${postId}`).textContent = data.count + " likes";
+            const likeButton = document.getElementById(`like-button-${postId}`);
+            likeButton.textContent = data.liked ? 'Unlike' : 'Like';
+        }
     })
     .catch(error => {
         console.error('Error', error);
