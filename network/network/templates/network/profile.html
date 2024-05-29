@@ -25,9 +25,9 @@
 <div>
     {% for post in posts %}
         <ul>
-            <div class="card w-75">
-                <h1>{{post.user}}</h1>
-                <h5>{{post.text}}</h5>
+            <div class="card mb-3 w-75">
+                <h1><a href=/profile/{{post.user.id}}> {{ post.user }}</a></h1>
+                <p class="post-text">{{ post.text }}</p>
                 <p>{{post.timestamp}}</p>
                 <p>{{post.likes.count}} Likes</p>
             </div>
