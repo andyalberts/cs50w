@@ -38,7 +38,9 @@
         <p>{{ post.timestamp }}</p>
         <p id="like-count-{{ post.id }}" >{{ post.likes.count }} Likes</p>
         <button class="btn btn-secondary  like-button" id="like-button-{{ post.id }}" data-post-id="{{ post.id }}" >like</button>
+        {% if logged_in == target_user %}
         <button class="btn btn-secondary edit-post " data-post-id="{{ post.id }}" >Edit</button>
+        {% endif %}
         </div>
         </div>
     {% endfor %}
