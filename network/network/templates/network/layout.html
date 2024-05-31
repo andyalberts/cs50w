@@ -39,21 +39,47 @@
     </div>
 </nav>
 <!----- Offcanvas button ----->
-
+{% if user.is_authenticated %}
 <button class="btn btn-secondary offcanvas-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">User</button>
-
-
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" data-bs-theme="dark"  id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptions">
-    <!----- offcanvas header ----->    
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasWithBothOptions">Offcanvas with body scrolling</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <!----- offcanvas body ---->
-        <div class="offcanvas-body">
-        <p>Try scrolling the rest of the page to see this option in action.</p>
-        </div>
-</div>
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" data-bs-theme="dark"  id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptions">
+        <!----- offcanvas header ----->    
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasWithBothOptions">Offcanvas with body scrolling</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <!----- offcanvas body ---->
+            <div class="offcanvas-body">
+                <a class="navbar-brand" href="{% url 'index' %}">Network</a>
+                <div>
+                    <ul class="navbar-nav mr-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'index' %}"><strong>{{ user.username }}</strong></a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">All Posts</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'following' %}">Following</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        </li>
+                    {% endif %}
+                    </ul>
+                </div>
+            </div>
+    </div>
+{% endif %}
 
     <div id="body-view">
         {% block body %}
