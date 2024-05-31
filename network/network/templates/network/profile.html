@@ -2,28 +2,24 @@
 {% load static %}
 
 {% block body %}
-<!-- Make Giant Page Card-->
-<!--Profile Pic (make model or a default) -->
-<!-- username -->
-<!-- follow button (exclude if on current.user's profile)-->
-<!-- # of followers -->
-<!-- # of follows -->
-<!-- posts loop from context ?:append here or view?  -->
-<div class="profile-header">
-    <span>{{ target_user }}</span>
+<div class="card profile-header my-3 ">
+    <div class="card-body">
+    <h1 class="card-title">{{ target_user }}</h1>
+    
     {% if target_user != logged_in %}
         {% if user.is_authenticated %}
             {% if is_following %}
-                <button class="followButton btn-secondary" onclick="followUser(event,'{{ target_user.id }}')">Following</button>
+                <button class="followButton btn btn-secondary" onclick="followUser(event,'{{ target_user.id }}')">Following</button>
             {% else %}
-                <button class="followButton btn-secondary" onclick="followUser(event,'{{ target_user.id }}')">Follow</button>
+                <button class="followButton btn btn-secondary btn-lg" onclick="followUser(event,'{{ target_user.id }}')">Follow</button>
             {% endif %}
         <!-- toggle message for follow/unfollow-->
         {% endif %}
 
     {% endif %}
-    <p>Followers: {{ followers }}</p>
-    <p>Following: {{ following }}</p>
+    <p class="card-text">Followers: {{ followers }}</p>
+    <p class="card-text">Following: {{ following }}</p>
+</div>
 </div>
 <div>
     {% for post in posts %}

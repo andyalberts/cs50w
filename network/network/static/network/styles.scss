@@ -47,8 +47,13 @@ body{
 
 a{
     color: $darkerslate;
+    text-decoration: none;
 }
 
 .profile-header{
-    color: white;
+    max-width: 90%;
+    background-color: $darkslate;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
 }
