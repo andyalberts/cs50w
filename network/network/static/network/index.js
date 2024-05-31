@@ -139,7 +139,7 @@ function loadPosts(page){
                 throw new Error('Invalid post posts received');
             }
         // send posts to renderPosts to be displayed
-        renderPosts(posts);
+        renderPosts(posts,currentUserId);
     })
     .catch(error => console.error('Error Loading Post', error));
 }
@@ -173,10 +173,10 @@ function loadFollowingPosts(page){
 }
 
 // Display each post sent from loadPosts
-function renderPosts(post){
+function renderPosts(post, currentUserId){
     const data = post.posts;
     console.log('Data:', data);
-    
+    console.log('ididid', currentUserId)
     const postsHTML = data.map(post =>
         `
         <div class="card postcard mb-3" id="post-${post.id}" >
