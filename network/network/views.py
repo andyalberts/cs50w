@@ -92,6 +92,7 @@ def submit_post(request):
 #get all posts -> paginate
 def posts(request):
     if request.method == "GET":
+        current_user_id = request.user.id if request.user.is_authenticated else None
         page_number = request.GET.get('page', 1)
         # retrieve posts, order them by timestamp desc
         posts = Post.objects.all()
@@ -99,8 +100,9 @@ def posts(request):
         # show 7 posts per page
         paginator = Paginator(by_time,7)
         page_posts = paginator.get_page(page_number)
-        return JsonResponse({"posts": [post.serialize() for post in page_posts]})
-    pass
+        return JsonResponse({"posts": [post.serialize() for post in page_posts],
+                             "current_user_id": current_user_id})
+    return JsonResponse({"error": "Invalid request type"})
 
 @login_required
 def save_edit(request,id):
@@ -108,7 +110,7 @@ def save_edit(request,id):
         data = json.loads(request.body)
         new_text = data.get("text","")
         post = get_object_or_404(Post, pk=id)
-        
+        print("hey",post.user)
         # users can only edit their own posts
         if post.user != request.user:
             return JsonResponse({'error':'you are unable to edit this post'})

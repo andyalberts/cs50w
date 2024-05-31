@@ -131,7 +131,9 @@ function loadPosts(page){
         return response.json();
     })
     .then(posts => {
-        console.log(posts)
+        const currentUserId = posts.current_user_id;
+        console.log(posts);
+        console.log("userID", currentUserId);
         if(!posts.posts || !Array.isArray(posts.posts))
             {
                 throw new Error('Invalid post posts received');
