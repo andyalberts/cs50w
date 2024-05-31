@@ -176,7 +176,6 @@ function loadFollowingPosts(page){
 function renderPosts(post, currentUserId){
     const data = post.posts;
     console.log('Data:', data);
-    console.log('ididid', currentUserId)
     const postsHTML = data.map(post =>
         `
         <div class="card postcard mb-3" id="post-${post.id}" >
@@ -190,7 +189,8 @@ function renderPosts(post, currentUserId){
         <p>${post.timestamp}</p>
         <p id="like-count-${post.id}" >${post.likes.count} Likes</p>
         <button class="btn btn-secondary  like-button" id="like-button-${post.id }" data-post-id="${post.id }" >like</button>
-        <button class="btn btn-secondary edit-post " data-post-id="${post.id}" >Edit</button>
+        
+        ${post.user.id == currentUserId ? `<button class="btn btn-secondary edit-post " data-post-id="${post.id}" >Edit</button>` : ''}
         </div>
         </div>
     `).join('');
