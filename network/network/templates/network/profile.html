@@ -34,17 +34,9 @@
         </div>
         <p>{{ post.timestamp }}</p>
         <p id="like-count-{{ post.id }}" >{{ post.likes.count }} Likes</p>
-        <button class="btn btn-secondary  like-button" id="like-button-{{ post.id }}" data-post-id="{{ post.id }" >like</button>
+        <!-- <button class="btn btn-secondary  like-button" id="like-button-{{ post.id }}" data-post-id="{{ post.id }" >like</button> -->
         </div>
         </div>
-        <!-- <ul>
-            <div class="card mb-3 w-75">
-                <h1><a href=/profile/{{post.user.id}}> {{ post.user }}</a></h1>
-                <p class="post-text">{{ post.text }}</p>
-                <p>{{post.timestamp}}</p>
-                <p>{{post.likes.count}} Likes</p>
-            </div>
-        </ul> -->
     {% endfor %}
 </div>
 {% endblock %}
