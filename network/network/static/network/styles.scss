@@ -2,33 +2,31 @@ $slate: #768698;
 $darkslate: #3d454f;
 $darkerslate: #343a40;
 
-.offcanvas-btn{
-    position:fixed;
-    z-index: 1;
-    border-radius: 50%;
-    height: 55px;
-    width: 55px;
-       
-}
-
+// ----- body stuff ------
 #body-view{
     margin-left: 60px;
-
-}
-
-.offcanvas{
-    background: none;
 }
 
 body{
     background-color: #222;
 }
 
-.side-nav{
-    display: block;
-    height: 100%;
+// ----- offcanvas stuff -----
+.offcanvas-btn{
+    margin-top: 1rem;
+    margin-left: 1rem;
+    position:fixed;
+    z-index: 1;
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
 }
 
+.offcanvas{
+    background: none;
+}
+
+// ----- posts display
 .postcard{
     max-width: 90%;
     background-color: $slate;
@@ -45,11 +43,7 @@ body{
     padding-left: 15px;
 }
 
-a{
-    color: $darkerslate;
-    text-decoration: none;
-}
-
+// ----- profile -----
 .profile-header{
     max-width: 90%;
     background-color: $darkslate;
@@ -57,3 +51,10 @@ a{
     margin-right: auto;
     padding-left: 15px;
 }
+
+// ----- junk drawer -----
+a{
+    color: $darkerslate;
+    text-decoration: none;
+}
+
