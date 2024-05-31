@@ -319,7 +319,6 @@ function likePost(event,postId){
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken
         },
-    
         }) 
     .then(response=>{
         if(response.ok){

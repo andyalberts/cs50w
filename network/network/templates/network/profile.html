@@ -9,19 +9,22 @@
 <!-- # of followers -->
 <!-- # of follows -->
 <!-- posts loop from context ?:append here or view?  -->
-<h1 class="target_user">{{ target_user }}</h1>
-{% if target_user != logged_in %}
-    {% if user.is_authenticated %}
-        {% if is_following %}
-            <button class="followButton" onclick="followUser(event,'{{ target_user.id }}')">Following</button>
-        {% else %}
-            <button class="followButton" onclick="followUser(event,'{{ target_user.id }}')">Follow</button>
+<div class="profile-header">
+    <p>{{ target_user }}</p>
+    {% if target_user != logged_in %}
+        {% if user.is_authenticated %}
+            {% if is_following %}
+                <button class="followButton" onclick="followUser(event,'{{ target_user.id }}')">Following</button>
+            {% else %}
+                <button class="followButton" onclick="followUser(event,'{{ target_user.id }}')">Follow</button>
+            {% endif %}
+        <!-- toggle message for follow/unfollow-->
         {% endif %}
-    <!-- toggle message for follow/unfollow-->
+
     {% endif %}
-{% endif %}
-<p>Followers: {{ followers }}</p>
-<p>Following: {{ following }}</p>
+    <p>Followers: {{ followers }}</p>
+    <p>Following: {{ following }}</p>
+</div>
 <div>
     {% for post in posts %}
     <div class="card postcard mb-3" id="post-{{ post.id }}" >
@@ -34,7 +37,8 @@
         </div>
         <p>{{ post.timestamp }}</p>
         <p id="like-count-{{ post.id }}" >{{ post.likes.count }} Likes</p>
-        <!-- <button class="btn btn-secondary  like-button" id="like-button-{{ post.id }}" data-post-id="{{ post.id }" >like</button> -->
+        <button class="btn btn-secondary  like-button" id="like-button-{{ post.id }}" data-post-id="{{ post.id }}" >like</button>
+        <button class="btn btn-secondary edit-post " data-post-id="{{ post.id }}" >Edit</button>
         </div>
         </div>
     {% endfor %}

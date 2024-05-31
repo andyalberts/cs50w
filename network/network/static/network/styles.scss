@@ -11,6 +11,11 @@ $darkerslate: #343a40;
        
 }
 
+#body-view{
+    margin-left: 60px;
+
+}
+
 .offcanvas{
     background: none;
 }
@@ -44,3 +49,6 @@ a{
     color: $darkerslate;
 }
 
+.profile-header{
+    color: white;
+}
