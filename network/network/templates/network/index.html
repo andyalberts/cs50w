@@ -10,9 +10,6 @@
     {% if user.is_authenticated %}
         <div class="make-post-card card mb-3 mt-4">
             <div class="card-body row g-0 ">
-                <div class="user-pic">
-                    Image
-                </div>
                 <form action="{% url 'submit_post' %}" method="post">
                 {% csrf_token %}
                 <div class="col-md-4">
