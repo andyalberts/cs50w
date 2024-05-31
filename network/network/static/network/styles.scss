@@ -3,9 +3,16 @@ $darkslate: #3d454f;
 $darkerslate: #343a40;
 
 .offcan-butt{
-        position:fixed;
-        z-index: 1;
+    position:fixed;
+    z-index: 1;
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
        
+}
+
+.offcanvas{
+    background: none;
 }
 
 body{

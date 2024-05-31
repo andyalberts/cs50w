@@ -40,11 +40,12 @@
         </nav>
     <!----- Offcanvas button ----->
     <div class="position-relative top-20% start-25%">
-    <button class="btn btn-secondary offcan-butt" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Enable body scrolling</button>
+    <button class="btn btn-secondary offcan-butt" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">User</button>
     </div>  
 
     <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" data-bs-theme="dark"  id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptions">
-            <div class="offcanvas-header">
+        <!----- offcanvas header ----->    
+        <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasWithBothOptions">Offcanvas with body scrolling</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
@@ -52,7 +53,7 @@
             <div class="offcanvas-body">
             <p>Try scrolling the rest of the page to see this option in action.</p>
             </div>
-        </div>
+    </div>
 
         <div id="body-view">
             {% block body %}
