@@ -10,13 +10,13 @@
 <!-- # of follows -->
 <!-- posts loop from context ?:append here or view?  -->
 <div class="profile-header">
-    <p>{{ target_user }}</p>
+    <span>{{ target_user }}</span>
     {% if target_user != logged_in %}
         {% if user.is_authenticated %}
             {% if is_following %}
-                <button class="followButton" onclick="followUser(event,'{{ target_user.id }}')">Following</button>
+                <button class="followButton btn-secondary" onclick="followUser(event,'{{ target_user.id }}')">Following</button>
             {% else %}
-                <button class="followButton" onclick="followUser(event,'{{ target_user.id }}')">Follow</button>
+                <button class="followButton btn-secondary" onclick="followUser(event,'{{ target_user.id }}')">Follow</button>
             {% endif %}
         <!-- toggle message for follow/unfollow-->
         {% endif %}

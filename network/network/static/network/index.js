@@ -33,11 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         loadPosts(currentPage);
     }
     if (path === '/following'){
-        const submitPostButton = document.querySelector('#submit_post');
-        if (submitPostButton) {
-            submitPostButton.addEventListener('click', submitPost);
-        }
-
+     
         // -------------- INDEX POST PAGINATOR -------------------
         let currentPage = 1;
         const nextButton = document.querySelector('#next-button');
