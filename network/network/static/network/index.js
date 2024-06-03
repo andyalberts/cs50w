@@ -1,17 +1,19 @@
 // ----- JQuery Button Example -----
 $(document).ready(function(){
+   //----- test button -----
     $(".test-button").hover(
         function(){
-            $(this).css(
+            $(":visible").css(
                 "color", "green"
         );
     },
         function(){
-            $(this).css(
-                "color", "yellow"
+            $(":visible").css(
+                "color", ""
         );
     }
     );
+    
 });
 
 // ----- MAIN DOCUMENT -----
