@@ -1,3 +1,5 @@
+$lighterslate: #c5ddf9;
+$lightslate: #aac4e2;
 $slate: #768698;
 $darkslate: #3d454f;
 $darkerslate: #343a40;
@@ -8,7 +10,8 @@ $darkerslate: #343a40;
 }
 
 body{
-    background-color: #222;
+    background-color: $lighterslate;
+    display: block;
 }
 
 // ----- offcanvas stuff -----
@@ -23,7 +26,8 @@ body{
 }
 
 .offcanvas{
-    background: none;
+    margin-left: 15px;
+    background: rgba($color: $slate, $alpha: 88%)  ;
 }
 
 // ----- posts display
@@ -37,7 +41,7 @@ body{
 
 .make-post-card{
     max-width: 90%;
-    background-color: $slate;
+    background-color: $lightslate;
     margin-left: auto;
     margin-right: auto;
     padding-left: 15px;

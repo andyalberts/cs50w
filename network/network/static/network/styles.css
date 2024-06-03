@@ -3,7 +3,8 @@
 }
 
 body {
-  background-color: #222;
+  background-color: #c5ddf9;
+  display: block;
 }
 
 .offcanvas-btn {
@@ -17,7 +18,8 @@ body {
 }
 
 .offcanvas {
-  background: none;
+  margin-left: 15px;
+  background: rgba(118, 134, 152, 0.88);
 }
 
 .postcard {
@@ -30,7 +32,7 @@ body {
 
 .make-post-card {
   max-width: 90%;
-  background-color: #768698;
+  background-color: #aac4e2;
   margin-left: auto;
   margin-right: auto;
   padding-left: 15px;

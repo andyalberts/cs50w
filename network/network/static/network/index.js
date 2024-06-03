@@ -1,3 +1,20 @@
+// ----- JQuery Button Example -----
+$(document).ready(function(){
+    $(".test-button").hover(
+        function(){
+            $(this).css(
+                "color", "green"
+        );
+    },
+        function(){
+            $(this).css(
+                "color", "yellow"
+        );
+    }
+    );
+});
+
+// ----- MAIN DOCUMENT -----
 document.addEventListener('DOMContentLoaded', function() {
    //checks current page path
     var path = window.location.pathname;
