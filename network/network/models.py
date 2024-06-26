@@ -29,4 +29,10 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
+class comments(models.Model):
+    user = models.ForeignKey('User', on_delete=models.CASCADE, blank=True, null=True)
+    text = models.CharField(max_length=420, blank=True)
+    post = models.ForeignKey('Post', on_delete=models.CASCADE, blank=True, null=True)
+    def __str__(self):
+        return self.text
 # access all posts of a user with <user>.post_set.all()
