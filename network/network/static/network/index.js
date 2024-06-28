@@ -202,9 +202,8 @@ function renderPosts(post, currentUserId){
         <h1><a href="/profile/${post.user.id}"> ${post.user.username}</a></h1>
         <p class="post-text">${post.text}</p>
         <div class="edit-area mt-3 d-none">
-        <textarea class="form-control mb-2">${post.text}</textarea>
-        <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
-        <button class="btn btn-success post-comment-button" data-post-id="${post.id}">Post</button>
+            <textarea class="form-control mb-2">${post.text}</textarea>
+            <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
         </div>
         <p>${post.timestamp}</p>
         <p id="like-count-${post.id}" >${post.likes.count} Likes</p>
@@ -212,7 +211,13 @@ function renderPosts(post, currentUserId){
         <button class="btn btn-secondary like-button" id="like-button-${post.id }" data-post-id="${post.id }">like</button>
         ${post.user.id == currentUserId ? `<button class="btn btn-secondary edit-post" data-post-id="${post.id}">Edit</button>` : ''}
         </div>
+        <div class="comment-area d-none m-4">
+            <textarea class="form-control mb-2"></textarea>
+            <button class="btn btn-success post-comment-button" data-post-id="${post.id}">Post</button>
         </div>
+        </div>
+        
+        
         `).join('');
         
         // <button class="btn btn-secondary comment-button" id="comment-button-${post.id}>comment</button>
@@ -244,9 +249,7 @@ function renderPosts(post, currentUserId){
         const postId = event.target.getAttribute('data-post-id');
         const postElement = document.querySelector(`#post-${postId}`);
         if (postElement){
-            postElement.querySelector('.post-text').classList.add('d-none');
-            postElement.querySelector('.save-post').classList.add('d-none');
-            postElement.querySelector('.edit-area').classList.remove('d-none');
+            postElement.querySelector('.comment-area').classList.remove('d-none');
         }
     });
     });
