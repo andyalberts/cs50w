@@ -29,7 +29,7 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
-class comments(models.Model):
+class Comments(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE, blank=True, null=True)
     text = models.CharField(max_length=420, blank=True)
     post = models.ForeignKey('Post', on_delete=models.CASCADE, blank=True, null=True)
