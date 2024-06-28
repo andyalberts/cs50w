@@ -207,7 +207,8 @@ function renderPosts(post, currentUserId){
         </div>
         <p>${post.timestamp}</p>
         <p id="like-count-${post.id}" >${post.likes.count} Likes</p>
-        <button class="btn btn-secondary  like-button" id="like-button-${post.id }" data-post-id="${post.id }" >like</button>
+        <button class="btn btn-secondary">comment</button>
+        <button class="btn btn-secondary like-button" id="like-button-${post.id }" data-post-id="${post.id }" >like</button>
         
         ${post.user.id == currentUserId ? `<button class="btn btn-secondary edit-post " data-post-id="${post.id}" >Edit</button>` : ''}
         </div>

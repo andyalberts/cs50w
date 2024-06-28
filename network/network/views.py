@@ -110,7 +110,6 @@ def save_edit(request,id):
         data = json.loads(request.body)
         new_text = data.get("text","")
         post = get_object_or_404(Post, pk=id)
-        print("hey",post.user)
         # users can only edit their own posts
         if post.user != request.user:
             return JsonResponse({'error':'you are unable to edit this post'})
@@ -204,3 +203,12 @@ def like_post(request, id):
             'count': likes_count})
     
     return JsonResponse({'error': 'Invalid request'}, status=400)
+
+@login_required
+def comment(request, id):
+     if request.method == 'POST':
+        post = get_object_or_404(Post, pk=id)
+        user = request.user
+
+        # make post request in JS to send comment text via json
+        # enter comment into db -> save
