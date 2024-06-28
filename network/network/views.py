@@ -147,7 +147,7 @@ def user_profile(request, id):
             "is_following": is_following,
         })
     elif request.method == "POST":
-       follow = target_user.followers.add(current_user)
+       follow = target_user.followers.add(logged_in)
        follow.save()
     return JsonResponse({'message': 'User followed successfully'})
 
@@ -209,6 +209,6 @@ def comment(request, id):
      if request.method == 'POST':
         post = get_object_or_404(Post, pk=id)
         user = request.user
-
+pass
         # make post request in JS to send comment text via json
         # enter comment into db -> save

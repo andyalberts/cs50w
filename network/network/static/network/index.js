@@ -80,7 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
    
 });
 
-async function submitPost(event){
+
+async function submitComment(event){
     event.preventDefault();
 
     let csrftoken = getCookie('csrftoken');
@@ -88,7 +89,6 @@ async function submitPost(event){
     let text = document.getElementById('post_text').value;
     console.log(text);
     try{
-
         // retrieves data from fetch, assigns value to response
         const response = await fetch('/submit_post',{
             method: 'POST',
@@ -113,9 +113,41 @@ async function submitPost(event){
     } catch(error) {
         console.error('Error:', error);
     }
-
 }
 
+async function submitPost(event){
+    event.preventDefault();
+
+    let csrftoken = getCookie('csrftoken');
+    // retrieves user post text from input field 
+    let text = document.getElementById('post_text').value;
+    console.log(text);
+    try{
+        // retrieves data from fetch, assigns value to response
+        const response = await fetch('/submit_post',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            body: JSON.stringify({
+                text: text
+            })
+        });
+        // unless it doesn't
+        if (!response.ok){
+            throw new Error('Network response was not ok');
+        }
+        // waits for body response to be read as JSON
+        const data = await response.json();
+        console.log('Success', data);
+        // Reset value of post box to blank after post submit
+        document.querySelector('#post_text').value = '';
+        loadPosts();
+    } catch(error) {
+        console.error('Error:', error);
+    }
+}
 // Function to get a cookie by name
 function getCookie(name) {
     let cookieValue = null;
