@@ -205,10 +205,22 @@ def like_post(request, id):
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
 @login_required
-def comment(request, id):
-     if request.method == 'POST':
+def post_comment(request, id):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            comment_text = data.get("text", "")
+        except JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON."}, status=400)
         post = get_object_or_404(Post, pk=id)
-        user = request.user
-pass
-        # make post request in JS to send comment text via json
-        # enter comment into db -> save
+        # Create and save comment
+        comment = Comment(
+            user=request.user,
+            text=comment_text,
+            post=post
+        )  
+        comment.save()
+        
+        return JsonResponse({'message':'comment successfully posted'})
+    return JsonResponse({'error':'request type not accepted'}, status=405)
+       

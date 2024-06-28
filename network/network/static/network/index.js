@@ -284,7 +284,7 @@ function renderPosts(post, currentUserId){
             postTextElement.innerHTML = commentText;
             postElement.querySelector('.post-text').classList.remove('d-none');
             postElement.querySelector('.comment-area').classList.add('d-none');
-            postComment(postId, editedPost);
+            saveComment(postId, commentText);
         }
     });
    });
@@ -303,17 +303,17 @@ function renderPosts(post, currentUserId){
    });
 }
 
-function postComment(postId, commentText){
+function saveComment(postId, commentText){
     console.log(postId, commentText);
     let csrftoken = getCookie('csrftoken'); 
-    fetch(`/save_edit/${postId}`,{
-        method: 'PATCH',
+    fetch(`/post_comment/${postId}`,{
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken
         },
         body:JSON.stringify({
-            text:editedPost
+            text:commentText
         })
     })
     .then(response=>{
@@ -322,7 +322,7 @@ function postComment(postId, commentText){
             console.log('ok',response);
         }
         else{
-            console.error('Failed to save post', response.statusText);
+            console.error('Failed to post comment', response.statusText);
             console.log(response);
         }
     })
