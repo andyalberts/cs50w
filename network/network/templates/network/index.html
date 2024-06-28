@@ -12,14 +12,11 @@
             <div class="card-body row g-0 ">
                 <form action="{% url 'submit_post' %}" method="post">
                 {% csrf_token %}
-                <div class="col-md-4">
                     <div class="input-group mb-3">
-                        <textarea class="post-input form-control-md" id="post_text" type="text" name="post_text"  placeholder="What's on your mind?"  aria-describedby="button-addon2"></textarea>  
+                        <textarea class="post-input form-control-md" id="post-textbox" type="text" name="post-textbox"  placeholder="What's on your mind?"  aria-describedby="button-addon2"></textarea>  
                         <input id="submit_post" type="submit" class="btn btn-secondary">
                     </div>
-                </div>  
                 </form>
-            
             </div>
         </div>
     {% endif %}

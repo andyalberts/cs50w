@@ -86,7 +86,7 @@ async function submitPost(event){
 
     let csrftoken = getCookie('csrftoken');
     // retrieves user post text from input field 
-    let text = document.getElementById('post_text').value;
+    let text = document.getElementById('post-textbox').value;
     console.log(text);
     try{
         // retrieves data from fetch, assigns value to response
@@ -108,7 +108,7 @@ async function submitPost(event){
         const data = await response.json();
         console.log('Success', data);
         // Reset value of post box to blank after post submit
-        document.querySelector('#post_text').value = '';
+        document.querySelector('#post-textbox').value = '';
         loadPosts();
     } catch(error) {
         console.error('Error:', error);
@@ -263,7 +263,7 @@ function renderPosts(post, currentUserId){
             const postTextElement = postElement.querySelector('.post-text');
             const editedPost = textarea.value;
             // assigns value of user input 'textarea' to post-text and changes to that view
-            postTextElement.innerHTML = textarea.value;
+            postTextElement.innerHTML = editedPost;
             postElement.querySelector('.post-text').classList.remove('d-none');
             postElement.querySelector('.edit-area').classList.add('d-none');
             //MAKE CLICK GO TO savePost FUNCTION
@@ -280,13 +280,11 @@ function renderPosts(post, currentUserId){
         if (postElement){
             const textarea = postElement.querySelector('.comment-area textarea')
             const postTextElement = postElement.querySelector('.post-text');
-            const editedPost = textarea.value;
-            // assigns value of user input 'textarea' to post-text and changes to that view
-            postTextElement.innerHTML = editedPost;
+            const commentText = textarea.value;
+            postTextElement.innerHTML = commentText;
             postElement.querySelector('.post-text').classList.remove('d-none');
             postElement.querySelector('.comment-area').classList.add('d-none');
-            //MAKE CLICK GO TO savePost FUNCTION
-            saveEdit(postId, editedPost);
+            postComment(postId, editedPost);
         }
     });
    });
