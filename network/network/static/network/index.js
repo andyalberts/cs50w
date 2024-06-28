@@ -197,7 +197,7 @@ function renderPosts(post, currentUserId){
     console.log('Data:', data);
     const postsHTML = data.map(post =>
         `
-        <div class="card postcard mb-3" id="post-${post.id}" >
+         <div class="card postcard mb-3" id="post-${post.id}" >
         <div class="card-body">
         <h1><a href="/profile/${post.user.id}"> ${post.user.username}</a></h1>
         <p class="post-text">${post.text}</p>
@@ -207,14 +207,14 @@ function renderPosts(post, currentUserId){
         </div>
         <p>${post.timestamp}</p>
         <p id="like-count-${post.id}" >${post.likes.count} Likes</p>
-        <button class="btn btn-secondary">comment</button>
-        <button class="btn btn-secondary like-button" id="like-button-${post.id }" data-post-id="${post.id }" >like</button>
+        <button class="btn btn-secondary comment-button" data-post-id="${post.id}">comment</button>
+        <button class="btn btn-secondary like-button" id="like-button-${post.id }" data-post-id="${post.id }">like</button>
+        ${post.user.id == currentUserId ? `<button class="btn btn-secondary edit-post" data-post-id="${post.id}">Edit</button>` : ''}
+        </div>
+        </div>
+        `).join('');
         
-        ${post.user.id == currentUserId ? `<button class="btn btn-secondary edit-post " data-post-id="${post.id}" >Edit</button>` : ''}
-        </div>
-        </div>
-    `).join('');
-       
+        // <button class="btn btn-secondary comment-button" id="comment-button-${post.id}>comment</button>
     
     // Displays posts on page 
     const postsContainer = document.querySelector('#display-posts');
@@ -223,10 +223,9 @@ function renderPosts(post, currentUserId){
         postsContainer.innerHTML = postsHTML + postsContainer.innerHTML;
         window.scrollTo(0,0);
     }
-    // ------- edit button functionality --------
+    // ------- Open Edit View --------
 
    const editButtons = document.querySelectorAll('.edit-post');
-   //adds listener to each button in editButtons nodelist
    editButtons.forEach(button => {
     button.addEventListener('click', function(event) {
         const postId = event.target.getAttribute('data-post-id');
@@ -235,10 +234,20 @@ function renderPosts(post, currentUserId){
             postElement.querySelector('.post-text').classList.add('d-none');
             postElement.querySelector('.edit-area').classList.remove('d-none');
         }
-     
     });
    });
-
+    // ----- Open Comment View -----
+    const commentButton = document.querySelectorAll('.comment-button');
+    commentButton.forEach(button => {
+    button.addEventListener('click', function(event) {
+        const postId = event.target.getAttribute('data-post-id');
+        const postElement = document.querySelector(`#post-${postId}`);
+        if (postElement){
+            postElement.querySelector('.post-text').classList.add('d-none');
+            postElement.querySelector('.edit-area').classList.remove('d-none');
+        }
+    });
+    });
    // ----- save button functionality -----
    const saveButtons = document.querySelectorAll('.save-post');
    saveButtons.forEach(button=> {
@@ -273,6 +282,9 @@ function renderPosts(post, currentUserId){
    });
 }
 
+function commentPost(postId, commentText){
+
+}
 function saveEdit(postId,editedPost){
     //patch post(postId), with editedPost text
     console.log(postId, editedPost);
@@ -325,7 +337,6 @@ function followUser(event,user_id){
     });
 
 }
-
 function likePost(event,postId){
     event.preventDefault();
     console.log(postId);
