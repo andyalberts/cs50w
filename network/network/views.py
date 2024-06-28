@@ -203,6 +203,10 @@ def like_post(request, id):
             'count': likes_count})
     
     return JsonResponse({'error': 'Invalid request'}, status=400)
+
+def load_comments(request, id){
+    pass
+}
 # saves comment
 @login_required
 def post_comment(request, id):
