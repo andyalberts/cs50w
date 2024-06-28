@@ -204,6 +204,7 @@ function renderPosts(post, currentUserId){
         <div class="edit-area mt-3 d-none">
         <textarea class="form-control mb-2">${post.text}</textarea>
         <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
+        <button class="btn btn-success post-comment-button" data-post-id="${post.id}">Post</button>
         </div>
         <p>${post.timestamp}</p>
         <p id="like-count-${post.id}" >${post.likes.count} Likes</p>
@@ -244,6 +245,7 @@ function renderPosts(post, currentUserId){
         const postElement = document.querySelector(`#post-${postId}`);
         if (postElement){
             postElement.querySelector('.post-text').classList.add('d-none');
+            postElement.querySelector('.save-post').classList.add('d-none');
             postElement.querySelector('.edit-area').classList.remove('d-none');
         }
     });
