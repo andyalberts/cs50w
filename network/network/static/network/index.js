@@ -207,6 +207,7 @@ function renderPosts(post, currentUserId){
         <p>${post.timestamp}</p>
         <p id="like-count-${post.id}">${post.likes.count} Likes</p>
         <button class="btn btn-secondary comment-button" data-post-id="${post.id}">comment</button>
+        <button class="btn btn-secondary comments-toggle" data-post-id="${post.id}">comments</button>
         <button class="btn btn-secondary like-button" id="like-button-${post.id }" data-post-id="${post.id }">like</button>
         ${post.user.id == currentUserId ? `<button class="btn btn-secondary edit-post" data-post-id="${post.id}">Edit</button>` : ''}
         </div>
@@ -214,13 +215,9 @@ function renderPosts(post, currentUserId){
             <textarea class="form-control mb-2"></textarea>
             <button class="btn btn-success post-comment" data-post-id="${post.id}">Post</button>
         </div>
+        <div class="comments-view"></div>
         </div>
-        
-        
         `).join('');
-        
-        // <button class="btn btn-secondary comment-button" id="comment-button-${post.id}>comment</button>
-    
     // Displays posts on page 
     const postsContainer = document.querySelector('#display-posts');
     if (postsContainer){
@@ -229,7 +226,6 @@ function renderPosts(post, currentUserId){
         window.scrollTo(0,0);
     }
     // ------- Open Edit View --------
-
    const editButtons = document.querySelectorAll('.edit-post');
    editButtons.forEach(button => {
     button.addEventListener('click', function(event) {
@@ -288,7 +284,6 @@ function renderPosts(post, currentUserId){
         }
     });
    });
-
    // ----- like button functionality -----
    const likeButtons = document.querySelectorAll('.like-button');
    likeButtons.forEach(button=>{
@@ -301,6 +296,22 @@ function renderPosts(post, currentUserId){
     }
     });
    });
+   // ----- Comments View -----
+   const commentsToggle = document.querySelectorAll('.comments-toggle');
+   commentsToggle.forEach(button=> {
+    button.addEventListener('click', function(event){
+        const postId = event.target.getAttribute('data-post-id');
+        const postElement = document.querySelector(`#post-${postId}`);
+        if(postElement){
+            commentsView = document.querySelector('.comments-view');
+            commentsView.innerHTML = "Hey";
+        }
+    });
+   });
+}
+
+function loadComments(event,user_id){
+    
 }
 
 function saveComment(postId, commentText){
@@ -411,6 +422,7 @@ function likePost(event,postId){
             document.getElementById(`like-count-${postId}`).textContent = data.count + " likes";
             const likeButton = document.getElementById(`like-button-${postId}`);
             likeButton.textContent = data.liked ? 'Unlike' : 'Like';
+           
         }
     })
     .catch(error => {

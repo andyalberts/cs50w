@@ -156,7 +156,7 @@ def following_page(request):
     if request.method == "GET":
         return render(request, "network/following.html")
     pass
-
+# posts on following page
 def following_posts(request):
     if request.method == "GET":
         page_number = request.GET.get('page', 1)
@@ -203,7 +203,7 @@ def like_post(request, id):
             'count': likes_count})
     
     return JsonResponse({'error': 'Invalid request'}, status=400)
-
+# saves comment
 @login_required
 def post_comment(request, id):
     if request.method == "POST":
