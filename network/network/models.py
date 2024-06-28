@@ -24,15 +24,17 @@ class Post(models.Model):
             }
         }
 
-class User(AbstractUser):
-    followers = models.ManyToManyField('self', related_name='following', symmetrical=False, blank=True)
-    def __str__(self):
-        return self.username
-
 class Comments(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE, blank=True, null=True)
     text = models.CharField(max_length=420, blank=True)
     post = models.ForeignKey('Post', on_delete=models.CASCADE, blank=True, null=True)
     def __str__(self):
         return self.text
+
+class User(AbstractUser):
+    followers = models.ManyToManyField('self', related_name='following', symmetrical=False, blank=True)
+    def __str__(self):
+        return self.username
+
+
 # access all posts of a user with <user>.post_set.all()
