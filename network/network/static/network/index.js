@@ -81,40 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-async function submitComment(event){
-    event.preventDefault();
-
-    let csrftoken = getCookie('csrftoken');
-    // retrieves user post text from input field 
-    let text = document.getElementById('post_text').value;
-    console.log(text);
-    try{
-        // retrieves data from fetch, assigns value to response
-        const response = await fetch('/submit_post',{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken
-            },
-            body: JSON.stringify({
-                text: text
-            })
-        });
-        // unless it doesn't
-        if (!response.ok){
-            throw new Error('Network response was not ok');
-        }
-        // waits for body response to be read as JSON
-        const data = await response.json();
-        console.log('Success', data);
-        // Reset value of post box to blank after post submit
-        document.querySelector('#post_text').value = '';
-        loadPosts();
-    } catch(error) {
-        console.error('Error:', error);
-    }
-}
-
 async function submitPost(event){
     event.preventDefault();
 
@@ -148,6 +114,7 @@ async function submitPost(event){
         console.error('Error:', error);
     }
 }
+
 // Function to get a cookie by name
 function getCookie(name) {
     let cookieValue = null;
@@ -229,7 +196,7 @@ function renderPosts(post, currentUserId){
     console.log('Data:', data);
     const postsHTML = data.map(post =>
         `
-         <div class="card postcard mb-3" id="post-${post.id}" >
+        <div class="card postcard mb-3" id="post-${post.id}" >
         <div class="card-body">
         <h1><a href="/profile/${post.user.id}"> ${post.user.username}</a></h1>
         <p class="post-text">${post.text}</p>
@@ -238,14 +205,14 @@ function renderPosts(post, currentUserId){
             <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
         </div>
         <p>${post.timestamp}</p>
-        <p id="like-count-${post.id}" >${post.likes.count} Likes</p>
+        <p id="like-count-${post.id}">${post.likes.count} Likes</p>
         <button class="btn btn-secondary comment-button" data-post-id="${post.id}">comment</button>
         <button class="btn btn-secondary like-button" id="like-button-${post.id }" data-post-id="${post.id }">like</button>
         ${post.user.id == currentUserId ? `<button class="btn btn-secondary edit-post" data-post-id="${post.id}">Edit</button>` : ''}
         </div>
         <div class="comment-area d-none m-4">
             <textarea class="form-control mb-2"></textarea>
-            <button class="btn btn-success post-comment-button" data-post-id="${post.id}">Post</button>
+            <button class="btn btn-success post-comment" data-post-id="${post.id}">Post</button>
         </div>
         </div>
         
@@ -304,6 +271,25 @@ function renderPosts(post, currentUserId){
         }
     });
    });
+   // ----- comment post button functionality -----
+   const postComment = document.querySelectorAll('.post-comment');
+   postComment.forEach(button=> {
+    button.addEventListener('click', function(event){
+        const postId = event.target.getAttribute('data-post-id');
+        const postElement = document.querySelector(`#post-${postId}`);
+        if (postElement){
+            const textarea = postElement.querySelector('.comment-area textarea')
+            const postTextElement = postElement.querySelector('.post-text');
+            const editedPost = textarea.value;
+            // assigns value of user input 'textarea' to post-text and changes to that view
+            postTextElement.innerHTML = editedPost;
+            postElement.querySelector('.post-text').classList.remove('d-none');
+            postElement.querySelector('.comment-area').classList.add('d-none');
+            //MAKE CLICK GO TO savePost FUNCTION
+            saveEdit(postId, editedPost);
+        }
+    });
+   });
 
    // ----- like button functionality -----
    const likeButtons = document.querySelectorAll('.like-button');
@@ -319,8 +305,33 @@ function renderPosts(post, currentUserId){
    });
 }
 
-function commentPost(postId, commentText){
-
+function postComment(postId, commentText){
+    console.log(postId, commentText);
+    let csrftoken = getCookie('csrftoken'); 
+    fetch(`/save_edit/${postId}`,{
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },
+        body:JSON.stringify({
+            text:editedPost
+        })
+    })
+    .then(response=>{
+        if(response.ok){
+            response.json();
+            console.log('ok',response);
+        }
+        else{
+            console.error('Failed to save post', response.statusText);
+            console.log(response);
+        }
+    })
+    .catch(error => {
+        // Handle fetch error
+        console.error('Error:', error);
+    });
 }
 function saveEdit(postId,editedPost){
     //patch post(postId), with editedPost text
