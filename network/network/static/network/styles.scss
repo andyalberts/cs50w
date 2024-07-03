@@ -15,7 +15,7 @@ body {
     background-attachment: fixed;
     display: block;
     width: 100%;
-  }
+}
 
 // ----- Navbar -----
 .navbar{
@@ -29,25 +29,23 @@ body {
     font-weight: 400;
     font-size: 2rem;
 }
-
 .nav-link:hover{
     font-weight: 300;
 }
+
 // ----- offcanvas stuff -----
 .offcanvas-btn {
     margin-top: 1rem;
     margin-left: 1rem;
     position: fixed;
-    z-index: 1;
+    // z-index: 1;
     border-radius: 50%;
     height: 55px;
     width: 55px;
-  }
-  
+}
 .offcanvas-image{
-    border-radius: 50%;
-    height: 55px;
-    width: 55px;
+    width: 50px;
+    height: 50px;
 }
 .offcanvas {
 margin-left: 5px;
