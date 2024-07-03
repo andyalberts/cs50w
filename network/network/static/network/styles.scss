@@ -38,14 +38,19 @@ body {
     margin-top: 1rem;
     margin-left: 1rem;
     position: fixed;
-    // z-index: 1;
     border-radius: 50%;
-    height: 55px;
-    width: 55px;
+    padding: 0; /* Remove padding */
+    width: 50px; /* Set width to match image size */
+    height: 50px; /* Set height to match image size */
+    overflow: hidden; /* Ensure the image fits inside the button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .offcanvas-image{
-    width: 50px;
-    height: 50px;
+    width: 100%; /* Ensure the image takes the full button size */
+    height: 100%; /* Ensure the image takes the full button size */
+    border-radius: 50%; /* Ensure the image is round */
 }
 .offcanvas {
 margin-left: 5px;
