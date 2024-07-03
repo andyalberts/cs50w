@@ -304,14 +304,30 @@ function renderPosts(post, currentUserId){
         const postElement = document.querySelector(`#post-${postId}`);
         if(postElement){
             commentsView = document.querySelector('.comments-view');
-            commentsView.innerHTML = "Hey";
+            loadComments(event,postId)
         }
     });
    });
 }
 
-function loadComments(event,user_id){
-    
+function loadComments(event,postId){
+    event.preventDefault();
+    console.log(postId);
+    fetch(`/comments/${postId}`, {
+        headers:{
+            accept: 'application/json',
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to fetch comments');
+        }
+        console.log(response);
+        return response.json();
+    })
+    .then(comments => {
+        console.log(comments);       
+    })
 }
 
 function saveComment(postId, commentText){

@@ -204,9 +204,16 @@ def like_post(request, id):
     
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
-def load_comments(request, id){
-    pass
-}
+def load_comments(request, id):
+    if request.method == "GET":
+        try:
+            post = get_object_or_404(Post, pk=id)
+            comments = Comment.objects.filter(post=post)
+            return JsonResponse({"comments": [comment.serialize() for comment in comments]})
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+    return JsonResponse({"error": "Invalid request type"}, status=400)
+
 # saves comment
 @login_required
 def post_comment(request, id):
