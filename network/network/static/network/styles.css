@@ -3,12 +3,28 @@
 }
 
 body {
-  background-image: url("/network/static/network/bgPattern.png"),url("/network/static/network/bgPattern2.png");
-  /* background: fixed; */
-  background-color: #c5ddf9;
+  background-image: url("/network/static/network/bgPattern.png"), url("/network/static/network/bgPattern2.png");
+  background-color: #97acc3;
   background-attachment: fixed;
   display: block;
   width: 100%;
+}
+
+.navbar {
+  background-color: rgba(255, 255, 255, 0.16);
+  color: #343a40 !important;
+  font-weight: 200;
+  font-size: 2rem;
+}
+
+.navbar-brand {
+  color: #343a40 !important;
+  font-weight: 400;
+  font-size: 2rem;
+}
+
+.nav-link:hover {
+  font-weight: 300;
 }
 
 .offcanvas-btn {
@@ -21,6 +37,12 @@ body {
   width: 55px;
 }
 
+.offcanvas-image {
+  border-radius: 50%;
+  height: 55px;
+  width: 55px;
+}
+
 .offcanvas {
   margin-left: 5px;
   background: rgba(118, 134, 152, 0.88);
@@ -28,7 +50,7 @@ body {
 
 .postcard {
   max-width: 90%;
-  background-color: rgba(118, 134, 152,0.9);
+  background-color: #768698;
   margin-left: auto;
   margin-right: auto;
   padding-left: 15px;

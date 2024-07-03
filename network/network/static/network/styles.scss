@@ -9,25 +9,49 @@ $darkerslate: #343a40;
     margin-left: 60px;
 }
 
-body{
-    background-color: $lighterslate;
+body {
+    background-image: url("/network/static/network/bgPattern.png"),url("/network/static/network/bgPattern2.png");
+    background-color: #97acc3;
+    background-attachment: fixed;
     display: block;
+    width: 100%;
+  }
+
+// ----- Navbar -----
+.navbar{
+    background-color: rgba(255, 255, 255, 0.16);
+    color:#343a40 !important;
+    font-weight: 200;
+    font-size: 2rem;
+}
+.navbar-brand{
+    color:#343a40 !important;
+    font-weight: 400;
+    font-size: 2rem;
 }
 
+.nav-link:hover{
+    font-weight: 300;
+}
 // ----- offcanvas stuff -----
-.offcanvas-btn{
+.offcanvas-btn {
     margin-top: 1rem;
     margin-left: 1rem;
-    position:fixed;
+    position: fixed;
     z-index: 1;
     border-radius: 50%;
     height: 55px;
     width: 55px;
+  }
+  
+.offcanvas-image{
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
 }
-
-.offcanvas{
-    margin-left: 15px;
-    background: rgba($color: $slate, $alpha: 88%)  ;
+.offcanvas {
+margin-left: 5px;
+background: rgba(118, 134, 152, 0.88);
 }
 
 // ----- posts display
@@ -48,13 +72,14 @@ body{
 }
 
 // ----- profile -----
-.profile-header{
+.profile-header {
     max-width: 90%;
-    background-color: $darkslate;
+    background-color: #aac4e2;
+    opacity: 90%;
     margin-left: auto;
     margin-right: auto;
     padding-left: 15px;
-}
+  }
 
 // ----- junk drawer -----
 a{
