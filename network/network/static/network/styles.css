@@ -3,6 +3,8 @@
 }
 
 body {
+  background-image: url("/network/static/network/bgPattern.png"),url("/network/static/network/bgPattern2.png");
+  /* background: fixed; */
   background-color: #c5ddf9;
   display: block;
 }
@@ -18,13 +20,13 @@ body {
 }
 
 .offcanvas {
-  margin-left: 15px;
+  margin-left: 5px;
   background: rgba(118, 134, 152, 0.88);
 }
 
 .postcard {
   max-width: 90%;
-  background-color: #768698;
+  background-color: rgba(118, 134, 152,0.9);
   margin-left: auto;
   margin-right: auto;
   padding-left: 15px;

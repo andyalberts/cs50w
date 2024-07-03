@@ -152,6 +152,7 @@ function loadPosts(page){
         const currentUserId = posts.current_user_id;
         console.log(posts);
         console.log("userID", currentUserId);
+        // Validation Check, if either return True, throw error
         if(!posts.posts || !Array.isArray(posts.posts))
             {
                 throw new Error('Invalid post posts received');
