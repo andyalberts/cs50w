@@ -145,7 +145,6 @@ function loadPosts(page){
         if (!response.ok) {
             throw new Error('Failed to fetch posts');
         }
-        console.log(response);
         return response.json();
     })
     .then(posts => {
@@ -281,6 +280,7 @@ function renderPosts(post, currentUserId){
             postTextElement.innerHTML = commentText;
             postElement.querySelector('.post-text').classList.remove('d-none');
             postElement.querySelector('.comment-area').classList.add('d-none');
+            console.log(postId, commentText);
             saveComment(postId, commentText);
         }
     });
@@ -311,10 +311,9 @@ function renderPosts(post, currentUserId){
    });
 }
 
-function loadComments(event,postId){
-    event.preventDefault();
+function loadComments(postId){
     console.log(postId);
-    fetch(`/comments/${postId}`, {
+    fetch(`/load_comments/${postId}`, {
         headers:{
             accept: 'application/json',
         }
@@ -323,7 +322,6 @@ function loadComments(event,postId){
         if (!response.ok) {
             throw new Error('Failed to fetch comments');
         }
-        console.log(response);
         return response.json();
     })
     .then(comments => {

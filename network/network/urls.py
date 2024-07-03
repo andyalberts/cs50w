@@ -11,7 +11,7 @@ urlpatterns = [
 
     #API routes
     path("posts", views.posts, name="posts"), # gets all posts
-    path("comments/<int:id>",views.load_comments, name="load_comments"),
+    path("load_comments/<int:id>",views.load_comments, name="load_comments"),
     path("submit_post", views.submit_post, name="submit_post"),
     path("like_post/<int:id>", views.like_post, name="like_post"),
 
