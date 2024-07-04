@@ -334,6 +334,19 @@ function loadComments(postId){
 function renderComments(comments){
     const data = comments.comments;
     console.log('Data:',data);
+    const commentsHTML = data.map(comment =>`
+    <div class="rendered-comments">
+    <h2>${comment.user.username}</h2>
+    <p>${comment.text}</p>
+    </div>    
+    `
+    )
+    const commentsView = document.querySelector('.comments-view');
+    commentsView.classList.remove('d-none');
+    if (commentsView){
+        commentsView.innerHTML="";
+        commentsView.innerHTML = commentsHTML + commentsView.innerHTML;
+    }
 }
 function saveComment(postId, commentText){
     console.log(postId, commentText);
