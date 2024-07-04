@@ -33,11 +33,11 @@ class Comment(models.Model):
         return {
             "id": self.id,
             "user": {
-                "id": self.user.id,  # Access the id of the associated User
+                "id": self.user.id, 
                 "username": self.user.username
             },
             "text": self.text,
-            "post": self.post
+            "post": self.post.id
         }
 
 class User(AbstractUser):
