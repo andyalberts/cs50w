@@ -114,7 +114,6 @@ async function submitPost(event){
         console.error('Error:', error);
     }
 }
-
 // Function to get a cookie by name
 function getCookie(name) {
     let cookieValue = null;
@@ -130,7 +129,6 @@ function getCookie(name) {
     }
     return cookieValue;
 }
-
 // Load individual posts to send to render_post
 function loadPosts(page){
    
@@ -161,7 +159,6 @@ function loadPosts(page){
     })
     .catch(error => console.error('Error Loading Post', error));
 }
-
 // Load posts from users on following list
 function loadFollowingPosts(page){
    
@@ -189,7 +186,6 @@ function loadFollowingPosts(page){
     })
     .catch(error => console.error('Error Loading Post', error));
 }
-
 // Display each post sent from loadPosts
 function renderPosts(post, currentUserId){
     const data = post.posts;
@@ -215,7 +211,7 @@ function renderPosts(post, currentUserId){
             <textarea class="form-control mb-2"></textarea>
             <button class="btn btn-success post-comment" data-post-id="${post.id}">Post</button>
         </div>
-        <div class="comments-view"></div>
+        <div class="comments-view d-none"></div>
         </div>
         `).join('');
     // Displays posts on page 
@@ -312,9 +308,7 @@ function renderPosts(post, currentUserId){
     });
    });
 }
-
 function loadComments(postId){
-    console.log("loadComments post id:", postId);
     fetch(`/load_comments/${postId}`, {
         headers:{
             accept: 'application/json',
@@ -327,14 +321,15 @@ function loadComments(postId){
         return response.json();
     })
     .then(comments => {
-        console.log(comments);       
+        console.log(comments.comments);       
+        console.log(comments);      
+        // renderComments(comments, ???) 
     })
     .catch(error => {
         // Handle fetch error
         console.error('Error:', error);
     });
 }
-
 function saveComment(postId, commentText){
     console.log(postId, commentText);
     let csrftoken = getCookie('csrftoken'); 
