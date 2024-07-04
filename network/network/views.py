@@ -100,6 +100,7 @@ def posts(request):
         # show 7 posts per page
         paginator = Paginator(by_time,7)
         page_posts = paginator.get_page(page_number)
+        print(by_time)
         return JsonResponse({"posts": [post.serialize() for post in page_posts],
                              "current_user_id": current_user_id})
     return JsonResponse({"error": "Invalid request type"})
@@ -209,9 +210,9 @@ def load_comments(request, id):
         try:
             post = get_object_or_404(Post, pk=id)
             comments = Comment.objects.filter(post=post)
+            print(comments)
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
-        
     return JsonResponse({"comments": [comment.serialize() for comment in comments]})
 
 # saves comment

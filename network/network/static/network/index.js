@@ -139,7 +139,6 @@ function loadPosts(page){
         }
     })
     .then(response => {
-        // Check if response is readable json -> converts to js object
         if (!response.ok) {
             throw new Error('Failed to fetch posts');
         }
@@ -302,7 +301,7 @@ function renderPosts(post, currentUserId){
 
         if(postElement){
             commentsView = document.querySelector('.comments-view');
-            console.log("postidCommentsJS", postId);
+            console.log("PostId:", postId);
             loadComments(postId);
         }
     });
@@ -320,19 +319,21 @@ function loadComments(postId){
         }
         return response.json();
     })
-    .then(comments => {
-        console.log(comments.comments);       
-        console.log(comments);   
+    .then(comments => {  
         if(!comments.comments || !Array.isArray(comments.comments))
             {
-                throw new Error('Invalid comments recieved')
+                throw new Error('Invalid comments received')
             }   
-        // renderComments(comments, ???) 
+        renderComments(comments);
     })
     .catch(error => {
         // Handle fetch error
         console.error('Error:', console.error('Error Loading Comments', error));
     });
+}
+function renderComments(comments){
+    const data = comments.comments;
+    console.log('Data:',data);
 }
 function saveComment(postId, commentText){
     console.log(postId, commentText);
