@@ -29,13 +29,23 @@ class Comment(models.Model):
     text = models.CharField(max_length=420, blank=True)
     post = models.ForeignKey('Post', on_delete=models.CASCADE, blank=True, null=True)
     
-    def __str__(self):
-        return self.text
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user": {
+                "id": self.user.id,  # Access the id of the associated User
+                "username": self.user.username
+            },
+            "text": self.text,
+            "timestamp": self.timestamp.strftime("%B %d %Y, %I:%M %p"),
+            "post": self.post
+        }
 
 class User(AbstractUser):
     followers = models.ManyToManyField('self', related_name='following', symmetrical=False, blank=True)
     def __str__(self):
         return self.username
 
+    
 
 # access all posts of a user with <user>.post_set.all()

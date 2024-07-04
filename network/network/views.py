@@ -209,6 +209,7 @@ def load_comments(request, id):
         try:
             post = get_object_or_404(Post, pk=id)
             comments = Comment.objects.filter(post=post)
+            print("post:", post, "comments:", comments)
             return JsonResponse({"comments": [comment.serialize() for comment in comments]})
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)

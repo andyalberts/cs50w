@@ -303,16 +303,18 @@ function renderPosts(post, currentUserId){
     button.addEventListener('click', function(event){
         const postId = event.target.getAttribute('data-post-id');
         const postElement = document.querySelector(`#post-${postId}`);
+
         if(postElement){
             commentsView = document.querySelector('.comments-view');
-            loadComments(event,postId)
+            console.log("postidCommentsJS", postId);
+            loadComments(postId);
         }
     });
    });
 }
 
 function loadComments(postId){
-    console.log(postId);
+    console.log("loadComments post id:", postId);
     fetch(`/load_comments/${postId}`, {
         headers:{
             accept: 'application/json',
@@ -327,6 +329,10 @@ function loadComments(postId){
     .then(comments => {
         console.log(comments);       
     })
+    .catch(error => {
+        // Handle fetch error
+        console.error('Error:', error);
+    });
 }
 
 function saveComment(postId, commentText){
