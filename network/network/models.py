@@ -28,7 +28,7 @@ class Comment(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE, blank=True, null=True)
     text = models.CharField(max_length=420, blank=True)
     post = models.ForeignKey('Post', on_delete=models.CASCADE, blank=True, null=True)
-    
+        
     def serialize(self):
         return {
             "id": self.id,
@@ -37,7 +37,6 @@ class Comment(models.Model):
                 "username": self.user.username
             },
             "text": self.text,
-            "timestamp": self.timestamp.strftime("%B %d %Y, %I:%M %p"),
             "post": self.post
         }
 
