@@ -322,12 +322,16 @@ function loadComments(postId){
     })
     .then(comments => {
         console.log(comments.comments);       
-        console.log(comments);      
+        console.log(comments);   
+        if(!comments.comments || !Array.isArray(comments.comments))
+            {
+                throw new Error('Invalid comments recieved')
+            }   
         // renderComments(comments, ???) 
     })
     .catch(error => {
         // Handle fetch error
-        console.error('Error:', error);
+        console.error('Error:', console.error('Error Loading Comments', error));
     });
 }
 function saveComment(postId, commentText){
