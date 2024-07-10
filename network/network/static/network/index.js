@@ -339,7 +339,7 @@ function renderComments(comments,postId){
     `
     ).join('')
     const commentsView = document.querySelector(`.comments-view-${postId}`);
-    commentsView.classList.remove('d-none');
+    commentsView.classList.toggle("d-none");
     if (commentsView){
         commentsView.innerHTML="";
         commentsView.innerHTML = commentsHTML + commentsView.innerHTML;
@@ -459,4 +459,15 @@ function likePost(event,postId){
     .catch(error => {
         console.error('Error', error);
     });    
+}
+
+function showHide(id){
+    // event.preventDefault();
+    var x = document.querySelector(`.comments-view-${id}`);
+    x.classList.toggle("d-none");
+    // if (x.classList.contains("d-none")) {
+    //   x.classList.remove("d-none");
+    // } else {
+    //   x.classList.add("d-none");
+    // }
 }
