@@ -20,7 +20,7 @@ $(document).ready(function(){
 document.addEventListener('DOMContentLoaded', function() {
    //checks current page path
     var path = window.location.pathname;
-    console.log(path)
+    console.log(path);
     if (path === '/'){
         const submitPostButton = document.querySelector('#submit_post');
         if (submitPostButton) {
@@ -243,7 +243,7 @@ function renderPosts(post, currentUserId){
         }
     });
     });
-   // ----- save button functionality -----
+   // ----- save button functionality (for edit) -----
    const saveButtons = document.querySelectorAll('.save-post');
    saveButtons.forEach(button=> {
     button.addEventListener('click', function(event){
@@ -270,10 +270,7 @@ function renderPosts(post, currentUserId){
         const postElement = document.querySelector(`#post-${postId}`);
         if (postElement){
             const textarea = postElement.querySelector('.comment-area textarea')
-            const postTextElement = postElement.querySelector('.post-text');
             const commentText = textarea.value;
-            postTextElement.innerHTML = commentText;
-            postElement.querySelector('.post-text').classList.remove('d-none');
             postElement.querySelector('.comment-area').classList.add('d-none');
             console.log(postId, commentText);
             saveComment(postId, commentText);
@@ -340,7 +337,7 @@ function renderComments(comments){
     <p>${comment.text}</p>
     </div>    
     `
-    )
+    ).join('')
     const commentsView = document.querySelector('.comments-view');
     commentsView.classList.remove('d-none');
     if (commentsView){
