@@ -210,7 +210,7 @@ function renderPosts(post, currentUserId){
             <textarea class="form-control mb-2"></textarea>
             <button class="btn btn-success post-comment" data-post-id="${post.id}">Post</button>
         </div>
-        <div class="comments-view d-none"></div>
+        <div class="comments-view-${post.id} d-none"></div>
         </div>
         `).join('');
     // Displays posts on page 
@@ -321,14 +321,14 @@ function loadComments(postId){
             {
                 throw new Error('Invalid comments received')
             }   
-        renderComments(comments);
+        renderComments(comments, postId);
     })
     .catch(error => {
         // Handle fetch error
         console.error('Error:', console.error('Error Loading Comments', error));
     });
 }
-function renderComments(comments){
+function renderComments(comments,postId){
     const data = comments.comments;
     console.log('Data:',data);
     const commentsHTML = data.map(comment =>`
@@ -338,7 +338,7 @@ function renderComments(comments){
     </div>    
     `
     ).join('')
-    const commentsView = document.querySelector('.comments-view');
+    const commentsView = document.querySelector(`.comments-view-${postId}`);
     commentsView.classList.remove('d-none');
     if (commentsView){
         commentsView.innerHTML="";
