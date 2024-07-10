@@ -460,14 +460,3 @@ function likePost(event,postId){
         console.error('Error', error);
     });    
 }
-
-function showHide(id){
-    // event.preventDefault();
-    var x = document.querySelector(`.comments-view-${id}`);
-    x.classList.toggle("d-none");
-    // if (x.classList.contains("d-none")) {
-    //   x.classList.remove("d-none");
-    // } else {
-    //   x.classList.add("d-none");
-    // }
-}
