@@ -5,34 +5,30 @@ $darkslate: #3d454f;
 $darkerslate: #343a40;
 
 // ----- body stuff ------
-#body-view{
-    margin-right: 240px;
-    margin-left: 240px;
-}
-
-body {
+body{
     background-image: url("/network/static/network/bgPattern.png");
     background-color: #2d2d2d;
     background-attachment: fixed;
-    display: block;
     width: 100%;
 }
-.user-information-block{
-    background-color: rgba(57, 57, 57, 0.9);
-    width: 300px;
-    height: 515px;
+#body-view{
+    margin-right: 5%;
+    margin-left: 5%;
+}
+#main-view{
 }
 // ----- Navbar -----
 .navbar {
     background-color: rgba(57, 57, 57,0.9) ;
     font-weight: 200;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    padding-left: 20px;
   }
   
 .navbar-brand {
 color: #000 !important;
 font-weight: 400;
-font-size: 2rem;
+font-size: 1.7rem;
 }
 .nav-link:hover{
     font-weight: 300;
@@ -65,7 +61,7 @@ background: rgba(118, 134, 152, 0.88);
 
 // ----- posts display
 .postcard{
-    max-width: 90%;
+    max-width: 100%;
     background-color:rgba($slate,0.75);
     margin-left: auto;
     margin-right: auto;
@@ -73,11 +69,15 @@ background: rgba(118, 134, 152, 0.88);
 }
 
 .make-post-card{
-    max-width: 90%;
+    max-width: 100%;
     background-color: $lightslate;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 15px;
+}
+.user-info-block{
+    background-color: rgba(57, 57, 57, 0.9);
+    width: 300px;
+    height: 515px;
 }
 
 // ----- profile -----

@@ -4,10 +4,11 @@
 {% block body %}
 
 <div id="main-view">
+    
     <!-- User Posting Card (Static) -->
     {% if user.is_authenticated %}
-        <div class="make-post-card card mb-3 mt-4">
-            <div class="card-body row g-0 ">
+        <div class="make-post-card card mb-3">
+            <div class="card-body row">
                 <form action="{% url 'submit_post' %}" method="post">
                 {% csrf_token %}
                     <div class="input-group mb-3">
@@ -19,13 +20,11 @@
         </div>
     {% endif %}
     <!-- Display all posts -->
-    <div id="display-posts">
-        <!-- <div></div> -->
-    </div>
-    <button id="prev-button">Prev</button>
-    <button id="next-button">Next</button>
+        <div id="display-posts" class="">
+        </div>
 </div>
-
+<button class="btn btn-secondary" id="prev-button">Prev</button>
+<button class="btn btn-secondary" id="next-button">Next</button>
 
 {% endblock %}
 
