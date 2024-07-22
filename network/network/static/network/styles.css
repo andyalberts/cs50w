@@ -72,6 +72,16 @@ body {
   background-color: rgba(57, 57, 57, 0.9);
   width: 300px;
   height: 515px;
+  position: sticky;
+  top: 100px;
+}
+
+.user-info-block-right {
+  background-color: rgba(57, 57, 57, 0.9);
+  width: 300px;
+  height: 515px;
+  position: sticky;
+  top: 100px;
 }
 
 .profile-header {
