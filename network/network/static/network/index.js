@@ -208,7 +208,7 @@ function renderPosts(post, currentUserId){
         </div>
         <div class="comment-area d-none m-4">
             <textarea class="form-control mb-2"></textarea>
-            <button class="btn btn-success post-comment" data-post-id="${post.id}">Post</button>
+            <button class="btn btn-success post-comment" onclick="toggleContent()" data-post-id="${post.id}">Post</button>
         </div>
         <div class="comments-view-${post.id} d-none"></div>
         </div>
@@ -460,3 +460,12 @@ function likePost(event,postId){
         console.error('Error', error);
     });    
 }
+
+function toggleContent() {
+    var content = document.querySelector('comment-area');
+    if (content.classList.contains('d-none')) {
+      content.classList.remove('d-none');
+    } else {
+      content.classList.add('d-none');
+    }
+  }
