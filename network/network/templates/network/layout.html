@@ -38,16 +38,16 @@
 <!-- <p style="width: 25px;"  class="test-button">JqueryStuff</p> -->
 
 <!----- Offcanvas button ----->
-{% if user.is_authenticated %}
+<!-- {% if user.is_authenticated %}
 <button class="btn btn-secondary offcanvas-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><img class="offcanvas-image" src="/network/static/network/defaultImg.png" ></button>
-    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" data-bs-theme="dark"  id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptions">
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" data-bs-theme="dark"  id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptions"> -->
         <!----- offcanvas header ----->    
-        <div class="offcanvas-header">
+        <!-- <div class="offcanvas-header">
             <h5 class="navbar-brand offcanvas-title" id="offcanvasWithBothOptions">{{ user.username }}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
+        </div> -->
             <!----- offcanvas body ---->
-            <div class="offcanvas-body">
+            <!-- <div class="offcanvas-body">
               
                 <div>
                     <ul class="navbar-nav mr-auto">
@@ -76,12 +76,13 @@
                 </div>
             </div>
     </div>
-{% endif %}
+{% endif %} -->
 
     <div id="body-view">
         {% block body %}
         {% endblock %}
     </div>
+    <div class="user-information-block">Hey</div>
 </div>
 
 </body>

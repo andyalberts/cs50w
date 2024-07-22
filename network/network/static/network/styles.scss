@@ -1,40 +1,45 @@
 $lighterslate: #c5ddf9;
 $lightslate: #aac4e2;
-$slate: #768698;
+$slate: #6E89A7;
 $darkslate: #3d454f;
 $darkerslate: #343a40;
 
 // ----- body stuff ------
 #body-view{
-    margin-left: 60px;
+    margin-right: 240px;
+    margin-left: 240px;
 }
 
 body {
-    background-image: url("/network/static/network/bgPattern.png"),url("/network/static/network/bgPattern2.png");
+    background-image: url("/network/static/network/bgPattern.png");
     background-color: #2d2d2d;
     background-attachment: fixed;
     display: block;
     width: 100%;
 }
-
+.user-information-block{
+    background-color: rgba(57, 57, 57, 0.9);
+    width: 300px;
+    height: 515px;
+}
 // ----- Navbar -----
 .navbar {
     background-color: rgba(57, 57, 57,0.9) ;
-    color: #000!important;
     font-weight: 200;
     font-size: 2rem;
   }
   
-  .navbar-brand {
-    color: #000 !important;
-    font-weight: 400;
-    font-size: 2rem;
-  }
+.navbar-brand {
+color: #000 !important;
+font-weight: 400;
+font-size: 2rem;
+}
 .nav-link:hover{
     font-weight: 300;
+    color:white;
 }
 
-// ----- offcanvas stuff -----
+// ----- offcanvas -----
 .offcanvas-btn {
     margin-top: 1rem;
     margin-left: 1rem;
@@ -61,7 +66,7 @@ background: rgba(118, 134, 152, 0.88);
 // ----- posts display
 .postcard{
     max-width: 90%;
-    background-color: $slate;
+    background-color:rgba($slate,0.75);
     margin-left: auto;
     margin-right: auto;
     padding-left: 15px;

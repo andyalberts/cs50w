@@ -1,18 +1,24 @@
 #body-view {
-  margin-left: 60px;
+  margin-right: 240px;
+  margin-left: 240px;
 }
 
 body {
-  background-image: url("/network/static/network/bgPattern.png"), url("/network/static/network/bgPattern2.png");
+  background-image: url("/network/static/network/bgPattern.png");
   background-color: #2d2d2d;
   background-attachment: fixed;
   display: block;
   width: 100%;
 }
 
+.user-information-block {
+  background-color: rgba(57, 57, 57, 0.9);
+  width: 300px;
+  height: 515px;
+}
+
 .navbar {
   background-color: rgba(57, 57, 57, 0.9);
-  color: #000 !important;
   font-weight: 200;
   font-size: 2rem;
 }
@@ -25,6 +31,7 @@ body {
 
 .nav-link:hover {
   font-weight: 300;
+  color: white;
 }
 
 .offcanvas-btn {
@@ -54,7 +61,7 @@ body {
 
 .postcard {
   max-width: 90%;
-  background-color: #768698;
+  background-color: rgba(110, 137, 167, 0.75);
   margin-left: auto;
   margin-right: auto;
   padding-left: 15px;
