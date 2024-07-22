@@ -11,24 +11,25 @@ $darkerslate: #343a40;
 
 body {
     background-image: url("/network/static/network/bgPattern.png"),url("/network/static/network/bgPattern2.png");
-    background-color: #97acc3;
+    background-color: #2d2d2d;
     background-attachment: fixed;
     display: block;
     width: 100%;
 }
 
 // ----- Navbar -----
-.navbar{
-    background-color: rgba(255, 255, 255, 0.16);
-    color:#343a40 !important;
+.navbar {
+    background-color: rgba(57, 57, 57,0.9) ;
+    color: #000!important;
     font-weight: 200;
     font-size: 2rem;
-}
-.navbar-brand{
-    color:#343a40 !important;
+  }
+  
+  .navbar-brand {
+    color: #000 !important;
     font-weight: 400;
     font-size: 2rem;
-}
+  }
 .nav-link:hover{
     font-weight: 300;
 }
