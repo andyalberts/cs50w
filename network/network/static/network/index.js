@@ -197,8 +197,8 @@ function renderPosts(post, currentUserId){
         <p class="post-text">${post.text}</p>
         <div class="edit-area mt-3 d-none">
             <textarea class="form-control mb-2">${post.text}</textarea>
-            <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
-            <button class="btn btn-success cancel-edit" data-post-id="${post.id}">Back</button>
+            <button class="btn btn-secondary save-post" data-post-id="${post.id}">Save</button>
+            <button class="btn btn-secondary cancel-edit" data-post-id="${post.id}">Back</button>
         </div>
         <p>${post.timestamp}</p>
         <p id="like-count-${post.id}">${post.likes.count} Likes</p>

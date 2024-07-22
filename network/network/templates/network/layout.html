@@ -9,7 +9,7 @@
     <script src="{% static 'network/index.js' %}"></script>
 </head>
 <body>
-<nav class="navbar sticky-top navbar-expand-lg">
+<nav class="navbar sticky-top navbar-expand-sm">
     <a class="navbar-brand" href="{% url 'index' %}">Network</a>
     <div>
         <ul class="navbar-nav mr-auto">
@@ -35,8 +35,8 @@
     </div>
 </nav>
 
-<section class="p-3 d-flex m-3">
-<div class="user-info-block"></div>
+<section class="d-flex m-3 mx-auto">
+<div class="user-info-block"><div class="circle"></div></div>
     <div id="body-view">
         {% block body %}
         {% endblock %}

@@ -12,10 +12,11 @@ body{
     width: 100%;
 }
 #body-view{
-    margin-right: 5%;
-    margin-left: 5%;
+    margin-right: 1%;
+    margin-left: 1%;
 }
-#main-view{
+section{
+    max-width: 90%;
 }
 // ----- Navbar -----
 .navbar {
@@ -62,9 +63,9 @@ background: rgba(118, 134, 152, 0.88);
 // ----- posts display
 .postcard{
     max-width: 100%;
-    background-color:rgba($slate,0.75);
-    margin-left: auto;
-    margin-right: auto;
+    background-color:rgba($slate,0.9);
+    // margin-left: auto;
+    // margin-right: auto;
     padding-left: 15px;
 }
 
@@ -79,16 +80,25 @@ background: rgba(118, 134, 152, 0.88);
     width: 300px;
     height: 515px;
     position: sticky;
-    top: 100px;
+    top: 84px;
+    display: flex;
+    justify-content: center;
+    padding: 25px;
 }
 .user-info-block-right{
     background-color: rgba(57, 57, 57, 0.9);
     width: 300px;
     height: 515px;
     position: sticky;
-    top: 100px;
+    top: 84px;
 }
-
+.circle{
+    content: "";
+    background-color: white;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+}
 // ----- profile -----
 .profile-header {
     max-width: 90%;
