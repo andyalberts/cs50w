@@ -198,6 +198,7 @@ function renderPosts(post, currentUserId){
         <div class="edit-area mt-3 d-none">
             <textarea class="form-control mb-2">${post.text}</textarea>
             <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
+            <button class="btn btn-success cancel-edit" data-post-id="${post.id}">Back</button>
         </div>
         <p>${post.timestamp}</p>
         <p id="like-count-${post.id}">${post.likes.count} Likes</p>
@@ -245,7 +246,7 @@ function renderPosts(post, currentUserId){
         }
     });
     });
-   // ----- save button functionality (for edit) -----
+   // ----- submit edit -----
    const saveButtons = document.querySelectorAll('.save-post');
    saveButtons.forEach(button=> {
     button.addEventListener('click', function(event){
@@ -261,6 +262,18 @@ function renderPosts(post, currentUserId){
             postElement.querySelector('.edit-area').classList.add('d-none');
             //MAKE CLICK GO TO savePost FUNCTION
             saveEdit(postId, editedPost);
+        }
+    });
+   });
+   // ---- cancel edit -----
+   const cancelEdit = document.querySelectorAll('.cancel-edit');
+   cancelEdit.forEach(button=> {
+    button.addEventListener('click', function(event){
+        const postId = event.target.getAttribute('data-post-id');
+        const postElement = document.querySelector(`#post-${postId}`);
+        if (postElement){
+            postElement.querySelector('.post-text').classList.remove('d-none');
+            postElement.querySelector('.edit-area').classList.add('d-none');
         }
     });
    });
