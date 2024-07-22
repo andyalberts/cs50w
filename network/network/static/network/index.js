@@ -208,7 +208,7 @@ function renderPosts(post, currentUserId){
         </div>
         <div class="comment-area d-none m-4">
             <textarea class="form-control mb-2"></textarea>
-            <button class="btn btn-success post-comment" onclick="toggleContent()" data-post-id="${post.id}">Post</button>
+            <button class="btn btn-success post-comment" data-post-id="${post.id}">Post</button>
         </div>
         <div class="comments-view-${post.id} d-none"></div>
         </div>
@@ -234,12 +234,14 @@ function renderPosts(post, currentUserId){
    });
     // ----- Open Comment View -----
     const commentButton = document.querySelectorAll('.comment-button');
+    const commentArea = document.querySelector('.comment-area');
     commentButton.forEach(button => {
     button.addEventListener('click', function(event) {
         const postId = event.target.getAttribute('data-post-id');
         const postElement = document.querySelector(`#post-${postId}`);
         if (postElement){
-            postElement.querySelector('.comment-area').classList.remove('d-none');
+            // postElement.querySelector('.comment-area').classList.remove('d-none');
+            toggleContent('.comment-area');
         }
     });
     });
@@ -461,8 +463,8 @@ function likePost(event,postId){
     });    
 }
 
-function toggleContent() {
-    var content = document.querySelector('comment-area');
+function toggleContent(element) {
+    var content = document.querySelector(element);
     if (content.classList.contains('d-none')) {
       content.classList.remove('d-none');
     } else {
