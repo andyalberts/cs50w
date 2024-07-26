@@ -3,6 +3,7 @@ body {
   background-color: #2d2d2d;
   background-attachment: fixed;
   width: 100%;
+  padding-top: 2%;
 }
 
 #body-view {
@@ -75,10 +76,11 @@ section {
   width: 300px;
   height: 515px;
   position: sticky;
-  top: 84px;
+  top: 2%;
   display: flex;
   justify-content: center;
   padding: 25px;
+  border-radius: 10px;
 }
 
 .user-info-block-right {
@@ -86,7 +88,8 @@ section {
   width: 300px;
   height: 515px;
   position: sticky;
-  top: 84px;
+  top: 2%;
+  border-radius: 10px;
 }
 
 .circle {
@@ -95,6 +98,11 @@ section {
   width: 220px;
   height: 220px;
   border-radius: 50%;
+}
+
+.nav-link {
+  color: #fff;
+  font-size: 1.7rem;
 }
 
 .profile-header {

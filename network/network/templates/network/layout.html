@@ -9,7 +9,7 @@
     <script src="{% static 'network/index.js' %}"></script>
 </head>
 <body>
-<nav class="navbar sticky-top navbar-expand-sm">
+<!-- <nav class="navbar sticky-top navbar-expand-sm">
     <a class="navbar-brand" href="{% url 'index' %}">Network</a>
     <div>
         <ul class="navbar-nav mr-auto">
@@ -33,10 +33,33 @@
         {% endif %}
         </ul>
     </div>
-</nav>
+</nav> -->
 
 <section class="d-flex m-3 mx-auto">
-<div class="user-info-block"><div class="circle"></div></div>
+<div class="user-info-block d-grid"><div class="circle"></div>
+{% if user.is_authenticated %}
+<div class="row">
+    <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link"href="{% url 'profile' user.id %}"><strong>{{ user.username }}</strong></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'following' %}">Following</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+    </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Log In</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+        </li>
+    {% endif %}
+    </ul>
+</div>
+</div>
     <div id="body-view">
         {% block body %}
         {% endblock %}

@@ -10,6 +10,7 @@ body{
     background-color: #2d2d2d;
     background-attachment: fixed;
     width: 100%;
+    padding-top: 2%;
 }
 #body-view{
     margin-right: 1%;
@@ -60,7 +61,7 @@ margin-left: 5px;
 background: rgba(118, 134, 152, 0.88);
 }
 
-// ----- posts display
+// ----- posts display -----
 .postcard{
     max-width: 100%;
     background-color:rgba($slate,0.9);
@@ -75,22 +76,26 @@ background: rgba(118, 134, 152, 0.88);
     margin-left: auto;
     margin-right: auto;
 }
+
+// ----- USER BLOCKS ----
 .user-info-block{
     background-color: rgba(57, 57, 57, 0.9);
     width: 300px;
     height: 515px;
     position: sticky;
-    top: 84px;
+    top: 2%;
     display: flex;
     justify-content: center;
     padding: 25px;
+    border-radius: 10px;
 }
 .user-info-block-right{
     background-color: rgba(57, 57, 57, 0.9);
     width: 300px;
     height: 515px;
     position: sticky;
-    top: 84px;
+    top: 2%;
+    border-radius: 10px;
 }
 .circle{
     content: "";
@@ -98,6 +103,11 @@ background: rgba(118, 134, 152, 0.88);
     width: 220px;
     height: 220px;
     border-radius: 50%;
+}
+
+.nav-link{
+    color: #fff;
+    font-size: 1.7rem;
 }
 // ----- profile -----
 .profile-header {
