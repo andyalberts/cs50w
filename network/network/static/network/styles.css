@@ -111,11 +111,6 @@ section {
   padding-left: 15px;
 }
 
-.login {
-  max-width: 100%;
-  height: fit-content;
-}
-
 a {
   color: #343a40;
   text-decoration: none;

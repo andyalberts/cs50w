@@ -80,6 +80,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (path === '/login'){
         document.querySelector('.user-info-block').classList.add('d-none');
     }
+    if (path === '/register'){
+        document.querySelector('.user-info-block').classList.add('d-none');
+    }
 });
 
 
