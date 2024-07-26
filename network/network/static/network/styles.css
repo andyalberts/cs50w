@@ -3,7 +3,6 @@ body {
   background-color: #2d2d2d;
   background-attachment: fixed;
   width: 100%;
-  padding-top: 2%;
 }
 
 #body-view {
@@ -17,15 +16,13 @@ section {
 
 .navbar {
   background-color: rgba(57, 57, 57, 0.9);
-  font-weight: 200;
-  font-size: 1.5rem;
   padding-left: 20px;
 }
 
 .navbar-brand {
   color: #000 !important;
   font-weight: 400;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
 }
 
 .nav-link:hover {
@@ -85,7 +82,7 @@ section {
 
 .user-info-block-right {
   background-color: rgba(57, 57, 57, 0.9);
-  width: 300px;
+  max-width: 300px;
   height: 515px;
   position: sticky;
   top: 2%;
@@ -106,12 +103,17 @@ section {
 }
 
 .profile-header {
-  max-width: 90%;
+  max-width: 100%;
   background-color: #aac4e2;
   opacity: 90%;
   margin-left: auto;
   margin-right: auto;
   padding-left: 15px;
+}
+
+.login {
+  max-width: 100%;
+  height: fit-content;
 }
 
 a {
