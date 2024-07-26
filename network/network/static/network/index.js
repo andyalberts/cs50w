@@ -77,7 +77,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // load posts on index template
         loadFollowingPosts(currentPage);
     }
-   
+    if (path === '/login'){
+        document.querySelector('.user-info-block').classList.add('d-none');
+    }
+    if (path === '/register'){
+        document.querySelector('.user-info-block').classList.add('d-none');
+    }
 });
 
 
@@ -193,18 +198,22 @@ function renderPosts(post, currentUserId){
         `
         <div class="card postcard mb-3" id="post-${post.id}" >
         <div class="card-body">
-        <h1><a href="/profile/${post.user.id}"> ${post.user.username}</a></h1>
-        <p class="post-text">${post.text}</p>
+        <h1 class="fs-2 mb-0" href="/profile/${post.user.id}"> ${post.user.username}</h1>
+        <small class="fst-italic text-muted">${post.timestamp}</small>
+
+        <p class="mt-2 post-text">${post.text}</p>
         <div class="edit-area mt-3 d-none">
             <textarea class="form-control mb-2">${post.text}</textarea>
-            <button class="btn btn-success save-post" data-post-id="${post.id}">Save</button>
+            <button class="btn btn-secondary save-post" data-post-id="${post.id}">Save</button>
+            <button class="btn btn-secondary cancel-edit" data-post-id="${post.id}">Back</button>
         </div>
-        <p>${post.timestamp}</p>
-        <p id="like-count-${post.id}">${post.likes.count} Likes</p>
-        <button class="btn btn-secondary comment-button" data-post-id="${post.id}">comment</button>
-        <button class="btn btn-secondary comments-toggle" data-post-id="${post.id}">comments</button>
-        <button class="btn btn-secondary like-button" id="like-button-${post.id }" data-post-id="${post.id }">like</button>
-        ${post.user.id == currentUserId ? `<button class="btn btn-secondary edit-post" data-post-id="${post.id}">Edit</button>` : ''}
+        <div class="d-flex column">
+            <p  id="like-count-${post.id}"> ${post.likes.count} likes</p>
+            <p class="ml-2 comments-toggle" data-post-id="${post.id}" style="cursor:pointer;">view ${post.comments.count} comments</p>
+            </div>
+            <button class="col btn btn-secondary comment-button" data-post-id="${post.id}">comment</button>
+            <button class="col btn btn-secondary like-button" id="like-button-${post.id }" data-post-id="${post.id }">like</button>
+            ${post.user.id == currentUserId ? `<button class="btn btn-secondary edit-post" data-post-id="${post.id}">Edit</button>` : ''}
         </div>
         <div class="comment-area d-none m-4">
             <textarea class="form-control mb-2"></textarea>
@@ -234,16 +243,18 @@ function renderPosts(post, currentUserId){
    });
     // ----- Open Comment View -----
     const commentButton = document.querySelectorAll('.comment-button');
+    const commentArea = document.querySelector('.comment-area');
     commentButton.forEach(button => {
     button.addEventListener('click', function(event) {
         const postId = event.target.getAttribute('data-post-id');
         const postElement = document.querySelector(`#post-${postId}`);
         if (postElement){
-            postElement.querySelector('.comment-area').classList.remove('d-none');
+            // postElement.querySelector('.comment-area').classList.remove('d-none');
+            toggleContent('.comment-area');
         }
     });
     });
-   // ----- save button functionality (for edit) -----
+   // ----- submit edit -----
    const saveButtons = document.querySelectorAll('.save-post');
    saveButtons.forEach(button=> {
     button.addEventListener('click', function(event){
@@ -259,6 +270,18 @@ function renderPosts(post, currentUserId){
             postElement.querySelector('.edit-area').classList.add('d-none');
             //MAKE CLICK GO TO savePost FUNCTION
             saveEdit(postId, editedPost);
+        }
+    });
+   });
+   // ---- cancel edit -----
+   const cancelEdit = document.querySelectorAll('.cancel-edit');
+   cancelEdit.forEach(button=> {
+    button.addEventListener('click', function(event){
+        const postId = event.target.getAttribute('data-post-id');
+        const postElement = document.querySelector(`#post-${postId}`);
+        if (postElement){
+            postElement.querySelector('.post-text').classList.remove('d-none');
+            postElement.querySelector('.edit-area').classList.add('d-none');
         }
     });
    });
@@ -460,3 +483,12 @@ function likePost(event,postId){
         console.error('Error', error);
     });    
 }
+
+function toggleContent(element) {
+    var content = document.querySelector(element);
+    if (content.classList.contains('d-none')) {
+      content.classList.remove('d-none');
+    } else {
+      content.classList.add('d-none');
+    }
+  }

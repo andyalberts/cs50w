@@ -21,13 +21,16 @@ class Post(models.Model):
             "likes": {
                 "count": self.likes.count(),
                 "users": [{"id": user.id, "username": user.username} for user in self.likes.all()]
+            },
+            "comments": {
+                "count": self.comments.count()
             }
         }
 
 class Comment(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE, blank=True, null=True)
     text = models.CharField(max_length=420, blank=True)
-    post = models.ForeignKey('Post', on_delete=models.CASCADE, blank=True, null=True)
+    post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name='comments', blank=True, null=True)
         
     def serialize(self):
         return {

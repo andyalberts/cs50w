@@ -1,32 +1,28 @@
-#body-view {
-  margin-right: 240px;
-  margin-left: 240px;
-}
-
 body {
   background-image: url("/network/static/network/bgPattern.png");
   background-color: #2d2d2d;
   background-attachment: fixed;
-  display: block;
   width: 100%;
 }
 
-.user-information-block {
-  background-color: rgba(57, 57, 57, 0.9);
-  width: 300px;
-  height: 515px;
+#body-view {
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+section {
+  max-width: 90%;
 }
 
 .navbar {
   background-color: rgba(57, 57, 57, 0.9);
-  font-weight: 200;
-  font-size: 2rem;
+  padding-left: 20px;
 }
 
 .navbar-brand {
   color: #000 !important;
   font-weight: 400;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .nav-link:hover {
@@ -60,23 +56,54 @@ body {
 }
 
 .postcard {
-  max-width: 90%;
-  background-color: rgba(110, 137, 167, 0.75);
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 100%;
+  background-color: rgba(110, 137, 167, 0.9);
   padding-left: 15px;
 }
 
 .make-post-card {
-  max-width: 90%;
+  max-width: 100%;
   background-color: #aac4e2;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 15px;
+}
+
+.user-info-block {
+  background-color: rgba(57, 57, 57, 0.9);
+  width: 300px;
+  height: 515px;
+  position: sticky;
+  top: 2%;
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+  border-radius: 10px;
+}
+
+.user-info-block-right {
+  background-color: rgba(57, 57, 57, 0.9);
+  max-width: 300px;
+  height: 515px;
+  position: sticky;
+  top: 2%;
+  border-radius: 10px;
+}
+
+.circle {
+  content: "";
+  background-color: white;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+}
+
+.nav-link {
+  color: #fff;
+  font-size: 1.7rem;
 }
 
 .profile-header {
-  max-width: 90%;
+  max-width: 100%;
   background-color: #aac4e2;
   opacity: 90%;
   margin-left: auto;
