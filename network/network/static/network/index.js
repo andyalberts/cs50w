@@ -77,7 +77,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // load posts on index template
         loadFollowingPosts(currentPage);
     }
-   
+    if (path === '/login'){
+        document.querySelector('.user-info-block').classList.add('d-none');
+    }
 });
 
 
