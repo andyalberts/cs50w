@@ -215,7 +215,7 @@ function renderPosts(post, currentUserId){
             <button class="col btn btn-secondary like-button" id="like-button-${post.id }" data-post-id="${post.id }">like</button>
             ${post.user.id == currentUserId ? `<button class="btn btn-secondary edit-post" data-post-id="${post.id}">Edit</button>` : ''}
         </div>
-        <div class="comment-area d-none m-4">
+        <div class="comment-area-${post.id} d-none m-4">
             <textarea class="form-control mb-2"></textarea>
             <button class="btn btn-success post-comment" data-post-id="${post.id}">Post</button>
         </div>
@@ -243,14 +243,12 @@ function renderPosts(post, currentUserId){
    });
     // ----- Open Comment View -----
     const commentButton = document.querySelectorAll('.comment-button');
-    const commentArea = document.querySelector('.comment-area');
     commentButton.forEach(button => {
     button.addEventListener('click', function(event) {
         const postId = event.target.getAttribute('data-post-id');
         const postElement = document.querySelector(`#post-${postId}`);
         if (postElement){
-            // postElement.querySelector('.comment-area').classList.remove('d-none');
-            toggleContent('.comment-area');
+            toggleContent(`.comment-area-${postId}`);
         }
     });
     });
@@ -292,9 +290,9 @@ function renderPosts(post, currentUserId){
         const postId = event.target.getAttribute('data-post-id');
         const postElement = document.querySelector(`#post-${postId}`);
         if (postElement){
-            const textarea = postElement.querySelector('.comment-area textarea')
+            const textarea = postElement.querySelector(`.comment-area-${postId} textarea`)
             const commentText = textarea.value;
-            postElement.querySelector('.comment-area').classList.add('d-none');
+            postElement.querySelector(`.comment-area-${postId}`).classList.add('d-none');
             console.log(postId, commentText);
             saveComment(postId, commentText);
         }
