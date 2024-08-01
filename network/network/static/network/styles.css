@@ -64,8 +64,6 @@ section {
 .make-post-card {
   max-width: 100%;
   background-color: #aac4e2;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .user-info-block {
@@ -78,6 +76,7 @@ section {
   justify-content: center;
   padding: 25px;
   border-radius: 10px;
+  z-index: 1000;
 }
 
 .user-info-block-right {

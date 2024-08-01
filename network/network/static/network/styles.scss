@@ -69,8 +69,8 @@ background: rgba(118, 134, 152, 0.88);
 .make-post-card{
     max-width: 100%;
     background-color: $lightslate;
-    margin-left: auto;
-    margin-right: auto;
+    // margin-left: auto;
+    // margin-right: auto;
 }
 
 // ----- USER BLOCKS ----
@@ -84,6 +84,7 @@ background: rgba(118, 134, 152, 0.88);
     justify-content: center;
     padding: 25px;
     border-radius: 10px;
+    z-index: 1000;
 }
 .user-info-block-right{
     background-color: rgba(57, 57, 57, 0.9);

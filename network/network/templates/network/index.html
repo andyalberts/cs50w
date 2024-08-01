@@ -5,7 +5,7 @@
 <div id="main-view">  
     <!-- User Posting Card (Static) -->
     {% if user.is_authenticated %}
-        <div class="make-post-card card mb-3">
+        <div class="make-post-card mx-auto card mb-3">
             <div class="card-body row">
                 <form action="{% url 'submit_post' %}" method="post">
                 {% csrf_token %}

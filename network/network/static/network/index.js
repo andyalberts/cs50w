@@ -207,7 +207,7 @@ function renderPosts(post, currentUserId){
                 <button class="btn btn-secondary save-post" data-post-id="${post.id}">Save</button>
                 <button class="btn btn-secondary cancel-edit" data-post-id="${post.id}">Back</button>
             </div>
-            <div class="">
+            <div class="d-flex flex-column">
                 <p class="" id="like-count-${post.id}"> ${post.likes.count} likes</p>
                 <button class="col-2 btn btn-sm btn-outline-dark like-button" id="like-button-${post.id }" data-post-id="${post.id }">like</button>
                 <button class="col-2 btn btn-sm btn-outline-dark comment-button" data-post-id="${post.id}">comment</button>
